@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>WoodQ</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="/admin/css/feather.css">
+  <link rel="stylesheet" href="/admin/css/themify-icons.css">
+  <link rel="stylesheet" href="/admin/css/vendor.bundle.base.css"> -->
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <link rel="stylesheet" href="/admin/css/dataTables.bootstrap4.css">
+  <link rel="stylesheet" href="/admin/css/themify-icons.css">
+  <link rel="stylesheet" type="text/css" href="/admin/css/select.dataTables.min.css">
+  <!-- End plugin css for this page -->
+
+  <link rel="stylesheet" href="/admin/css/admin.css">
+
+  <link rel="shortcut icon" href="/admin/image/people.png" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css">
+
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <style type="text/css">
+       
+            .grid tr:nth-child(even) {
+                background: #fff
+            }
+
+            .grid tr:nth-child(odd) {
+                background: #f9fafa
+            }
+
+            .grid td {
+                border: 1px solid #e4e4e4;
+                color: #000;
+                font-size: 13px;
+                 height:10px;
+            }
+
+            .grid th {
+                background: #fff;
+                text-align: center;
+                color: #000;
+                height:10px;
+                font-size: 13px;
+                font-weight: 600;
+                border: 1px solid #e4e4e4;
+            }
+
+
+        .gv {
+            overflow-x: scroll;
+        }
+
+    </style>
+</head>
+<body>
+  <div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+        <a class="navbar-brand brand-logo mr-5" href=""><img src="/user/images/logo-removebg-preview.png" class="mr-2" alt="logo"/></a>
+        <p class="font-weight-light small-text mb-0 text-muted">
+          WoodQ
+        </p>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+        
+        <ul class="navbar-nav mr-lg-2">
+          <li class="nav-item nav-search d-none d-lg-block">
+            <div class="input-group">
+              <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
+                <span class="input-group-text" id="search">
+                  <i class="icon-search"></i>
+                </span>
+              </div>
+              <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
+            </div>
+          </li>
+        </ul>
+            
+        <a class="nav-link" href="/admin/product"> <button type="button" class="btn btn-outline-primary">Add product</button> </a></li>
+          
+      </div>
+    </nav>
+
+
+
+    
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+     
+        
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/admin">
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="" aria-expanded="false" aria-controls="ui-basic">
+              <i class="icon-layout menu-icon"></i>
+              <span class="menu-title">Product</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-basic">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="/admin/product_page">Product</a></li>
+                <li class="nav-item"> <a class="nav-link" href="">Category </a></li>
+                <li class="nav-item"> <a class="nav-link" href=""></a></li>
+              </ul>
+              
+            </div>
+           
+      </nav>
+      
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                
+                <div class="gv">
+                  <%if(details!= null ) { %>
+                    <table id="example" class="table table-striped table-bordered grid" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>ProductName</th>
+                                <th>Category</th>
+                                <th>Image</th>
+                                <th>$Product Price</th>
+                                <th>$Sale Price</th>
+                
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                           
+                          <%details.forEach(function(productq){ %>
+                           
+                            <tr>
+                              <td><%= productq.productName%></td>
+                              <td><%= productq.category%></td>
+                          
+                               <td><img src="/admin/productImage/<%=productq.image %>">
+                              <td><%= productq.productPrice%></td>
+                              <td><%= productq.salePrice%></td>
+                              
+                            </tr>
+                            <% }) %>
+                        </tbody>
+                       
+                    </table>
+                    <% } %>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <script src="/admin/js/vendor.bundle.base.js"></script>
+
+  
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    
+    
+    
+    
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src=" https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+    </script>
+  </body>
+</html>

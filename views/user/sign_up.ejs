@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>woodQ</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="icon" type="image/png" href="/user/images/logo-removebg-preview.png" sizes="32x32"/>
+
+		<!-- MATERIAL DESIGN ICONIC FONT -->
+		<link rel="stylesheet" href="user/css/material-design-iconic-font.min.css">
+		
+		<!-- STYLE CSS -->
+		<link rel="stylesheet" href="/user/css/sign.css">
+		
+	</head>
+
+	<body>
+
+		<div class="wrapper">
+			<div class="image-holder">
+				<img src="/user/images/bg img.png" alt="">
+			</div>
+			<div class="form-inner">
+				<form action="/userSign_up" method="post">
+					<div class="form-header">
+						<h3>Sign up</h3>
+						<!-- <img src="images/sign-up.png" alt="" class="sign-up-icon"> -->
+					
+					</div>
+					<div class="form-group">
+						<label for="">Username:</label>
+						<input name="username" type="text" class="form-control" id="username" required=""  onkeyup="validateName()">
+						<p id="userError" class="error"></p>
+					</div>
+					<div class="form-group">
+						<label for="">E-mail:</label>
+						<input name="email" type="email" class="form-control" id="email"  required=""  onkeyup="validateEmail()"  >
+						<p id="emailError" class="error"></p>
+					</div>
+					<div class="form-group">
+						<label for="">phone:</label>
+						<input name="phone" type="number" class="form-control" id="phone"  required=""  onkeyup="validatePhone()">
+						<p id="phoneError" class="error"></p>
+					</div>
+					
+					<div class="form-group" >
+						<label for="">Password:</label>
+						<input name="password" type="password" class="form-control" id="password" required=""  onkeyup="validatePassword()">
+						<p id="passwordError" class="error"></p>
+					</div>
+					<!-- <div class="form-group" >
+						<label for="">Conform Password:</label>
+						<input name="conformpassword" type="password" class="form-control" id="conform" required=""  onkeyup="checkpassword()" >
+						<p id="conformError" class="error"></p>
+					</div> -->
+					<p style="color:rgb(146, 43, 43) ; align-items: center; margin-left: 85px; font-size:17px"> <%=locals.error%></p>
+					
+					<button type="submit" >create my account</button>
+			       
+
+				</form>
+			</div>
+			
+		</div>
+		
+		<!-- <script src="js/jquery-3.3.1.min.js"></script>
+		<script src="js/jquery.form-validator.min.js"></script>
+		<script src="js/main.js"></script> -->
+
+<!-- 
+		<script>
+			const usernameError = document.getElementById('userError');
+		     const emailError = document.getElementById('emailError');
+			const phoneError = document.getElementById('phoneError');
+			const passwordError = document.getElementById('passwordError');
+			//const conformError = document.getElementById('conformError');
+			function validateName(){
+			  var username = document.getElementById('username').value ;
+				 if(username.length == ""){
+				  usernameError.innerHTML='Name is required'
+				username.focus()
+				 return false
+				}
+				if(!username.match(/^[A-Za-z]*\s{1}[A-Za-z]*$/)){
+			usernameError.innerHTML ='please enter valid name'
+			return false;
+				}
+				usernameError.innerHTML = ''
+				return true;
+			}	
+			function validateEmail(){
+		  var email = document.getElementById('email').value;
+		   
+		  if (email.length==0){
+			emailError.innerHTML = 'Email  required'
+			return false;
+		  }
+		  if(!email.match(/^[A-Za-z\._\-[0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/)){
+			emailError.innerHTML = 'Email Invalid'
+			return false;
+		  }
+		  emailError.innerHTML = '';
+			return true;
+		}
+		function validatePhone(){
+			var phone =document.getElementById('phone').value;
+			if(phone.length == 0){
+				phoneError.innerHTML =' phone no is required '
+				return false;
+			}
+			if(phone.length !== 10){
+				phoneError.innerHTML ='phone no should be 10 digits'
+				return false
+			}
+			if(!phone.match(/^[0-9]{10}$/)){
+				phoneError.innerHTML = 'phone no is required'
+				return false
+			}
+			phoneError.innerHTML = ''
+			return true;
+		}
+		  function validatePassword(){
+		  var password = document.getElementById('password').value
+		  if(password.length < 8){
+			passwordError.innerHTML = 'password is required [above 8 character]'
+			password.focus()
+			return false;
+		  }
+		  passwordError.innerHTML = '';
+			return true;
+		  }
+		//   function checkpassword(){
+		// 	var password = document.getElementById('password').value;
+		// 	var conform = document.getElementById('conform').value;
+		// 	if(conform.length < 8 && password == conform){
+		// 		conformError.innerHTML ='Not Required Password'
+		// 		return false;
+		// 	}
+		// 	conformError.innerHTML =''
+		// 	return true
+
+		//   }
+		  </script> -->
+	</body>
+</html>
