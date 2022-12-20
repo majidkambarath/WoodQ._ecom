@@ -20,4 +20,3 @@
 //             allowedFormats:['jpeg','png','jpg']
 //         }
 //     }),
-};

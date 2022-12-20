@@ -32,36 +32,31 @@
         <div class="row align-items-center justify-content-center">
           <div class="col-md-7">
             <h3>Add Your <strong>Products</strong></h3>
-            <form action="/admin/product" method="post" enctype="multipart/form-data">
+            <form action="" method="post" enctype="multipart/form-data">
             
               <div class="form-group last mb-3">
                 <label for="password">ProductName</label>
-                <input type="text"  class="form-control" placeholder=" ProductName"  name="ProductName" >
+                <input type="text"  class="form-control" placeholder=" ProductName" value="<%=products.productName%>"  name="ProductName" >
               </div>
               <div class="form-group last mb-3">
                 <label for="password">category</label>
-            <select id="inputState" class="form-control" name="category">
-              <option selected>choose...</option>
-              <%categories.forEach((data)=>{%>
-                <option><%=data.category%></option>
-              <%})%>
-            </select>
+                <input type="text"  class="form-control" placeholder="category"name="category" value="<%=products.category%>" >
               </div>
               <div class="form-group last mb-3">
                 <label>Choose product images</label>
-               
+              
                  <input type="file" accept="image/*" name="image"  multiple >
               </div>
               <div class="form-group last mb-3">
                 <label for="password">productPrice</label>
-                <input type="number"  class="form-control" placeholder=" productPrice"  name="productPrice" >
+                <input type="number"  class="form-control" placeholder=" productPrice"  value="<%=products.productPrice%>" name="productPrice" >
               </div>
               <div class="form-group last mb-3">
                 <label for="password">salePrice</label>
-                <input type="number"  class="form-control" placeholder=" salePrice"  name="salePrice" >
+                <input type="number"  class="form-control" placeholder=" salePrice" value="<%=products.salePrice%>"  name="salePrice" >
               </div>
-              <input type="submit" value="Add" class="btn btn-block btn-primary">
-              <span class="ml-auto"><a href="/admin" class="forgot-pass">Back Home</a></span> 
+              <input type="submit" value="Update Now" class="btn btn-block btn-primary">
+              <span class="ml-auto"><a href="/admin/product_page" class="forgot-pass">Back Home</a></span> 
 
             </form>
           </div>
