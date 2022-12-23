@@ -12,13 +12,19 @@ const { log } = require('console');
  require('./config/databaseModel')
 //express 
 const app = express();
+app.use(session({
+    secret:'abcdefcode',
+    resave:false,
+    saveUninitialized:true,
+    cookie:{secure:true}
+}))
 app.use(cookiesParser());
 // console.log('running');
 
 const port = process.env.port||4040;
 // installiton sign-up page
 app.use(express.json());
-app.use(bodyparser.urlencoded({extended:true}))
+app.use(express.urlencoded({extended:true}))
 
 // installition ejs
 app.set('view engine','ejs');
@@ -31,11 +37,9 @@ app.use((req, res, next) => {
     next();
 });
 //session add
-app.use(session({
-    resave: true,
-    saveUninitialized: true,
-    secret: 'secretpassword',
-}))
+
+
+
 //file path
 var publicDir = require('path').join(__dirname,'public'); 
 console.log(publicDir);

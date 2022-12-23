@@ -32,16 +32,13 @@
         <div class="row align-items-center justify-content-center">
           <div class="col-md-7">
             <h3>Add Your <strong>Category</strong></h3>
+            <p style="color: rgb(255, 35, 35);" ><%=locals.wrong%></p>
             <form action="" method="post" enctype="multipart/form-data">
               <div class="form-group last mb-3">
                 <label for="password">category</label>
-                <input type="text"  class="form-control" placeholder="category"name="category"  value="<%=cate.category%>"" >
+                <input type="text"  class="form-control" placeholder="category"name="category"  value="<%=cate.category%>" >
               </div>
-              <div class="form-group last mb-3">
-                <label>Choose product images</label>
-               
-                 <input type="file" accept="image/*" name="image"  multiple value="<%=cate.image%>">
-              </div>
+              
               
               <input type="submit" value="Add" class="btn btn-block btn-primary">
               <span class="ml-auto"><a href="/admin" class="forgot-pass">Back Home</a></span> 

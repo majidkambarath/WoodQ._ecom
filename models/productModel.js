@@ -4,16 +4,17 @@ const productSchema = new mongoose.Schema({
     type:String
    },
    category:{
-    type:String
+    type:mongoose.Types.ObjectId,
+    ref:'category',
    },
    image:{
       type:String
    },
    productPrice:{
-    type:Number
+    type:String
    },
    salePrice:{
-    type:Number
+    type:String
    }
    
     

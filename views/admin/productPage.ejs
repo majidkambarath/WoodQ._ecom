@@ -156,11 +156,13 @@
                               <td><%= productq.productName%></td>
                               <td><%= productq.category%></td>
                           
-                               <td><img src="/admin/productImage/<%=productq.image %>" width="200px"></td>
+                               <td><img  src="/admin/productImage/<%=productq.image %>" style="width: 144px;
+                                height: 111px;"></td>
                               <td><%= productq.productPrice%></td>
                               <td><%= productq.salePrice%></td>
                               <td>
-                                <a href="/admin/product_edit?id=<%= productq._id%>" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">Edit</i></a>
+                                <a href="/admin/product_edit?id=<%= productq._id%>"onclick="return confirm('Proceed to edit ?')"
+                                  class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">Edit</i></a>
                                 <a href="/admin/product_delete?id=<%= productq._id%>" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">Delete</i></a>
                               </td>
                               

@@ -4,9 +4,7 @@ const categorySchema = new mongoose.Schema({
     category:{
         type:String
     },
-    image:{
-        type:String
-    },
+  
     status:{
         type:Boolean,
         default:true

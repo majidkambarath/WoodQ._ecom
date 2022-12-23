@@ -14,7 +14,6 @@ const categoryInsert = async (req, res) => {
   try {
     const categoryDate = new category({
       category: req.body.category,
-      image: req.file.filename,
     });
     console.log(req.file);
     categoryDate.save();
@@ -28,13 +27,15 @@ const categoryInsert = async (req, res) => {
   }
 };
 
+let categoryStore;
 const cateEdit = async (req, res) => {
   try {
     const id = req.query.id;
 
-    const categoryStore = await category.findById({ _id: id });
+    categoryStore = await category.findById({ _id: id });
+
     if (categoryStore) {
-      res.render("admin/editCate.ejs", { cate:categoryStore });
+      res.render("admin/editCate.ejs", { cate: categoryStore });
       console.log("category add category");
     } else {
       res.redirect("/admin/category");
@@ -49,10 +50,20 @@ const cateUpdate = async (req, res) => {
   try {
     const id = req.query.id;
     const inputCategory = req.body.category;
-    const image = req.file.filename;
-    const categg = await category.findByIdAndUpdate({ _id: id },{ $set: { inputCategory, image } });
-    res.redirect("/admin/category");
-    console.log("update success");
+    //const inputImage = req.file.filename;
+    const chack = await category.findOne({ inputCategory: category });
+    if (chack) {
+      res.render("admin/editCate", {
+        wrong: "Already exited catagory",
+        cate: categoryStore,
+      });
+    } else {
+      const categg = await category.findByIdAndUpdate(id, {
+        $set: { category: inputCategory },
+      });
+      res.redirect("/admin/category");
+      console.log("update success");
+    }
   } catch (error) {
     console.log(error.message);
   }

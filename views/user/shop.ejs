@@ -1,0 +1,35 @@
+<%-include('./layouts/shophead.ejs')%>
+
+<div class="untree_co-section product-section before-footer-section">
+<div class="container">
+      <div class="row">
+
+          <!-- Start Column 1 -->
+          <%if(show!= null){ %>
+            <%show.forEach(function(show){ %>
+               
+        <div class="col-12 col-md-4 col-lg-3 mb-5">
+           
+            <a class="product-item" href="/view_product?id=<%=show._id%>">
+              
+                <img src="/admin/productImage/<%=show.image%>" class="img-fluid product-thumbnail"style="width: 444px;
+                height: 254px;">
+                 <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                <h3 class="product-title"><%=show.productName%></h3>
+             
+                <span class="text-muted text-decoration-line-through">$<%=show.productPrice%></span>
+                <strong class="product-price"> $<%=show.salePrice%></strong>
+                <span class="icon-cross">
+                    <img src="/user/images/cross.svg" class="img-fluid">
+                </span>
+            </a>
+        </div> 
+        <% }) %>
+        <% } %>
+        
+        
+      </div>
+</div>
+</div>
+<%-include('./layouts/footer.ejs')%>
+

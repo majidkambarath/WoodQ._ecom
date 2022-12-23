@@ -7,8 +7,6 @@ module.exports={
          user: process.env.AUTH_USER,
          pass: process.env.AUTH_PASS  ,
        },
-     }),
-
-     OTP  : `${Math.floor(1000 + Math.random() * 9000)}` ,
+     })
      
 }
