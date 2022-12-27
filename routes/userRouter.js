@@ -17,9 +17,9 @@ router.post('/otp',userController.user_otp)
 router.get('/profile',userController.profile)
 /*-------------------------productController---------------------------------*/
 router.get('/shop',productController.shoppage)
-router.get('/view_product',productController.viewpage)
+router.get('/view_product/:id',productController.viewpage)
 /*------------------------------cartManagmnt----------------------------------*/
 router.get('/cart',auth.userVerfiy,shopController.viewcart)
-router.get('/addToCart/:id',shopController.addToCart)
+router.post('/addToCart',shopController.addToCart)
 
 module.exports=router

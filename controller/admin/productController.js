@@ -33,7 +33,26 @@ const inserProduct = async (req, res) => {
 //product page
 
 const productPost = async (req, res) => {
-  const productq = await product.find();
+  const productq = await product.aggregate([
+    {
+      $lookup:{
+        from:'categories',
+        localField:'category',
+        foreignField:'_id',
+        as:'catadata'
+      }
+    },
+    {
+      $project:{
+        productName:'$productName',
+        category:'$catadata.category',
+        image:'$image',
+        productPrice:'$productPrice',
+        salePrice:'$salePrice'
+      }
+    }
+  ])
+  console.log(productq);
   res.render("admin/productPage.ejs", { productq });
 };
 

@@ -1,4 +1,4 @@
-<%-include('./layouts/shoppage.ejs')%>
+<%-include('./layouts/cartview.ejs')%>
         <!-- Navigation-->
         
         <!-- Product section-->
@@ -14,11 +14,12 @@
                         </div>
                         <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?</p>
                         <div class="d-flex">
-                            <a class="btn btn-outline-dark mt-auto flex-shrink-0 h-1 " href="addToCart/<%=show.id%>">Add to cart</a>
+                            <!-- <a class="btn btn-outline-dark mt-auto flex-shrink-0 h-1 " href="addToCart/<%=show.id%>">Add to cart</a> -->
+                            <button class="btn btn-outline-dark mt-auto flex-shrink-0 h-1 " onclick="addToCart('<%=show._id%>')" >Add to cart</button>
                            
                         </div>
                     </div>
-                </div>
+                </div>  
             </div>
         </section>
         <!-- Related items section-->
@@ -59,5 +60,6 @@
             </div>
            
         </section>
+      
       
      <%-include('./layouts/shopfooter.ejs')%>
