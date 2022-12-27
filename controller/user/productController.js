@@ -5,6 +5,8 @@ const shoppage = async(req,res)=>{
 }
 
 const viewpage = async(req,res)=>{
+
+ 
     const show = await product.findById({_id:req.query.id});
     console.log(show);
     const shows =await product.find().limit(4);

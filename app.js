@@ -16,7 +16,7 @@ app.use(session({
     secret:'abcdefcode',
     resave:false,
     saveUninitialized:true,
-    cookie:{secure:true}
+   
 }))
 app.use(cookiesParser());
 // console.log('running');
@@ -48,6 +48,8 @@ app.use(express.static(publicDir));
 //for use routers
 app.use('/',userRouter);
 app.use('/admin',adminRouter)
+
+
 
 app.listen(port,()=>{
     console.log("losting to the sever on http://localhost:4040");

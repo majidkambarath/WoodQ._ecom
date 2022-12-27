@@ -3,6 +3,7 @@ const User = require("../../models/userModel");
 const bcryptjs = require("bcryptjs");
 const otp_find = require("../../middleware/nodemailer");
 const otp = require("../../models/otp");
+const session = require('express-session')
 const securePassword = async (password) => {
   try {
     console.log("chage hash");
@@ -15,7 +16,12 @@ const securePassword = async (password) => {
 };
 
 const userlogin = async(req, res) => {
-  res.render("user/login.ejs");
+  if(req.session.userlo){
+    res.redirect('/')
+  }else{
+    res.render("user/login.ejs");
+  }
+  
 };
 const usersign =async (req, res) => {
   res.render("user/sign_up.ejs");
@@ -32,7 +38,7 @@ const userInsert = async (req, res) => {
     if (user) {
       res.render("user/sign_up.ejs", { error: "User Already Exist" });
     } else {
-      const OTP = Math.floor(1000 + Math.random() * 9000);
+      const OTP =  Math.floor(1000 + Math.random() * 9000);
       let mailDetails = {
         from: process.env.AUTH_USER,
         to: data.email,
@@ -43,12 +49,13 @@ const userInsert = async (req, res) => {
         if (err) {
           console.log(err);
         } else {
-          const otp_store = new otp({
+          const otp_store =  new otp({
             otp: OTP,
           });
           console.log(OTP);
           otp_store.save();
           console.log(data);
+          
           res.render("user/otp.ejs", { data });
         }
       });
@@ -91,17 +98,18 @@ const userverificate = async (req, res) => {
     const password = req.body.password;
     console.log(req.body.password);
     const userData = await User.findOne({ email: email });
-    console.log(userData);
-
+   
     if (userData) {
       if (userData.status) {
         const match = await bcryptjs.compare(
           req.body.password,
           userData.password
         );
-        console.log(match);
         if (match) {
-          res.render("user/home.ejs", { userData });
+          req.session.userlo = userData._id
+          res.redirect('/')
+         
+        
         } else {
           res.render("user/login.ejs", { wrong: "Invalid Credentials" });
         }
@@ -119,10 +127,15 @@ const userverificate = async (req, res) => {
 
 //home page
 
-const homeLo = (req, res) => {
-  res.render("user/home.ejs");
+const homeLo = async (req, res) => {
+  const userData = await User.findOne();
+  res.render("user/home.ejs",{userData});
 };
 
+
+const profile = (req,res)=>{
+  res.render('user/profile')
+}
 module.exports = {
   userlogin,
   usersign,
@@ -130,4 +143,5 @@ module.exports = {
   userverificate,
   homeLo,
   user_otp,
+  profile
 };
