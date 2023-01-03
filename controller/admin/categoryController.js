@@ -13,7 +13,7 @@ const addCategory = async (req, res) => {
 const categoryInsert = async (req, res) => {
   try {
     const categoryDate = new category({
-      category: req.body.category,
+      category: req.body.category.toUpperCase(),
     });
     console.log(req.file);
     categoryDate.save();

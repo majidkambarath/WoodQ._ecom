@@ -12,18 +12,20 @@ const loProduct = async (req, res) => {
 // product inserting
 const inserProduct = async (req, res) => {
   try {
+   const images = [req.files[0].filename,req.files[1].filename,req.files[2].filename,req.files[3].filename]
+
     let data=req.body;
     const cata = await category.findOne({category:req.body.category})
-    console.log(cata)
     let productData = new product({
       productName: data.ProductName,
       category: cata.id,
-      image: req.file.filename,
+      image: images,
       productPrice: data.productPrice,
       salePrice: data.salePrice,
     });
     await productData.save();
-    await product.find();
+    const dataaa =  await product.find();
+
     res.redirect("/admin/product_page");
   } catch (error) {
     console.log(error.message);
@@ -74,19 +76,34 @@ const productEdit = async (req, res) => {
 
 const productUpadte = async (req, res) => {
   try {
-    let data =req.body;
-    const id = req.query.id;
-    const productName = data.ProductName;
-    const category =data.category;
-    const image = req.file.filename;
-    const productPrice = data.productPrice;
-    const salePrice = data.salePrice;
-    const productq = await product.findByIdAndUpdate(
-      { _id: id },
-      { $set: { productName, category, image, productPrice, salePrice } }
-    );
-    res.redirect("/admin/product_page");
-    console.log("update success");
+    if(typeof req.file === "undefined"){
+      let data =req.body;
+      const id = req.query.id;
+      const productName = data.ProductName;
+      const category =data.category;
+      const productPrice = data.productPrice;
+      const salePrice = data.salePrice;
+      const productq = await product.findByIdAndUpdate(
+        { _id: id },
+        { $set: { productName, category,  productPrice, salePrice } }
+      );
+      res.redirect("/admin/product_page");
+      console.log("update success");
+    }else{
+      let data =req.body;
+      const id = req.query.id;
+      const productName = data.ProductName;
+      const category =data.category;
+      const image = req.file.filename;
+      const productPrice = data.productPrice;
+      const salePrice = data.salePrice;
+      const productq = await product.findByIdAndUpdate(
+        { _id: id },
+        { $set: { productName, category, image, productPrice, salePrice } }
+      );
+      res.redirect("/admin/product_page");
+      console.log("update success")
+    }
   } catch (error) {
     console.log(error.message);
   }

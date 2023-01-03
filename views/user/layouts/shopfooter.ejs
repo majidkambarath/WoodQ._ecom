@@ -102,11 +102,34 @@
 </footer>
 <!-- End Footer Section -->	
 
+<script>
+    var options = {
+        width: 400,
+        zoomWidth: 500,
+        offset: {vertical: 0, horizontal: 10}
+    };
+    new ImageZoom(document.getElementById("img-container"), options);
+     
+    </script>
+<script>
+    var mainImg = document.getElementById('imgChange');
+    var subImg = document.getElementById('subimg')
 
+    subImg[0].onclick=function(){
+        mainImg.src="/admin/productImage/<%=show.image[3]%>"
+    }
+    subImg[1].onclick=function(){
+        mainImg.src="/admin/productImage/<%=show.image[1]%>"
+    }
+       
+</script>
+
+    
 <script src="/user/js/bootstrap.bundle.min.js"></script>
 <script src="/user/js/tiny-slider.js"></script>
 <script src="/user/js/custom.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>

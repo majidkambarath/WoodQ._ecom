@@ -1,0 +1,221 @@
+<%-include('./layouts/shophead.ejs')%>
+<div class="untree_co-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mb-5 mb-md-0">
+          <h2 class="h3 mb-3  ">Shipping Details</h2>
+
+          <div class="p-3 p-lg-5 border bg-white">
+            <div class="d-flex justify-content-between">
+              
+            </div>
+            <%if(show!= null){%>
+              <%show.forEach(function(data){%>
+              <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between" >
+                      <h3 class="card-title">Billing Address</h3>
+                      <a href="/adddelete?id=<%=data._id%>" ><i class="fa-solid fa-trash"></i></a>
+                    </div>
+
+                 
+                </p><span style="font-weight:bold">FIrstName :</span><%=data.FirstName%><br>
+                <span style="font-weight:bold">LastName :</span><%=data.LastName%><br>
+                <span style="font-weight:bold">Address  :</span><%=data.address%><br>
+                <span style="font-weight:bold">State : </span><%=data.State%><br>
+                <span style="font-weight:bold">ZipCode :</span><%=data.Code%><br>
+                <span style="font-weight:bold">Email : </span><%=data.Email%><br>
+                <span style="font-weight:bold">Mobile :</span><%=data.phone%><br>
+            </p> 
+          
+            <a href="" sty>Edit <i class="icon-edit"></i></a>
+        
+          </p>
+              </div>
+
+
+
+
+                  
+
+
+               <p class="form-group">
+                    <form action="" method="">
+                        <input type="hidden" value="<%=data.FirstName%>" name="First Name">
+                        <input type="hidden" value="<%=data.LastName%>" name="Last Name">
+                        <input type="hidden" value="<%=data.Address%>" name="Address">
+                        <input type="hidden" value="<%=data.State%>" name="State">
+                        <input type="hidden" value="<%=data.postCode%>" name="zipcode">
+                        <input type="hidden" value="<%=data.Email%>" name="Email">
+                        <input type="hidden" value="<%=data.phone%>" name="Phone">
+                        <button type="submit" class="btn btn-primary ">Deliver Here</button>
+                    </form>
+
+                  </p>
+                  
+                </div>
+              </div>
+              <% }) %>
+              <% } %>
+<!--             
+              <div class="container">
+                <div class="row">
+                    <div class="col-md-6 mb-5 mb-md-0">
+                  <div class="card" style="width: 23rem;">
+                    <div class="card-body ">
+
+                      <h5 class="card-title">
+                       
+                      </h5>
+                      <p class="card-text">
+                        
+                      </p>
+                      <p>
+                        
+                      </p>
+                      <form action="/payment" method="post">
+                        <input type="hidden" value="" name="addressId">
+                        <input type="hidden" value="" name="totalPrice">
+                        <input type="hidden" value="" name="name">
+                        <input type="hidden" value="" name="home">
+                        <input type="hidden" value="" name="state">
+                        <input type="hidden" value="" name="pincode">
+                        <input type="hidden" value="" name="mobile_num">
+                        <button type="submit" class="btn btn-primary ">Deliver Here</button>
+                      </form>
+                    </div>
+                  </div>
+                    </div>
+                </div>
+              </div> -->
+                  <br>
+          
+            
+                      <br>
+                      <div class="form-group">
+                        <label for="c_ship_different_address" class="text" data-bs-toggle="collapse"
+                          href="#ship_different_address" role="button" aria-expanded="false"
+                          aria-controls="ship_different_address"><b>Add new address </b></label>
+                        <div class="collapse" id="ship_different_address">
+                          <div class="py-2">
+                            <form action="/profile" method="post">
+
+                              <div class="form-group row">
+                                <div class="col-md-6">
+                                    <label for="c_fname" class="text-black">First Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="c_fname" name="fname">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="c_lname" class="text-black">Last Name <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="c_lname" name="lname">
+                                  </div>
+                              </div>
+                              
+
+                              <div class="form-group row  mb-3">
+                                <div class="col-md-12">
+                                  <label for="c_diff_address" class=" ">Address <span
+                                      class="text-danger">*</span></label>
+                                  <input type="text" class="form-control" name="address" placeholder="address">
+                                </div>
+                              </div>
+
+                              <div class="form-group row">
+                                <div class="col-md-6">
+                                  <label for="c_diff_state_country" class=" ">State <span
+                                      class="text-danger">*</span></label>
+                                  <input type="text" class="form-control" name="state">
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="c_diff_postal_zip" class=" ">Posta / Zip <span
+                                      class="text-danger">*</span></label>
+                                  <input type="text" class="form-control" name="post">
+                                </div>
+                              </div>
+
+                              <div class="form-group
+                                                     row mb-5">
+                                <div class="col-md-6">
+                                  <label for="c_diff_email_address" class=" ">Email Address <span
+                                      class="text-danger">*</span></label>
+                                  <input type="text" class="form-control" name="email">
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="c_diff_phone" class=" ">Phone <span class="text-danger">*</span></label>
+                                  <input type="text" class="form-control" name="phone" placeholder="Phone Number">
+                                </div>
+                              </div>
+                              
+                              <button type="submit" class="btn btn-primary btn-sm py-3 btn-block">Save Address</button>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row mb-5">
+            <div class="col-md-12">
+              <h2 class="h3 mb-3">Coupon Code</h2>
+              <div class="p-3 p-lg-5 border bg-white">
+
+                <label for="c_code" class=" mb-3">Enter your coupon code if you have one</label>
+                <div class="input-group w-75 couponcode-wrap">
+                  <input type="text" class="form-control me-2" id="c_code" placeholder="Coupon Code"
+                    aria-label="Coupon Code" aria-describedby="button-addon2">
+                  <div class="input-group-append">
+                    <button class="btn btn-primary btn-sm" type="button" id="button-addon2">Apply</button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-5">
+            <div class="col-md-12">
+              <h2 class="h3 mb-3  ">Your Order</h2>
+              <div class="p-3 p-lg-5 border bg-white">
+                <table class="table site-block-order-table mb-5">
+                  <thead>
+                    <th>Product</th>
+                    <th>Total</th>
+                  </thead>
+                  <tbody>
+                
+                     
+                    
+                          <tr>
+                            <td>
+                              <strong class="mx-2">x</strong>
+                                
+                            </td>
+                            <td>$
+                            </td>
+                          </tr>
+                         
+                        
+                              <tr>
+                                <td class="text-black font-weight-bold"><strong>Coupon Applied</strong></td>
+                                <td class="text-black">$350.00</td>
+                              </tr>
+                              <tr>
+                                <td class="  font-weight-bold"><strong>Order Total</strong></td>
+                                <td class="  font-weight-bold"><strong>$</strong></td>
+                              </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+                    
+
+
+<%-include('./layouts/footer.ejs')%>

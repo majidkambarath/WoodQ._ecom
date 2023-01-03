@@ -22,7 +22,19 @@ const userSchema = new mongoose.Schema({
     status:{
         type:Boolean,
         default:true
-    }
+    },
+    address:[{
+        FirstName : String,
+        LastName : String,
+        Address : String,
+        State: String,
+        Email : String,
+        phone : Number,
+        postCode :Number,
+        primary:Boolean
+
+    }]
+    
 
     
 })

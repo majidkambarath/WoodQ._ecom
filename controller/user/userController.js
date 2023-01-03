@@ -3,7 +3,9 @@ const User = require("../../models/userModel");
 const bcryptjs = require("bcryptjs");
 const otp_find = require("../../middleware/nodemailer");
 const otp = require("../../models/otp");
-const session = require('express-session')
+const session = require('express-session');
+const { aggregate } = require("../../models/cartModel");
+const mongoose = require('mongoose')
 const securePassword = async (password) => {
   try {
     console.log("chage hash");
@@ -133,9 +135,13 @@ const homeLo = async (req, res) => {
 };
 
 
-const profile = (req,res)=>{
+const profile =async (req,res)=>{
   res.render('user/profile')
 }
+
+
+
+
 module.exports = {
   userlogin,
   usersign,
@@ -143,5 +149,7 @@ module.exports = {
   userverificate,
   homeLo,
   user_otp,
-  profile
+  profile,
+
+
 };

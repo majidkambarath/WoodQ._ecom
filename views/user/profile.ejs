@@ -60,13 +60,13 @@
                             </div><!-- .End .tab-pane -->
 
                             <div class="tab-pane fade" id="tab-address" role="tabpanel" aria-labelledby="tab-address-link">
-                                <p>The following addresses will be used on the checkout page by default.</p>
+                                <!-- <p>The following addresses will be used on the checkout page by default.</p>
 
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="card card-dashboard">
                                             <div class="card-body">
-                                                <h3 class="card-title">Billing Address</h3><!-- End .card-title -->
+                                                <h3 class="card-title">Billing Address</h3>
 
                                                 <p>User Name<br>
                                                 User Company<br>
@@ -75,23 +75,74 @@
                                                 1-234-987-6543<br>
                                                 yourmail@mail.com<br>
                                                 <a href="#">Edit <i class="icon-edit"></i></a></p>
-                                            </div><!-- End .card-body -->
-                                        </div><!-- End .card-dashboard -->
-                                    </div><!-- End .col-lg-6 -->
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <div class="col-lg-6">
                                         <div class="card card-dashboard">
                                             <div class="card-body">
-                                                <h3 class="card-title">Shipping Address</h3><!-- End .card-title -->
+                                                <h3 class="card-title">Shipping Address</h3>
 
                                                 <p>You have not set up this type of address yet.<br>
                                                 <a href="#">Edit <i class="icon-edit"></i></a></p>
-                                            </div><!-- End .card-body -->
-                                        </div><!-- End .card-dashboard -->
-                                    </div><!-- End .col-lg-6 -->
-                                </div><!-- End .row -->
-                            </div><!-- .End .tab-pane -->
-
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <div class="p-3 p-lg-5 border bg-white">
+                                   <form method="post" action="/profile">
+                                    <div class="form-group row">
+                                      <div class="col-md-6">
+                                        <label for="c_fname" class="text-black">First Name <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="c_fname" name="fname">
+                                      </div>
+                                      <div class="col-md-6">
+                                        <label for="c_lname" class="text-black">Last Name <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="c_lname" name="lname">
+                                      </div>
+                                    </div>
+                
+                                  
+                                    <div class="form-group row">
+                                      <div class="col-md-12">
+                                        <label for="c_address" class="text-black">Address <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="c_address" name="address" placeholder="Street address">
+                                      </div>
+                                    </div>
+                
+                                  
+                
+                                    <div class="form-group row">
+                                      <div class="col-md-6">
+                                        <label for="c_state_country" class="text-black">State / Country <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="c_state_country" name="state">
+                                      </div>
+                                      <div class="col-md-6">
+                                        <label for="c_postal_zip" class="text-black">Posta / Zip <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="c_postal_zip" name="post">
+                                      </div>
+                                    </div>
+                
+                                    <div class="form-group row mb-5">
+                                      <div class="col-md-6">
+                                        <label for="c_email_address" class="text-black">Email Address <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="c_email_address" name="email">
+                                      </div>
+                                      <div class="col-md-6">
+                                        <label for="c_phone" class="text-black">Phone <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="c_phone" name="phone" placeholder="Phone Number">
+                                      </div>
+                                    </div>
+                
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-outline-primary-2">
+                                            <span>SAVE CHANGES</span>
+                                            <i class="icon-long-arrow-right"></i>
+                                        </button>
+                                 </div>
+                                </form>
+                            </div>
                             <div class="tab-pane fade" id="tab-account" role="tabpanel" aria-labelledby="tab-account-link">
                                 <form action="#">
                                     <div class="row">

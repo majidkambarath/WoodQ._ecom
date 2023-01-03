@@ -8,13 +8,13 @@ const productSchema = new mongoose.Schema({
     ref:'category',
    },
    image:{
-      type:String
+      type:Array
    },
    productPrice:{
-    type:String
+    type:Number
    },
    salePrice:{
-    type:String
+    type:Number
    }
    
     
