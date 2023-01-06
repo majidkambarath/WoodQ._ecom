@@ -9,7 +9,6 @@ const productController = require('../controller/admin/productController')
 const categoryController = require('../controller/admin/categoryController')
 const custmoerController = require('../controller/admin/customer.Controller')
 //seesion middleware
-const auth = require('../middleware/auth/admin/auth')
 //admin&&product side
 
 router.get('/',admincontroller.dashboard)
@@ -28,7 +27,7 @@ router.get('/category_add',categoryController.addCategory)
 router.post('/category_add',upload.single('image'),categoryController.categoryInsert)
 router.get('/category_edit',categoryController.cateEdit)
 router.post('/category_edit',upload.single('image'),categoryController.cateUpdate)
-router.get('/category_delete',categoryController.cateDelete)
+router.delete('category',categoryController.cateDelete)
 //custmoer page
 router.get('/custmoer_page',custmoerController.custmoerPage)
 router.get('/custmoer_block',custmoerController.userBlock)

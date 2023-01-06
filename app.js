@@ -49,7 +49,9 @@ app.use(express.static(publicDir));
 app.use('/',userRouter);
 app.use('/admin',adminRouter)
 
-
+app.all('*', (req, res) => {
+    res.render('user/layouts/404.ejs')
+})
 
 app.listen(port,()=>{
     console.log("losting to the sever on http://localhost:4040");

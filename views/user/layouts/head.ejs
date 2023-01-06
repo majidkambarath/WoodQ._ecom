@@ -44,21 +44,10 @@
 
 					<ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
                        
-						<%if(locals.userData){%>
-							<li><a class="nav-link"  href="/login">LOGOUT</a></li>
-						<%}else{%>
-							<div class="dropdown">
-							
-								<a class="nav-link  dropdown-toggle" data-bs-toggle="dropdown"  aria-expanded="false" href="#"><img src="/user/images/user.svg"></a>
-								<ul class="dropdown-menu">
-								  <li><a class="dropdown-item" href="/login">login</a></li>
-								  <li><a class="dropdown-item" href="">cart</a></li>
-								  <li><a class="dropdown-item" href="#">wish lisit</a></li>
-								</ul>
-							  </div>
-						  <%}%> 
-				
+							<li><a class="nav-link  " href="/profile"><img src="/user/images/user.svg"></a></li>
+							<li><a class="nav-link fs-5" style="color: aliceblue;" href="/wishlist"><i class="fa fa-heart"></i></a></li>
 							<li><a class="nav-link" href="/cart"><img src="/user/images/cart.svg"></a></li>
+						
 						
 					</ul>
 				</div>

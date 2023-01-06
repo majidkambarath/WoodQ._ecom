@@ -4,10 +4,10 @@ const cartSchema = new mongoose.Schema({
     type: mongoose.SchemaTypes.ObjectId,
     ref: "User",
   },
-  ItemQty:{
-    type:Number,
-    default:1,
-  },
+  // ItemQty:{
+  //   type:Number,
+  //   default:1,
+  // },
   // TotalPrice:{
   //   type:Number,
   //   default:0,

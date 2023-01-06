@@ -1,0 +1,191 @@
+<%-include('./layouts/shophead.ejs')%>
+
+<div class="untree_co-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mb-5 mb-md-0">
+          <h2 class="h3 mb-3  ">Shipping Details</h2>
+
+          <div class="p-3 p-lg-5 border bg-white">
+          <%if(defaultset!= ''){%>
+                <%defaultset.forEach(function(set){%>
+                  
+            
+              <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between" >
+                      <h3 class="card-title">Billing Address</h3>
+                    
+                    </div>
+
+                </p><span style="font-weight:bold"><%=set.address.FirstName%></span>
+                <span style="font-weight:bold"><%=set.address.LastName%></span> <br>
+                <span style="font-weight:bold"><%=set.address.Address%></span>
+                <span style="font-weight:bold"><%=set.address.State%></span>
+                <span style="font-weight:bold"><%=set.address.postCode%></span><br>
+                <span style="font-weight:bold"> <%=set.address.Email%> </span>,
+                <span style="font-weight:bold"><%=set.address.phone%></span>
+         
+              </div>
+            <!-- Button trigger modal -->
+            <div class="d-flex justify-content-between">
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Add <i class="fa-solid fa-plus"></i>
+               </button>
+               <a href="/profile"><i class="fa-sharp fa-solid fa-user-plus"></i></a>
+               
+            </div>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <%if(Address!= null){%>
+        <form method="post" action="/payment">
+        <%Address.forEach(function(add,i){%>
+        
+      <div class="modal-body">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="address" value="<%=add._id%>" id="flexRadioDefault<%=i%>">
+          <label class="form-check-label" for="flexRadioDefault<%=i%>">
+            <div class="card">
+              <div class="card-body">
+                <p>
+                  <%=add.FirstName%> <%=add.LastName%> </br>
+                  <%=add.Address%>, <%=add.State%>, <%=add.postCode%> </br>
+                  <%=add.Email%> <%=add.phone%>
+                </p>
+              </div>
+            </div>
+          </label>
+        </div>
+        
+      </div>
+      <%})%>
+      
+     <% } %>
+      <div class="modal-footer">
+        <button type="button" class="btn-sm" data-bs-dismiss="modal">Close</button>
+        <button type="submit"  class="btn-sm">Select</button>
+      </div>
+          </form>
+    </div>
+  </div>
+</div>
+              </div>
+            </div>
+            <%})%>
+            <%}else{%>
+              <a class="btn btn-primary " href="/profile"> Add Address <i class="fa-sharp fa-solid fa-user-plus"></i></a>
+              <%}%>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row mb-5">
+            <div class="col-md-12">
+              <h2 class="h3 mb-3">Coupon Code</h2>
+              <div class="p-3 p-lg-5 border bg-white">
+
+                <label for="c_code" class=" mb-3">Enter your coupon code if you have one</label>
+                <div class="input-group w-75 couponcode-wrap">
+                  <input type="text" class="form-control me-2" id="c_code" placeholder="Coupon Code"
+                    aria-label="Coupon Code" aria-describedby="button-addon2">
+                  <div class="input-group-append">
+                    <button class="btn btn-primary btn-sm" type="button" id="button-addon2">Apply</button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        
+
+    
+       
+          <div class="row mb-5">
+            <div class="col-md-12">
+              <h2 class="h3 mb-3 text-black">Your Order</h2>
+              <div class="p-3 p-lg-5 border bg-white">
+                
+                <table class="table site-block-order-table mb-5">
+                 
+                  <thead>
+                    <th>Product</th>
+                    <th>Total</th>
+                  </thead>
+                  <tbody>
+                    <%if(detailss!= null){%>
+                      <%detailss.forEach(function(set){%>
+                  
+                    <tr>
+                     
+                      <td> <strong class="mx-2"><%=set.carts.productName%></strong>X   <%=set.qtyItems%></td>
+                      <td>$<%=set.TotalPrice%></td>
+                    </tr>
+                   
+                    <%})%>
+                    <%}%>
+                    <tr>
+                      <td class="text-black font-weight-bold"><strong>Cart Subtotal</strong></td>
+                      <td class="text-black">$<%=subtotal%></td>
+                    </tr>
+                    <tr>
+                      <td class="text-black font-weight-bold"><strong>Order Total</strong></td>
+                      <td class="text-black font-weight-bold"><strong>$<%=subtotal%></strong></td>
+                    </tr>
+                    
+                  
+                  </tbody>
+                </table>
+                            
+                <div class="border p-3 mb-3">
+                  <h3 class="h6 mb-0"><a class="d-block" data-bs-toggle="collapse" href="#collapsebank" role="button" aria-expanded="false" aria-controls="collapsebank">Direct Bank Transfer</a></h3>
+        
+                  <div class="collapse" id="collapsebank">
+                    <div class="py-2">
+                      <p class="mb-0">Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
+                    </div>
+                  </div>
+                </div>
+        
+                <div class="border p-3 mb-3">
+                  <h3 class="h6 mb-0"><a class="d-block" data-bs-toggle="collapse" href="#collapsecheque" role="button" aria-expanded="false" aria-controls="collapsecheque">Cheque Payment</a></h3>
+        
+                  <div class="collapse" id="collapsecheque">
+                    <div class="py-2">
+                      <p class="mb-0">Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
+                    </div>
+                  </div>
+                </div>
+        
+                <div class="border p-3 mb-5">
+                  <h3 class="h6 mb-0"><a class="d-block" data-bs-toggle="collapse" href="#collapsepaypal" role="button" aria-expanded="false" aria-controls="collapsepaypal">Paypal</a></h3>
+        
+                  <div class="collapse" id="collapsepaypal">
+                    <div class="py-2">
+                      <p class="mb-0">Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
+                    </div>
+                  </div>
+                </div>
+        
+                <div class="form-group">
+                  <button class="btn btn-black btn-lg py-3 btn-block" onclick="window.location='thankyou.html'">Place Order</button>
+                </div>
+        
+              </div>
+            </div>
+          </div>
+          
+        
+       </div>
+        </div>
+      </div>
+</div>
+
+
+<%-include('./layouts/footer.ejs')%>

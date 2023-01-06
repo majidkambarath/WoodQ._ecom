@@ -5,13 +5,11 @@
         <div class="col-md-6 mb-5 mb-md-0">
           <h2 class="h3 mb-3  ">Shipping Details</h2>
 
-          <div class="p-3 p-lg-5 border bg-white">
-            <div class="d-flex justify-content-between">
-              
-            </div>
+          <div class="p-3 p-lg-5 border bg-white ">
+      
             <%if(show!= null){%>
               <%show.forEach(function(data){%>
-              <div class="card" style="width: 18rem;">
+              <div class="card " style="width: 18rem;">
                 <div class="card-body">
                   <div class="card-body">
                     <div class="d-flex justify-content-between" >
@@ -28,78 +26,34 @@
                 <span style="font-weight:bold">Email : </span><%=data.Email%><br>
                 <span style="font-weight:bold">Mobile :</span><%=data.phone%><br>
             </p> 
-          
-            <a href="" sty>Edit <i class="icon-edit"></i></a>
-        
+          <div class="d-flex justify-content-between">
+            <a href="/editAdd?id=<%=data._id%>"><i class="fa-regular fa-pen-to-square"></i></a>
+       
+            <a href="/setdefault?id=<%=data._id%>" style="text-decoration: none;" > Set Default </a>
+          </div>
+           
+            
+            
+            
           </p>
               </div>
-
-
-
-
-                  
-
-
-               <p class="form-group">
-                    <form action="" method="">
-                        <input type="hidden" value="<%=data.FirstName%>" name="First Name">
-                        <input type="hidden" value="<%=data.LastName%>" name="Last Name">
-                        <input type="hidden" value="<%=data.Address%>" name="Address">
-                        <input type="hidden" value="<%=data.State%>" name="State">
-                        <input type="hidden" value="<%=data.postCode%>" name="zipcode">
-                        <input type="hidden" value="<%=data.Email%>" name="Email">
-                        <input type="hidden" value="<%=data.phone%>" name="Phone">
-                        <button type="submit" class="btn btn-primary ">Deliver Here</button>
-                    </form>
-
-                  </p>
-                  
+               
                 </div>
               </div>
               <% }) %>
               <% } %>
-<!--             
-              <div class="container">
-                <div class="row">
-                    <div class="col-md-6 mb-5 mb-md-0">
-                  <div class="card" style="width: 23rem;">
-                    <div class="card-body ">
 
-                      <h5 class="card-title">
-                       
-                      </h5>
-                      <p class="card-text">
-                        
-                      </p>
-                      <p>
-                        
-                      </p>
-                      <form action="/payment" method="post">
-                        <input type="hidden" value="" name="addressId">
-                        <input type="hidden" value="" name="totalPrice">
-                        <input type="hidden" value="" name="name">
-                        <input type="hidden" value="" name="home">
-                        <input type="hidden" value="" name="state">
-                        <input type="hidden" value="" name="pincode">
-                        <input type="hidden" value="" name="mobile_num">
-                        <button type="submit" class="btn btn-primary ">Deliver Here</button>
-                      </form>
-                    </div>
-                  </div>
-                    </div>
-                </div>
-              </div> -->
+
                   <br>
           
-            
-                      <br>
-                      <div class="form-group">
+                  <br>
+                      <!-- <div class="form-group">
                         <label for="c_ship_different_address" class="text" data-bs-toggle="collapse"
                           href="#ship_different_address" role="button" aria-expanded="false"
                           aria-controls="ship_different_address"><b>Add new address </b></label>
                         <div class="collapse" id="ship_different_address">
                           <div class="py-2">
-                            <form action="/profile" method="post">
+                            <form action="/add" method="post">
 
                               <div class="form-group row">
                                 <div class="col-md-6">
@@ -151,12 +105,12 @@
                             </form>
                           </div>
                         </div>
-                      </div>
+                      </div> -->
           </div>
         </div>
         <div class="col-md-6">
           <div class="row mb-5">
-            <div class="col-md-12">
+            <!-- <div class="col-md-12">
               <h2 class="h3 mb-3">Coupon Code</h2>
               <div class="p-3 p-lg-5 border bg-white">
 
@@ -170,8 +124,10 @@
                 </div>
 
               </div>
-            </div>
+            </div> -->
           </div>
+        
+        
 
           <div class="row mb-5">
             <div class="col-md-12">
@@ -188,25 +144,25 @@
                     
                           <tr>
                             <td>
-                              <strong class="mx-2">x</strong>
+                              <strong class="mx-2"></strong>
                                 
                             </td>
-                            <td>$
+                            <td>
                             </td>
                           </tr>
                          
                         
-                              <tr>
-                                <td class="text-black font-weight-bold"><strong>Coupon Applied</strong></td>
-                                <td class="text-black">$350.00</td>
-                              </tr>
+                              
                               <tr>
                                 <td class="  font-weight-bold"><strong>Order Total</strong></td>
-                                <td class="  font-weight-bold"><strong>$</strong></td>
+                                <td class="  font-weight-bold"><strong>$<%=amonut%></strong></td>
                               </tr>
                   </tbody>
                 </table>
+            
+                 <a href="\payment"> <button class="btn btn-black btn-lg py-3 btn-block" >Place Order</button> </a>
               </div>
+             
             </div>
           </div>
         </div>

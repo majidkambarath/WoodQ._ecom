@@ -22,7 +22,28 @@
 		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 		<script src="/user/js/ajax.js"></script>
-
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<style>
+            figure.zoom {
+    background-position: 50% 50%;
+    position: relative;
+    width: 450px;
+    overflow: hidden;
+    cursor: zoom-in;
+  }
+  figure.zoom img:hover {
+    opacity: 0;
+  }
+  figure.zoom img {
+    transition: opacity .5s;
+    display: block;
+    width: 100%;
+  }
+  .heart{
+	border: none;
+    background-color: white;
+  }
+        </style>
     </head>
     <body>
         <nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark" arial-label="Furni navigation bar">
@@ -49,11 +70,17 @@
 					</ul>
 
 					<ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
-						<li><a class="nav-link" href="#"><img src="/user/images/user.svg"></a></li>
+						<li><a class="nav-link " href="#"><img src="/user/images/user.svg"></a></li>
+						<li><a class="nav-link fs-5" style="color: aliceblue; position: absolute; margin-left: 58px;" href="/wishlist"><i class="fa fa-heart"></i><span class="badge badge-light " id="count-id" ></span>
+							<!-- <%if(find>0){%>
+							<%=locals.find%>
+							<%}%> -->
+						</span> </a></li>
 						<li>
         
-                         <a class="nav-link" href="/cart"><img src="/user/images/cart.svg">
-							<span class="badge badge-light" id="count-id">
+                         <a class="nav-link " href="/cart"><img src="/user/images/cart.svg">
+							<span class="badge badge-light 
+							" id="count-id">
 								<%if(count>0){%>
 									<%=locals.count%>
 									<%}%>

@@ -1,0 +1,59 @@
+<%-include('./layouts/shophead.ejs')%>
+
+<div class="col-md-6 mb-5 mb-md-0 mx-auto ">
+    <h2 class="h3 mb-3 text-black">Edit Details</h2>
+ 
+      
+      <form method="post" action="">
+      <div class="form-group row">
+        <div class="col-md-6">
+          <label for="c_fname" class="text-black">First Name <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="c_fname" name="FirstName" value="<%=change[0].address[0].FirstName%>">
+        </div>
+        <div class="col-md-6">
+          <label for="c_lname" class="text-black">Last Name <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="c_lname" name="LastName" value="<%=change[0].address[0].LastName%>">
+        </div>
+      </div>
+
+
+      <div class="form-group row">
+        <div class="col-md-12">
+          <label for="c_address" class="text-black">Address <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="c_address" name="Address" placeholder="Street address" value="<%=change[0].address[0].Address%>">
+        </div>
+      </div>
+
+      
+      <div class="form-group row">
+        <div class="col-md-6">
+          <label for="c_state_country" class="text-black">State / Country <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="c_state_country" name="State" value="<%=change[0].address[0].State%>">
+        </div>
+        <div class="col-md-6">
+          <label for="c_postal_zip" class="text-black">Posta / Zip <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="c_postal_zip" name="postCode" value="<%=change[0].address[0].postCode%>">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-md-6">
+          <label for="c_email_address" class="text-black">Email Address <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="c_email_address" name="Email" value="<%=change[0].address[0].Email%>">
+        </div>
+        <div class="col-md-6">
+          <label for="c_phone" class="text-black">Phone <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="c_phone" name="phone" placeholder="Phone Number" value="<%=change[0].address[0].phone%>">
+        </div>
+       
+          </div>
+          <button type="submit" class="btn btn-outline-primary-2 my-3">
+            <span>SAVE CHANGES</span>
+     
+        </button>
+           
+
+    </form>
+</div>
+
+<%-include('./layouts/footerAdd.ejs')%>

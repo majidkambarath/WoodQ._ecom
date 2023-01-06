@@ -45,3 +45,33 @@ function change(prodId,cartId,count){
     })
     console.log('dgbdjgbdlj');
 }
+
+
+function addTowish(id){
+    console.log(id);
+    $.ajax({
+        url:'/addTowishlist',
+        method:'post',
+        data : {
+            prodId : id
+        },
+       
+        success:(response)=>{
+            if(response.wish){
+                Swal.fire({
+                    title: "Product Already in Wishlist..!",
+                    icon: "warning",
+                    confirmButtonText: "continue",
+                  }).then(function () {
+                    location.reload();
+                  });
+                
+                }else{
+                    location.reload()
+                }
+          
+        }
+    })
+    console.log(data);
+
+}

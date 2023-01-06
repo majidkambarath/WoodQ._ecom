@@ -1,0 +1,26 @@
+<%-include('./layouts/carthead.ejs')%>
+<div class="container row row-cols-3 g-4 mx-auto mt-3">
+  
+  <%if(wishdata!= null){ %>
+    <%wishdata.forEach(function(data){%>
+    <div class="col ">
+      <div class="card w-75">
+        <img src="/admin/productImage/<%=data.wish.image[0]%>" class="card-img-top" alt="...">
+        <div class="card-body">
+          <div class="d-flex justify-content-between"><h5 class="card-title"><%=data.wish.productName%></h5>
+            <a href="/remove?id=<%=data.productId%>"><i class="fa-solid fa-xmark"></i></a></div>
+          
+          <p class="card-text"> <span class="text-decoration-line-through">$<%=data.wish.productPrice%></span>
+            <span>$<%=data.wish.salePrice%></span></p>
+            <a href="#"> <i class="fa-sharp fa-solid fa-cart-plus fs-5"></i></a>
+
+
+        </div>
+      </div>
+    </div>
+    <% }) %>
+    <% } %>
+  </div>
+
+ 
+  <%-include('./layouts/shopfooter.ejs')%>

@@ -1,15 +1,26 @@
-<%-include('./layouts/shophead.ejs')%>
+<%-include('./layouts/shop.ejs')%>
 
 <div class="untree_co-section product-section before-footer-section">
+    <div class="dropdown">
+        <button class="btn dropdown-toggle " style="margin-top: -144px; margin-left: 50px;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+         Fillter
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <%catadata.forEach(function(show){ %>
+          <li><a class="dropdown-item" href="/shop?id=<%=show._id%>"><%=show.category%></a></li>
+          <% }) %>
+        </ul>
+      </div>
 <div class="container">
+   
       <div class="row">
-
+        
           <!-- Start Column 1 -->
           <%if(show!= null){ %>
             <%show.forEach(function(show){ %>
                
         <div class="col-12 col-md-4 col-lg-3 mb-5">
-           
+            
             <a class="product-item" href="/view_product/<%=show._id%>">
               
                 <img src="/admin/productImage/<%=show.image[0]%>" class="img-fluid product-thumbnail"style="width: 444px;
