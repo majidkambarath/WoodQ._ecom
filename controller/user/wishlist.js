@@ -78,7 +78,7 @@ const addWishlist = async(req,res)=>{
             })
             await addWish.save()
         }
-
+     res.redirect('/view_product')
        
     } catch (error) {
         console.log(error.message);

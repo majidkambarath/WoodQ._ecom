@@ -147,8 +147,8 @@ a {
     .hero .hero-img-wrap:after {
       content: "";
       position: absolute;
-      width: 255px;
-      height: 217px;
+      /* width: 255px;
+      height: 217px; */
       background-image: url("../images/dots-light.svg");
       background-size: contain;
       background-repeat: no-repeat;

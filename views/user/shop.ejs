@@ -1,16 +1,38 @@
 <%-include('./layouts/shop.ejs')%>
 
+<div class="hero">
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-lg-5">
+                <div class="intro-excerpt">
+                    <h1 style="font-family: Times;">Modern Interior <span clsas="d-block">Design Studio</span></h1>
+                    <p>
+                        <div class="dropdown">
+                            <button style="font-family: Times;" class="btn dropdown-toggle btn-white-outline "type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                          Categorys
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="/shop "> Show All</a></li>
+                                <%catadata.forEach(function(show){ %>
+                              <li><a class="dropdown-item" href="/shop?id=<%=show._id%>"><%=show.category%></a></li>
+                              
+                              <% }) %>
+                            </ul>
+                          </div>
+                       
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="hero-img-wrap">
+                    <img src="/user/images/couch.png" class="img-fluid" style="max-width: -webkit-fill-available;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="untree_co-section product-section before-footer-section">
-    <div class="dropdown">
-        <button class="btn dropdown-toggle " style="margin-top: -144px; margin-left: 50px;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-         Fillter
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <%catadata.forEach(function(show){ %>
-          <li><a class="dropdown-item" href="/shop?id=<%=show._id%>"><%=show.category%></a></li>
-          <% }) %>
-        </ul>
-      </div>
+    
 <div class="container">
    
       <div class="row">

@@ -1,6 +1,5 @@
 <%-include('./layouts/head.ejs')%>
 
-
 <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -25,7 +24,7 @@
           </li>
         </ul>
             
-        <a class="nav-link" href="/admin/category_add"> <button type="button" class="btn btn-outline-primary">Add Category</button> </a></li>
+        <a class="nav-link" href="/admin/add_coupon"> <button type="button" class="btn btn-outline-primary">Add Coupon</button> </a></li>
           
       </div>
     </nav>
@@ -48,12 +47,12 @@
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="" aria-expanded="false" aria-controls="ui-basic">
               <i class="icon-layout menu-icon"></i>
-              <span class="menu-title">Catr</span>
+              <span class="menu-title">Coupon</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-           <li class="nav-item"> <a class="nav-link" href="">Category </a></li>
+           <li class="nav-item"> <a class="nav-link" href="">Coupon </a></li>
                 <li class="nav-item"> <a class="nav-link" href=""></a></li>
               </ul>
               
@@ -63,47 +62,50 @@
       
       <div class="container">
         <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-          <h3 class="font-weight-bold">Category Management</h3>
+          <h3 class="font-weight-bold">Coupon Management</h3>
         </div><br>
           <div class="row">
               <div class="col-md-12">
                
                   
                   <div class="gv">
-                    <%if(categorySave!= null ) { %>
+                  <%if(findCoupon!=null){%>
                       <table id="example" class="table table-striped table-bordered grid" style="width:100%">
                           <thead>
                               <tr>
                                 
-                                  <th>Category</th>
-                                 
+                                  <th>CouponName</th>
+                                  <th>Discount</th>
+                                  <th>StartingDate</th>
+                                  <th>ExpriyDate</th>
                                   <th>Action</th>
                   
                               </tr>
                           </thead>
                           <tbody>
   
-                             
-                            <%categorySave.forEach(function(cate){ %>
-                             
+            <%findCoupon.forEach((data)=>{%>
+      
                               <tr>
                               
-                                <td><%= cate.category%></td>
-                            
-                                
-                                
-                                
-                                <td>
-                                  <a href="/admin/category_edit?id=<%= cate._id%>" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">Edit</i></a>
-                                  <a href="/admin/category_delete?id=<%=cate._id%>" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">Delete</i></a>
+                                <td><%=data.couponName%></td>
+                                <td><%=data.discount%></td>
+                                <td><%=data.startingDate%></td>
+                                <td><%=data.expiryDate%></td>
+                                <td>   
+                                  <%if(data.active==true){%>
+                                  <a href="/admin/coupon_block?id=<%=data._id%>"><button type="button" class="btn btn-success">Active</button></a>
+                                  <%}else{%>
+                                    <a href="/admin/coupon_block?id=<%=data._id%>"><button type="button" class="btn btn-danger">Blocked</button></a>
+                                  <%}%>
                                 </td>
-                                
                               </tr>
-                              <% }) %>
+                     
                           </tbody>
+                          <%})%>
                          
                       </table>
-                      <% } %>
+                      <%}%>
                   </div>
               </div>
               

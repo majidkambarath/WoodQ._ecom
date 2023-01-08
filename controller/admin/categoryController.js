@@ -12,6 +12,11 @@ const addCategory = async (req, res) => {
 
 const categoryInsert = async (req, res) => {
   try {
+   const categoryy = req.body.category.toUpperCase()
+   const cata = await category.findOne({category:categoryy})
+   if(cata){
+    res.render("admin/addCategory",{wrong:"Already Exited Category"} );
+   }else{
     const categoryDate = new category({
       category: req.body.category.toUpperCase(),
     });
@@ -22,6 +27,8 @@ const categoryInsert = async (req, res) => {
 
     res.redirect("/admin/category");
     console.log("inserting sucess");
+   }
+
   } catch (error) {
     console.log(error.message);
   }
@@ -49,7 +56,7 @@ const cateEdit = async (req, res) => {
 const cateUpdate = async (req, res) => {
   try {
     const id = req.query.id;
-    const inputCategory = req.body.category;
+    const inputCategory = req.body.category.toUpperCase();
     //const inputImage = req.file.filename;
     const chack = await category.findOne({ inputCategory: category });
     if (chack) {
@@ -72,6 +79,7 @@ const cateUpdate = async (req, res) => {
 const cateDelete = async (req, res) => {
   try {
     const id = req.query.id;
+
     const Delete = await category.findByIdAndDelete({ _id: id });
     res.redirect("/admin/category");
     console.log("delete category");

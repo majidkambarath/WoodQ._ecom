@@ -35,9 +35,9 @@ function change(prodId,cartId,count){
         },
         success:(response)=>{
             if(response.success){
-                let count = $('#qty').html()
-                count = parseInt(count)+1
-                $('#qty').html(count)                 
+                // let count = $('#qty').html()
+                // count = parseInt(count)+1
+                // $('#qty').val(count)                 
                location.reload();
             }
         }

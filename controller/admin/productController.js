@@ -61,10 +61,28 @@ const productPost = async (req, res) => {
 const productEdit = async (req, res) => {
   try {
     const id = req.query.id;
-
+    const cataName = await product.aggregate([
+      {
+        $lookup:{
+          from:'categories',
+          localField:'category',
+          foreignField:'_id',
+          as:'catadata'
+        }
+      },
+      {
+        $project:{
+          productName:'$productName',
+          category:'$catadata.category',
+          image:'$image',
+          productPrice:'$productPrice',
+          salePrice:'$salePrice'
+        }
+      }
+    ])
     const productq = await product.findById({ _id: id });
     if (productq) {
-      res.render("admin/edit", { products: productq });
+      res.render("admin/edit", { products: productq ,cataName});
       console.log("edit success");
     } else {
       res.redirect("/admin/product_page");
