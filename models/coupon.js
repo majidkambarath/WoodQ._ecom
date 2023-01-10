@@ -6,6 +6,9 @@ const couponSchema = new mongoose.Schema({
   discount:{
     type:Number
   },
+  minDiscount:{
+   type:Number
+  },
   startingDate:{
     type:Date
   },
@@ -15,7 +18,13 @@ const couponSchema = new mongoose.Schema({
   active:{
     type:Boolean,
     default:true
-  }
+  },
+  users:[
+    {
+        userId:mongoose.Types.ObjectId
+      
+    }
+  ]
 
 })
 

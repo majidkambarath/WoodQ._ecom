@@ -3,11 +3,13 @@ const router = express.Router();
 const sessions = require('express-session');
 const upload = require('../middleware/multer')
 
+const orderController = require('../controller/admin/order')
 const couponController = require('../controller/admin/coupon')
 const admincontroller = require('../controller/admin/adminController')
 const productController = require('../controller/admin/productController')
 const categoryController = require('../controller/admin/categoryController')
 const custmoerController = require('../controller/admin/customer.Controller')
+const bannerController = require('../controller/admin/banner')
 //seesion middleware
 //admin&&product side
 
@@ -31,9 +33,17 @@ router.get('/category_delete',categoryController.cateDelete)
 /*----------------------------------custmoer page---------------------------------*/
 router.get('/custmoer_page',custmoerController.custmoerPage)
 router.get('/custmoer_block',custmoerController.userBlock)
+/*----------------------------------banner mangement---------------------------------*/
+router.get('/banner_page',bannerController.banner_page)
+router.get('/add_banner',bannerController.add_Banner)
+router.post('/add_banner',upload.array('image',4),bannerController.insert_banner)
 /*----------------------------------coupon---------------------------------*/
 router.get('/coupon_page',couponController.coupon_page)
 router.get('/add_coupon',couponController.add_Coupon_page)
 router.post('/add_coupon',couponController.coupon_insert)
 router.get('/coupon_block',couponController.coupon_blocking)
+
+router.get('/order_page',orderController.order_page)
+router.post('/order_upte',orderController.order_upte)
+
 module.exports = router

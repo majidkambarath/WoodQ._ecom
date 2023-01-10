@@ -2,13 +2,13 @@
 
   <div class="untree_co-section">
     <div class="container">
-         <form>
+         <form method="post" action="/order_place">
       <div class="row">
      
         <div class="col-md-6 mb-5 mb-md-0">
           <h2 class="h3 mb-3  ">Shipping Details</h2>
           <div class="p-3 p-lg-5 border bg-white">
-            <%if(defaultset!= '' ){%>
+            <%if(defaultset!= ''){%>
               <%defaultset.forEach(function(set){%>
                 <div class="card" style="width: 18rem;">
                   <div class="card-body">
@@ -18,24 +18,31 @@
                       </div>
                       </p><span style="font-weight:bold">
                         <%=set.address.FirstName%>
+                        <input hidden  value="<%=set.address.FirstName%>" name="firstName">
                       </span>
                       <span style="font-weight:bold">
                         <%=set.address.LastName%>
+                        <input hidden  value="<%=set.address.LastName%>" name="lastName">
                       </span> <br>
                       <span style="font-weight:bold">
                         <%=set.address.Address%>
+                        <input hidden  value="<%=set.address.Address%>" name="address">
                       </span>
                       <span style="font-weight:bold">
                         <%=set.address.State%>
+                        <input hidden  value="<%=set.address.State%>" name="state">
                       </span>
                       <span style="font-weight:bold">
                         <%=set.address.postCode%>
+                        <input hidden  value="<%=set.address.postCode%>" name="PostCode">
                       </span><br>
                       <span style="font-weight:bold">
                         <%=set.address.Email%>
+                        <input hidden  value="<%=set.address.Email%>" name="email">
                       </span>,
                       <span style="font-weight:bold">
                         <%=set.address.phone%>
+                        <input hidden  value=" <%=set.address.phone%>" name="Phone">
                       </span>
                     </div>
                     <!-- Button trigger modal -->
@@ -60,13 +67,18 @@
             <div class="col-md-12">
               <h2 class="h3 mb-3">Coupon Code</h2>
               <div class="p-3 p-lg-5 border bg-white">
-                <label for="c_code" class=" mb-3">Enter your coupon code if you have one</label>
+                <label for="c_code" class=" mb-3">Enter your coupon code if you have one</label><br>
+                <span id="invalid" style="color: brown;"></span>
                 <div class="input-group w-75 couponcode-wrap">
-                  <input type="text" class="form-control me-2" id="c_code" placeholder="Coupon Code"
-                    aria-label="Coupon Code" aria-describedby="button-addon2">
+                  
+                  <input type="text" class="form-control me-2" id="code"  placeholder="Coupon Code"
+                    aria-label="Coupon Code" name="coupon" aria-describedby="button-addon2">
+                   <input hidden id="couponId" value="" name="couponId">
+                   
                   <div class="input-group-append">
-                    <button class="btn btn-primary btn-sm" type="button" id="button-addon2">Apply</button>
+                    <button class="btn btn-primary btn-sm" type="button"  onclick="Addcoupon('<%=subtotal%>')">Apply</button>
                   </div>
+                  
                 </div>
               </div>
             </div>
@@ -100,7 +112,11 @@
                             </tr>
                             <tr>
                               <td class="text-black font-weight-bold"><strong>Order Total</strong></td>
-                              <td class="text-black font-weight-bold"><strong>$<%=subtotal%></strong></td>
+                              <td
+                               class="text-black font-weight-bold">$<span id="total"><%=subtotal%></span>
+                               <input hidden name="discountPrice" id="distPrice" value="">
+                              </td>
+
                             </tr>
                   </tbody>
                 </table>
@@ -111,7 +127,7 @@
                 <label for="html">Online Method</label><br>
                 </div>
                 <div class="form-group">
-                  <button class="btn btn-black btn-lg py-3 btn-block" onclick="window.location='thankyou.html'">Place
+                  <button class="btn btn-black btn-lg py-3 btn-block" value="submit" type="submit" >Place
                     Order</button>
                 </div>
                 

@@ -24,7 +24,7 @@
           </li>
         </ul>
             
-        <a class="nav-link" href="/admin/add_coupon"> <button type="button" class="btn btn-outline-primary">Add Coupon</button> </a></li>
+        <a class="nav-link" href="/admin/add_banner"> <button type="button" class="btn btn-outline-primary">Add Images</button> </a></li>
           
       </div>
     </nav>
@@ -47,12 +47,12 @@
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="" aria-expanded="false" aria-controls="ui-basic">
               <i class="icon-layout menu-icon"></i>
-              <span class="menu-title">Coupon</span>
+              <span class="menu-title">Banner </span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-           <li class="nav-item"> <a class="nav-link" href="">Coupon </a></li>
+           <li class="nav-item"> <a class="nav-link" href="">banner </a></li>
                 <li class="nav-item"> <a class="nav-link" href=""></a></li>
               </ul>
               
@@ -62,45 +62,45 @@
       
       <div class="container">
         <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-          <h3 class="font-weight-bold">Coupon Management</h3>
+          <h3 class="font-weight-bold">Banner Management</h3>
         </div><br>
           <div class="row">
               <div class="col-md-12">
                
-                  
+                 
                   <div class="gv">
-                  <%if(findCoupon!=null){%>
+                    <%if(image!=null){%>
                       <table id="example" class="table table-striped table-bordered grid" style="width:100%">
                           <thead>
                               <tr>
                                 
-                                  <th>CouponName</th>
-                                  <th>Discount</th>
-                                  <th>MiniDiscount</th>
-                                  <th>StartingDate</th>
-                                  <th>ExpriyDate</th>
+                                  <th>Banner Images</th>
+                                 
+                                 
                                   <th>Action</th>
                   
                               </tr>
                           </thead>
                           <tbody>
   
-            <%findCoupon.forEach((data)=>{%>
+           <%image.forEach((data)=>{%>
+     
       
                               <tr>
                               
-                                <td><%=data.couponName%></td>
-                                <td><%=data.discount%></td>
-                                <td><%=data.minDiscount%></td>
-                                <td><%=data.startingDate%></td>
-                                <td><%=data.expiryDate%></td>
-                                <td>   
-                                  <%if(data.active==true){%>
-                                  <a href="/admin/coupon_block?id=<%=data._id%>"><button type="button" class="btn btn-success">Active</button></a>
-                                  <%}else{%>
-                                    <a href="/admin/coupon_block?id=<%=data._id%>"><button type="button" class="btn btn-danger">Blocked</button></a>
-                                  <%}%>
-                                </td>
+                                    <td>
+                                      <img  src="/admin/productImage/<%=data.image[0]%>" style="width: 144px;
+                                     height: 111px;">
+                                       <img  src="/admin/productImage/<%=data.image[1]%>" style="width: 144px;
+                                       height: 111px;">
+                                         <img  src="/admin/productImage/<%=data.image[2]%>" style="width: 144px;
+                                         height: 111px;">
+                                           <img  src="/admin/productImage/<%=data.image[3]%>" style="width: 144px;
+                                           height: 111px;">
+                                     </td>
+                                     <td>  <button type="button" class="btn" onclick="edit('<%=data._id%>')" ><i class="fa-regular fa-pen-to-square"></i></button></td>
+                                     <td>  <button type="button" class="btn" ><i class="fa-solid fa-delete-left"></i></button></td>
+
                               </tr>
                      
                           </tbody>
@@ -114,6 +114,31 @@
           </div>
       </div>
       
+
+      <script>
+        function edit(id){
+          console.log(id);
+    // $.ajax({
+    //     url:'/addToCart',
+    //     method:'post',
+    //     data : {
+    //         proId : id
+    //     },
+    //     success:(response)=>{
+            
+    //        if(response.success){
+    //        let count =$('#count-id').html()
+    //        count = parseInt(count)+1
+    //        $('#count-id').html(count)
+    //        location.reload();
+    //        }
+          
+    //     }
+    // })
+}
+
+
+      </script>
 
 
 

@@ -19,10 +19,11 @@ const add_Coupon_page = async (req, res) => {
 
 const coupon_insert = async (req, res) => {
   try {
-    let { Name, Discount, startingDate, expriyDate } = req.body;
+    let { Name, Discount,minDiscount, startingDate, expriyDate } = req.body;
     let coupomInsert = new coupon({
-      couponName: Name,
+      couponName: Name.toUpperCase(),
       discount: Discount,
+      minDiscount:minDiscount,
       startingDate: startingDate,
       expiryDate: expriyDate,
     });
@@ -56,4 +57,6 @@ module.exports = {
   add_Coupon_page,
   coupon_insert,
   coupon_blocking,
+
+  
 };

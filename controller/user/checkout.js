@@ -1,6 +1,9 @@
 const user = require("../../models/userModel");
 const cart = require("../../models/cartModel")
+const coupon = require('../../models/coupon')
+const order = require('../../models/order')
 const mongoose = require("mongoose");
+
 
 const insertaddress = async (req, res) => {
   try {
@@ -88,9 +91,10 @@ const showAddress = async (req, res) => {
         },
       },
     ]);
-
-    res.render("user/profile",{show});
-     console.log(show[0].primary);
+let order_list = await order.find()
+console.log(order_list);
+    res.render("user/profile",{show,order_list});
+   
   } catch (error) {
     console.log(error.message);
   }
@@ -185,7 +189,7 @@ const Addupdate = async (req,res)=>{
     ).then(()=>{
       res.redirect('/profile')
     })
-    console.log(updateAddress);
+    // console.log(updateAddress);
    } catch (error) {
     console.log(error.message);
    }
@@ -234,6 +238,7 @@ const payment = async(req,res)=>{
         },
       },
     ])
+    // console.log(detailss[0].productId);
     const subtotal = detailss.reduce((acc, cur) => {
       acc = acc + cur.TotalPrice;
       return acc;
@@ -254,14 +259,15 @@ const payment = async(req,res)=>{
     ])
     // const sub = await subtotal(userId)
     // const len = subtotal.length
-    console.log(defaultset);
+    // console.log(defaultset);
     // const totalcount = sub[0].total
     // const amonut = parseInt(totalcount)
     // console.log(amonut);
     const show = await user.findOne({_id:mongoose.Types.ObjectId(userId)})
     const Address = show.address
-
-    res.render('user/payment.ejs',{defaultset,detailss,Address,subtotal})
+    const couponData = await coupon.find()
+    console.log(couponData);
+    res.render('user/payment.ejs',{defaultset,detailss,Address,subtotal,couponData})
 
   } catch (error) {
     console.log(error.message);
@@ -296,6 +302,66 @@ const changeOption = async(req,res)=>{
   } catch (error) {
     console.log(error.message);
   }
+
+}
+const applycoupon = async(req,res)=>{
+try {
+  let data = req.body;
+  let coupon_cde = data.copuoncode;
+  let find = data.subTotal
+  let Total = parseInt(find)
+  const Id = req.session.userlo;
+  const userId = mongoose.Types.ObjectId(Id)
+
+const coupon_check = await coupon.findOne({couponName:coupon_cde});
+console.log(coupon_check);
+
+if(coupon_check){
+
+let currentDate = new Date();
+if(currentDate>=coupon_check.startingDate && currentDate <= coupon_check.expiryDate){
+  let userCheck = coupon_check.users.findIndex((users)=> users.userId == Id)
+
+  userCheck=parseInt(userCheck)
+  if(userCheck === -1){
+
+   if(Total > coupon_check.minDiscount){
+
+ let discount = coupon_check.discount
+ let total = Total
+ let discountParentage = (total*discount)/100
+ let finnalDiscount = total - discountParentage
+ var apply = ' Apply succeeed '
+ let couponId = coupon_check._id
+ console.log(couponId);
+ res.json({finnalDiscount,apply,couponId})
+    }else{
+   var maximum = 'purchese Above 1000 '
+      res.json({maximum})
+    }
+  
+
+  }else{
+    var userEx = 'Already Existed Coupon';
+    res.json({userEx})
+  
+  }
+  
+}else{
+ var exprire = 'Your coupon is Exprired';
+  res.json({exprire})
+}
+
+}else{
+  var invalid = 'copuon is not valid';
+ res.json({invalid})
+}
+
+  
+} catch (error) {
+  console.log(error);
+}
+
 }
 module.exports = {
   insertaddress,
@@ -306,5 +372,6 @@ module.exports = {
   editAddress,
   Addupdate,
   payment,
-  changeOption
+  changeOption,
+  applycoupon
 };

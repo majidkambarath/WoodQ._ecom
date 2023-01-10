@@ -26,11 +26,12 @@
                                 <a class="nav-link" id="tab-account-link" data-toggle="tab" href="#tab-account" role="tab" aria-controls="tab-account" aria-selected="false">Account Details</a>
                             </li>
                             
-                            <li class="nav-item">
-                                <a class="nav-link" id="tab-orders-link" data-toggle="tab" href="#tab-orders" role="tab" aria-controls="tab-orders" aria-selected="false">Orders</a>
-                            </li>
+                            
                             <li class="nav-item">
                                 <a class="nav-link" id="tab-downloads-link" data-toggle="tab" href="#tab-downloads" role="tab" aria-controls="tab-downloads" aria-selected="false">Downloads</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="tab-downloads-link" data-toggle="tab" href="#tab-Order" role="tab" aria-controls="tab-downloads" aria-selected="false">Order</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="tab-address-link" data-toggle="tab" href="#tab-address" role="tab" aria-controls="tab-address" aria-selected="false">Adresses</a>
@@ -46,15 +47,12 @@
 
                     <div class="col-md-8 col-lg-9">
                         <div class="tab-content">
-                            <div class="tab-pane fade show active" id="tab-dashboard" role="tabpanel" aria-labelledby="tab-dashboard-link">
-                                <p>Hello <span class="font-weight-normal text-dark">User</span> (not <span class="font-weight-normal text-dark">User</span>? <a href="#">Log out</a>) 
-                                <br>
-                                From your account dashboard you can view your <a href="#tab-orders" class="tab-trigger-link link-underline">recent orders</a>, manage your <a href="#tab-address" class="tab-trigger-link">shipping and billing addresses</a>, and <a href="#tab-account" class="tab-trigger-link">edit your password and account details</a>.</p>
-                            </div><!-- .End .tab-pane -->
+                         
 
                             <div class="tab-pane fade" id="tab-orders" role="tabpanel" aria-labelledby="tab-orders-link">
                                 <p>No order has been made yet.</p>
                                 <a href="category.html" class="btn btn-outline-primary-2"><span>GO SHOP</span><i class="icon-long-arrow-right"></i></a>
+                                
                             </div><!-- .End .tab-pane -->
 
                             <div class="tab-pane fade" id="tab-downloads" role="tabpanel" aria-labelledby="tab-downloads-link">
@@ -106,6 +104,90 @@
                                     </div>
                                   </div>
 
+                            </div>
+                            <div class="tab-pane fade" id="tab-Order" role="tabpanel" aria-labelledby="tab-address-link">
+                                <%if(order_list != null){%>
+                                <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col">#Order Date</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Delivery Date</th>
+                                        <th scope="col">Payment Method</th>
+                                        <th scope="col">Order Status</th>
+                                        <th scope="col">Action</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                        <%order_list.forEach((data)=>{%>
+                                        <% let date = data.orderDate %>
+                                        <% const formt = new Date(date ); %>
+                                        <% const todate = formt.toLocaleDateString(); %>
+                                    
+                                      <tr>
+                                        <td><%=todate%></td>
+                                        <td><%=data.name%></td>
+                                        <td><%=data.deliveryDate%></td>
+                                        <td><%=data.paymentMethod%></td>
+                                        <td>
+                                            <%if(data.orderStatus == "cancelled"||data.orderStatus == "refunded"){%>
+                                                <span class="badge badge-pill badge-danger"><%=data.orderStatus%></span>
+                                            <%}%>
+                                            <%if(data.orderStatus == "Devliverd" ){%>
+                                                <span class="badge badge-pill badge-primary"><%=data.orderStatus%></span>
+                                            <%}%>
+                                            <%if(data.orderStatus == "processing"||data.orderStatus == "shipped" ){%>
+                                                <span class="badge badge-pill badge-warning"><%=data.orderStatus%></span>
+                                            <%}%>
+
+                                        </td>
+                                        <td>
+                                            <a href="/order_details?id=<%=data._id%>" > <i class="fa-solid fa-circle-info"></i></a><br>
+                                            <a href="/cancel?id=<%=data._id%>" style="color: red;" >  Cancel</a>
+                                        </td>
+                                      </tr>
+                                      
+                                      </tr>
+                                    </tbody>
+                                    <%})%>
+                                  </table>
+                                  <%}%>
+                            </div>
+                            <div class="tab-pane fade" id="tab-account" role="tabpanel" aria-labelledby="tab-address-link">
+                                <form action="#">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label>First Name *</label>
+                                            <input type="text" class="form-control" required>
+                                        </div><!-- End .col-sm-6 -->
+
+                                        <div class="col-sm-6">
+                                            <label>Last Name *</label>
+                                            <input type="text" class="form-control" required>
+                                        </div><!-- End .col-sm-6 -->
+                                    </div><!-- End .row -->
+
+                                    <label>Display Name *</label>
+                                    <input type="text" class="form-control" required>
+                                    <small class="form-text">This will be how your name will be displayed in the account section and in reviews</small>
+
+                                    <label>Email address *</label>
+                                    <input type="email" class="form-control" required>
+
+                                    <label>Current password (leave blank to leave unchanged)</label>
+                                    <input type="password" class="form-control">
+
+                                    <label>New password (leave blank to leave unchanged)</label>
+                                    <input type="password" class="form-control">
+
+                                    <label>Confirm new password</label>
+                                    <input type="password" class="form-control mb-2">
+
+                                    <button type="submit" class="btn btn-outline-primary-2">
+                                        <span>SAVE CHANGES</span>
+                                        <i class="icon-long-arrow-right"></i>
+                                    </button>
+                                </form>
                             </div>
                             <div class="tab-pane fade" id="tab-address" role="tabpanel" aria-labelledby="tab-address-link">
                                
@@ -193,42 +275,7 @@
                                  </div>
                                 </form>
                             </div>
-                            <div class="tab-pane fade" id="tab-account" role="tabpanel" aria-labelledby="tab-account-link">
-                                <form action="#">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <label>First Name *</label>
-                                            <input type="text" class="form-control" required>
-                                        </div><!-- End .col-sm-6 -->
-
-                                        <div class="col-sm-6">
-                                            <label>Last Name *</label>
-                                            <input type="text" class="form-control" required>
-                                        </div><!-- End .col-sm-6 -->
-                                    </div><!-- End .row -->
-
-                                    <label>Display Name *</label>
-                                    <input type="text" class="form-control" required>
-                                    <small class="form-text">This will be how your name will be displayed in the account section and in reviews</small>
-
-                                    <label>Email address *</label>
-                                    <input type="email" class="form-control" required>
-
-                                    <label>Current password (leave blank to leave unchanged)</label>
-                                    <input type="password" class="form-control">
-
-                                    <label>New password (leave blank to leave unchanged)</label>
-                                    <input type="password" class="form-control">
-
-                                    <label>Confirm new password</label>
-                                    <input type="password" class="form-control mb-2">
-
-                                    <button type="submit" class="btn btn-outline-primary-2">
-                                        <span>SAVE CHANGES</span>
-                                        <i class="icon-long-arrow-right"></i>
-                                    </button>
-                                </form>
-                            </div><!-- .End .tab-pane -->
+                            
                         </div>
                     </div><!-- End .col-lg-9 -->
                 </div><!-- End .row -->

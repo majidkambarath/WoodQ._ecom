@@ -6,6 +6,7 @@ const otp = require("../../models/otp");
 const session = require('express-session');
 const { aggregate } = require("../../models/cartModel");
 const mongoose = require('mongoose')
+const banner = require('../../models/banner')
 const securePassword = async (password) => {
   try {
     console.log("chage hash");
@@ -130,8 +131,16 @@ const userverificate = async (req, res) => {
 //home page
 
 const homeLo = async (req, res) => {
-  const userData = await User.findOne();
-  res.render("user/home.ejs",{userData});
+  try {
+    let banner_view = await banner.find()
+    let image = banner_view[0].image
+    const userData = await User.findOne();
+  res.render("user/home.ejs",{userData,image});
+    
+  } catch (error) {
+    console.log(error.message);
+  }
+  
 };
 
 

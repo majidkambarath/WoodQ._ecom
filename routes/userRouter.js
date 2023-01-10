@@ -4,12 +4,12 @@ const sessions = require('express-session');
 
 const auth = require('../middleware/login/auth')
 // const count = require('../middleware/login/count')
-const addressController = require('../controller/user/address')
+const checkoutController = require('../controller/user/checkout')
 const productController=require('../controller/user/productController')
 const userController = require('../controller/user/userController')
 const cartController = require('../controller/user/cartController')
 const wishlistController = require('../controller/user/wishlist')
-
+const orderController = require('../controller/user/oderController')
 
 router.get('/login',auth.userVerfiy,userController.userlogin)
 router.get('/userSign_up',userController.usersign)
@@ -33,19 +33,25 @@ router.post('/addToCart',auth.userVerfiy,cartController.addToCart)
 router.post('/change-quantity',auth.userVerfiy,cartController.changeQuantity)
 router.get('/delete-cart',auth.userVerfiy,cartController.deleteCart)
 
-/*----------------------------------adresss---------------------------------*/
-router.post('/profile',auth.userVerfiy,addressController.insertaddress)
-router.post('/add',auth.userVerfiy,addressController.addAddress)
-router.get('/profile',auth.userVerfiy,addressController.showAddress)
-router.get('/adddelete',auth.userVerfiy,addressController.addDelete)
-router.get('/editAdd',auth.userVerfiy,addressController.editAddress)
-router.post('/editAdd',auth.userVerfiy,addressController.Addupdate)
-router.get('/setdefault',auth.userVerfiy,addressController.defaultSet)
-router.get('/payment',auth.userVerfiy,addressController.payment)
-router.post('/payment',auth.userVerfiy,addressController.changeOption)
+/*----------------------------------checkout---------------------------------------*/
+router.post('/profile',auth.userVerfiy,checkoutController.insertaddress)
+router.post('/add',auth.userVerfiy,checkoutController.addAddress)
+router.get('/profile',auth.userVerfiy,checkoutController.showAddress)
+router.get('/adddelete',auth.userVerfiy,checkoutController.addDelete)
+router.get('/editAdd',auth.userVerfiy,checkoutController.editAddress)
+router.post('/editAdd',auth.userVerfiy,checkoutController.Addupdate)
+router.get('/setdefault',auth.userVerfiy,checkoutController.defaultSet)
+router.get('/payment',auth.userVerfiy,checkoutController.payment)
+router.post('/payment',auth.userVerfiy,checkoutController.changeOption)
+router.post('/apply_coupon',checkoutController.applycoupon)
 /*------------------------------wishlistManagmnt----------------------------------*/
 router.get('/wishlist',wishlistController.Wishlistpage)
 router.post('/addTowishlist',wishlistController.addWishlist)
 router.get('/remove',auth.userVerfiy,wishlistController.removewishlist)
+/*------------------------------oderManagmnt----------------------------------*/
+router.post('/order_place',orderController.orderPlace)
+router.get('/order_view',orderController.order_view)
+router.get('/cancel',orderController.order_cancel)
+
 
 module.exports=router

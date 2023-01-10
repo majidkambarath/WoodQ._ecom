@@ -1,5 +1,7 @@
 // const { response } = require("express")
 
+
+
 function addToCart(id){
     $.ajax({
         url:'/addToCart',
@@ -73,5 +75,45 @@ function addTowish(id){
         }
     })
     console.log(data);
+
+}
+
+function Addcoupon(total){
+    let code = $('#code').val()
+    console.log(code);
+    console.log(total);
+    
+    $.ajax({
+        url:'/apply_coupon',
+        method:'post',
+        data : {
+            copuoncode : code,
+            subTotal: total,
+        },
+        success:(res)=>{
+            if(res.invalid){
+                $('#invalid').html(res.invalid)
+            }
+            if(res.exprire){
+                $('#invalid').html(res.exprire)
+            }
+            if(res.maximum){
+                $('#invalid').html(res.maximum)
+            }
+            if(res.userEx){
+                $('#invalid').html(res.userEx)
+            }
+            if(res.finnalDiscount){
+                $('#total').html(res.finnalDiscount)
+                $('#distPrice').val(res.finnalDiscount)
+            }
+            if(res.apply){
+                $('#invalid').html(res.apply)
+            }
+            if(res.couponId){
+                $('#couponId').val(res.couponId)
+            }
+        }
+    })
 
 }

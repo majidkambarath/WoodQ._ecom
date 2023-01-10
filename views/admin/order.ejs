@@ -24,7 +24,7 @@
           </li>
         </ul>
             
-        <a class="nav-link" href="/admin/add_coupon"> <button type="button" class="btn btn-outline-primary">Add Coupon</button> </a></li>
+     </li>
           
       </div>
     </nav>
@@ -47,12 +47,12 @@
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="" aria-expanded="false" aria-controls="ui-basic">
               <i class="icon-layout menu-icon"></i>
-              <span class="menu-title">Coupon</span>
+              <span class="menu-title">Order</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-           <li class="nav-item"> <a class="nav-link" href="">Coupon </a></li>
+           <li class="nav-item"> <a class="nav-link" href="">Order</a></li>
                 <li class="nav-item"> <a class="nav-link" href=""></a></li>
               </ul>
               
@@ -62,45 +62,68 @@
       
       <div class="container">
         <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-          <h3 class="font-weight-bold">Coupon Management</h3>
+          <h3 class="font-weight-bold">Order Management</h3>
         </div><br>
           <div class="row">
               <div class="col-md-12">
                
                   
                   <div class="gv">
-                  <%if(findCoupon!=null){%>
+                  <%if(findData!=null){%>
                       <table id="example" class="table table-striped table-bordered grid" style="width:100%">
                           <thead>
                               <tr>
-                                
-                                  <th>CouponName</th>
-                                  <th>Discount</th>
-                                  <th>MiniDiscount</th>
-                                  <th>StartingDate</th>
-                                  <th>ExpriyDate</th>
-                                  <th>Action</th>
+                                <th>#OrderId</th>
+                                  <th>Name</th>
+                                  <th>DiscountPrice</th>
+                                  <th>Payment Method</th>
+                                  <th>Order Date</th>
+                                  <th>Order Status</th>
                   
                               </tr>
                           </thead>
                           <tbody>
   
-            <%findCoupon.forEach((data)=>{%>
+            <%findData.forEach((data)=>{%>
       
                               <tr>
-                              
-                                <td><%=data.couponName%></td>
-                                <td><%=data.discount%></td>
-                                <td><%=data.minDiscount%></td>
-                                <td><%=data.startingDate%></td>
-                                <td><%=data.expiryDate%></td>
-                                <td>   
-                                  <%if(data.active==true){%>
-                                  <a href="/admin/coupon_block?id=<%=data._id%>"><button type="button" class="btn btn-success">Active</button></a>
-                                  <%}else{%>
-                                    <a href="/admin/coupon_block?id=<%=data._id%>"><button type="button" class="btn btn-danger">Blocked</button></a>
-                                  <%}%>
+                               <% let date = data.orderDate %>
+                               <% const formt = new Date(date ); %>
+                               <% const todate = formt.toLocaleDateString(); %>
+                                <td><%=data._id%></td>
+                                <td><%=data.name%></td>
+                                <td><%=data.totalPrice%></td>
+                                <td><%=data.paymentMethod%></td>
+                                <td><%= todate %></td>
+                                <td>
+                                    <form method="post" action="/admin/order_upte">
+                                    <select name="order_status" >
+                                        <%if(data.orderStatus !== 'data.orderStatus'){%>
+                                        <option value="<%=data.orderStatus%>" selected><%=data.orderStatus%></option>
+                                        <%}%>
+                                        <%if(data.orderStatus !== 'processing'){%>
+                                        <option value="processing" >processing</option>
+                                        <%}%>
+                                        <%if(data.orderStatus !== 'shipped'){%>
+                                        <option value="shipped" >shipped</option>
+                                        <%}%>
+                                        <%if(data.orderStatus !== 'Devliverd'){%>
+                                        <option value="Devliverd" >Devliverd</option>
+                                         <%}%>
+                                      <%if(data.orderStatus !== 'cancelled'){%>
+                                       <option value="cancelled" >cancelled</option>
+                                        <%}%>
+                                         <%if(data.orderStatus !== 'refunded'){%>
+                                         <option value="refunded" >refunded</option>
+                                           <%}%>
+                                    </select>
+                                    <input type="text" name="OrderId" value="<%=data._id%>" hidden>
+                                    <button class="btn btn-primary" type="submit">Update</button>
+                                    </form>
+                                  
                                 </td>
+                           
+                                
                               </tr>
                      
                           </tbody>
