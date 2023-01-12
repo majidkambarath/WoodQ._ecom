@@ -96,10 +96,10 @@
                                 <td><%=data.paymentMethod%></td>
                                 <td><%= todate %></td>
                                 <td>
-                                    <form method="post" action="/admin/order_upte">
-                                    <select name="order_status" >
+                               
+                                    <select name="order_status" id="data<%=data._id%>" >
                                         <%if(data.orderStatus !== 'data.orderStatus'){%>
-                                        <option value="<%=data.orderStatus%>" selected><%=data.orderStatus%></option>
+                                        <option value="<%=data.orderStatus%>" ><%=data.orderStatus%></option>
                                         <%}%>
                                         <%if(data.orderStatus !== 'processing'){%>
                                         <option value="processing" >processing</option>
@@ -118,8 +118,12 @@
                                            <%}%>
                                     </select>
                                     <input type="text" name="OrderId" value="<%=data._id%>" hidden>
-                                    <button class="btn btn-primary" type="submit">Update</button>
-                                    </form>
+                                 
+                                    <div id="updte<%=data._id%>">
+                                      <button class="btn btn-primary" onclick="update('<%=data._id%>')">Update</button>
+                                    </div>
+                                  
+                              
                                   
                                 </td>
                            
@@ -137,7 +141,6 @@
           </div>
       </div>
       
-
 
 
 <%-include('./layouts/footer.ejs')%>

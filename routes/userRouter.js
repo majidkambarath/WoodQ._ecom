@@ -3,13 +3,14 @@ const router = express.Router();
 const sessions = require('express-session');
 
 const auth = require('../middleware/login/auth')
-// const count = require('../middleware/login/count')
+
 const checkoutController = require('../controller/user/checkout')
 const productController=require('../controller/user/productController')
 const userController = require('../controller/user/userController')
 const cartController = require('../controller/user/cartController')
 const wishlistController = require('../controller/user/wishlist')
 const orderController = require('../controller/user/oderController')
+
 
 router.get('/login',auth.userVerfiy,userController.userlogin)
 router.get('/userSign_up',userController.usersign)
@@ -29,7 +30,7 @@ router.get('/shop',productController.shoppage)
 router.get('/view_product/:id',productController.viewpage)
 /*------------------------------cartManagmnt----------------------------------*/
 router.get('/cart',auth.userVerfiy,cartController.viewcart)
-router.post('/addToCart',auth.userVerfiy,cartController.addToCart)
+router.post('/addToCart',cartController.addToCart)
 router.post('/change-quantity',auth.userVerfiy,cartController.changeQuantity)
 router.get('/delete-cart',auth.userVerfiy,cartController.deleteCart)
 
@@ -50,8 +51,10 @@ router.post('/addTowishlist',wishlistController.addWishlist)
 router.get('/remove',auth.userVerfiy,wishlistController.removewishlist)
 /*------------------------------oderManagmnt----------------------------------*/
 router.post('/order_place',orderController.orderPlace)
-router.get('/order_view',orderController.order_view)
+router.get('/order_details',orderController.order_details)
 router.get('/cancel',orderController.order_cancel)
-
+router.get('/order_invoice',orderController.order_invoice)
+// router.post('/pay_online',auth.userVerfiy,paypal.paypalgate)
+router.get('/payment_success',orderController.payment_success)
 
 module.exports=router

@@ -14,7 +14,7 @@ const banner_page = async(req,res)=>{
 const add_Banner = async(req,res)=>{
     try {
         res.render('admin/addBanner')
-
+    
     } catch (error) {
        console.log(error.message); 
     }
@@ -22,7 +22,7 @@ const add_Banner = async(req,res)=>{
 
 const insert_banner = async(req,res)=>{
     try {
-        const files = [req.files[0].filename,req.files[1].filename,req.files[2].filename,req.files[3].filename];
+        const files = [req.files[0].filename,req.files[1].filename,req.files[2].filename];
         let bannerData = new banner({
            image:files
         })

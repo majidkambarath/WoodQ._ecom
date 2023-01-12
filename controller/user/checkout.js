@@ -91,8 +91,8 @@ const showAddress = async (req, res) => {
         },
       },
     ]);
-let order_list = await order.find()
-console.log(order_list);
+  
+let order_list = await order.find({userId:userId})
     res.render("user/profile",{show,order_list});
    
   } catch (error) {

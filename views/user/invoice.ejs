@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="/user/css/home/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="card "   >
+        <div class="card-body" id="Invoice">
+          <div class="container mb-5 mt-3">
+            <div class="row d-flex align-items-baseline">
+              <div class="col-xl-9">
+                <!-- <p style="color: #7e8d9f;font-size: 20px;">Invoice >> <strong>ID: #<%=couponData[0]._id%></strong></p> -->
+              </div>
+              <div class="col-xl-3 float-end" >
+                <a class="btn btn-light text-capitalize border-0 "  data-mdb-ripple-color="dark"><i
+                    class="fas fa-print text-primary"  onclick="printInvoice('Invoice')"></i> Print</a>
+                <a class="btn btn-light text-capitalize" data-mdb-ripple-color="dark"><i
+                    class="far fa-file-pdf text-danger"></i> Export</a>
+                    
+              </div>
+              <hr>
+            </div>
+      
+            <div class="container">
+              <div class="col-md-12">
+                <div class="text-center">
+               
+                  <h3  style="color:#5d9fc5 ;" class="pt-0">WoodQ.com</h3>
+                </div>
+      
+              </div>
+      
+      
+              <div class="row">
+                <div class="col-xl-8">
+                  <ul class="list-unstyled">
+                    <li class="text-muted">To: <span style="color:#5d9fc5 ;"><%=couponData[0].name%></span></li>
+                    <li class="text-muted"><%=couponData[0].orderdetails.Address%></li>
+                    <li class="text-muted">State,<%=couponData[0].orderdetails.State%> </li>
+                    <li class="text-muted"><i class="fas fa-phone"></i> <%=couponData[0].orderdetails.phone%></li>
+                  </ul>
+                </div>
+                                        <% let date = couponData[0].orderDate %>
+                                        <% const formt = new Date(date ); %>
+                                        <% const todate = formt.toLocaleDateString(); %>
+                <div class="col-xl-4">
+                  <p class="text-muted">Invoice</p>
+                  <ul class="list-unstyled">
+                    <li class="text-muted"></i> <span
+                        class="fw-bold">ID:</span>#<%=couponData[0]._id%></li>
+                    <li class="text-muted"></i> <span
+                        class="fw-bold">Creation Date: </span><%=todate%></li>
+                    <li class="text-muted"></i>
+                         <span
+                        class="me-1 fw-bold">Status:
+                         <%if(couponData[0].orderStatus == "cancelled"||couponData[0].orderStatus == "refunded"){%>
+                            <span class="badge bg-danger text-black fw-bold"><%=couponData[0].orderStatus%></span>
+                        <%}%>
+                        <%if(couponData[0].orderStatus == "Devliverd" ){%>
+                            <span class="badge bg-primary text-black fw-bold"><%=couponData[0].orderStatus%></span>
+                        <%}%>
+                        <%if(couponData[0].orderStatus == "processing"||couponData[0].orderStatus == "shipped" ){%>
+                            <span class="badge bg-warning text-black fw-bold"><%=couponData[0].orderStatus%></span>
+                        <%}%>
+                            
+                    
+                    
+                    </li>
+                  </ul>
+                </div>
+              </div>
+      
+              <div class="row my-2 mx-1 justify-content-center">
+                <%if(couponData != null){%>
+                <table class="table table-striped table-borderless">
+                  <thead style="background-color:#84B0CA ;" class="text-white">
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">product</th>
+                      <th scope="col">Qty</th>
+                      <th scope="col">Unit Price</th>
+                      <th scope="col">Amount</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <%couponData.forEach((data)=>{%>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td><%=data.product.productName%></td>
+                      <td><%=data.quantity%></td>
+                      <td>$<%=data.TotalPrice%></td>
+                      <td>$<%=data.TotalPrice%></td>
+                    </tr>
+                
+                  </tbody>
+                  <%})%>
+                </table>
+                <%}%>
+              </div>
+              <div class="row">
+                <div class="col-xl-8">
+                  <p class="ms-3">Add additional notes and payment information</p>
+      
+                </div>
+                <div class="col-xl-3">
+                  <ul class="list-unstyled">
+                    <li class="text-muted ms-3"><span class="text-black me-4">SubTotal</span>$<%=subtotal%></li>
+                    <li class="text-muted ms-3 mt-2"><span class="text-black me-4">Tax(15%)</span>$111</li>
+                  </ul>
+                  <%if(couponData[0].discountPrice == null){%>
+                  <p class="text-black float-start"><span class="text-black me-3"> Total Amount</span><span
+                      style="font-size: 25px;">$<%=couponData[0].totalPrice%></span></p>
+                    <%}else{%>
+                      <p class="text-black float-start"><span class="text-black me-3"> Total Amount</span><span
+                        style="font-size: 25px;">$<%=couponData[0].discountPrice%></span></p>
+                    <%}%>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-xl-10">
+                  <p>Thank you for your purchase</p>
+                </div>
+                
+              </div>
+      
+            </div>
+          </div>
+        </div>
+      </div> 
+      <script>
+        function printInvoice(divName) {
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
+    
+        document.body.innerHTML = printContents;
+    
+        window.print();
+    
+        document.body.innerHTML = originalContents;
+    }
+    </script>
+
+    
+</body>
+</html>

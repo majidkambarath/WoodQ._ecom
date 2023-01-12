@@ -1,5 +1,4 @@
 <%-include('./layouts/head.ejs')%>
-
 <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -24,7 +23,7 @@
           </li>
         </ul>
             
-        <a class="nav-link" href="/admin/add_coupon"> <button type="button" class="btn btn-outline-primary">Add Coupon</button> </a></li>
+       
           
       </div>
     </nav>
@@ -47,12 +46,12 @@
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="" aria-expanded="false" aria-controls="ui-basic">
               <i class="icon-layout menu-icon"></i>
-              <span class="menu-title">Coupon</span>
+              <span class="menu-title">Reports </span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-           <li class="nav-item"> <a class="nav-link" href="">Coupon </a></li>
+           <li class="nav-item"> <a class="nav-link" href="">Sales Reports </a></li>
                 <li class="nav-item"> <a class="nav-link" href=""></a></li>
               </ul>
               
@@ -62,57 +61,43 @@
       
       <div class="container">
         <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-          <h3 class="font-weight-bold">Coupon Management</h3>
+          <h3 class="font-weight-bold">Sales Reports</h3>
         </div><br>
           <div class="row">
               <div class="col-md-12">
                
-                  
+                 
                   <div class="gv">
-                  <%if(findCoupon!=null){%>
-                      <table id="example" class="table table-striped table-bordered grid" style="width:100%">
-                          <thead>
-                              <tr>
-                                
-                                  <th>CouponName</th>
-                                  <th>Discount</th>
-                                  <th>MiniDiscount</th>
-                                  <th>StartingDate</th>
-                                  <th>ExpriyDate</th>
-                                  <th>Action</th>
-                  
-                              </tr>
-                          </thead>
-                          <tbody>
-  
-            <%findCoupon.forEach((data)=>{%>
-              <% let date = data.startingDate %>
-              <% const formt = new Date(date ); %>
-              <% const todate = formt.toLocaleDateString(); %>
-
-              <% let date1 = data.expiryDate %>
-              <% const formt1 = new Date(date1 ); %>
-              <% const todate1 = formt1.toLocaleDateString(); %>
-
-                              <tr>
-                              
-                                <td><%=data.couponName%></td>
-                                <td><%=data.discount%></td>
-                                <td><%=data.minDiscount%></td>
-                                <td><%=todate%></td>
-                                <td><%=todate1%></td>
-                                <td>   
-                                  <%if(data.active==true){%>
-                                  <a href="/admin/coupon_block?id=<%=data._id%>"><button type="button" class="btn btn-success">Active</button></a>
-                                  <%}else{%>
-                                    <a href="/admin/coupon_block?id=<%=data._id%>"><button type="button" class="btn btn-danger">Blocked</button></a>
-                                  <%}%>
-                                </td>
-                              </tr>
+                    <%if(salestatus != null){%>
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            
+                            <th scope="col">order Id</th>
+                            <th scope="col">Order Date</th>
+                            <th scope="col">Order Status</th>
+                            <th scope="col">Payment Status</th>
+                            <th scope="col">Total Unit</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <%salestatus.forEach((data)=>{%>
+                            <% let date = data.orderDate %>
+                            <% const formt = new Date(date ); %>
+                            <% const todate = formt.toLocaleDateString(); %>
                      
-                          </tbody>
+                          <tr>
+                            
+                            <td>#<%=data._id%></td>
+                            <td><%=todate%></td>
+                            <td>
+                              <span class="badge badge-pill badge-success"><%=data.orderStatus%></span>
+                            </td>
+                            <td><%=data.paymentMethod%></td>
+                            <td>$<%=data.totalPrice%></td>
+                          </tr>
                           <%})%>
-                         
+                        </tbody>
                       </table>
                       <%}%>
                   </div>
@@ -122,6 +107,8 @@
       </div>
       
 
+
+ 
 
 
 <%-include('./layouts/footer.ejs')%>
