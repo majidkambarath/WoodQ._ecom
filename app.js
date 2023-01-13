@@ -42,7 +42,7 @@ app.use((req, res, next) => {
 
 //file path
 var publicDir = require('path').join(__dirname,'public'); 
-console.log(publicDir);
+// console.log(publicDir);
 app.use(express.static(publicDir)); 
 
 //for use routers
@@ -55,5 +55,5 @@ app.all('*', (req, res) => {
 
 app.listen(port,()=>{
     console.log("losting to the sever on http://localhost:4040");
-    console.log('hii')
+    
 })

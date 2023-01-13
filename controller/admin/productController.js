@@ -1,11 +1,12 @@
 const category = require("../../models/categoryModel");
 const product = require("../../models/productModel");
+var sharp = require('sharp');
 
 //productLO
 
 const loProduct = async (req, res) => {
   const categories = await category.find({ status: true });
-  console.log(categories);
+ 
   res.render("admin/product.ejs", { categories });
 };
 
@@ -14,12 +15,21 @@ const inserProduct = async (req, res) => {
   try {
    const images = [req.files[0].filename,req.files[1].filename,req.files[2].filename,req.files[3].filename]
 
+   const unique  = []
+   for(i=0 ; i<4 ;i++){
+    const ImageName = req.body.ProductName + [i] + '-' + Date.now()+'.jpg';
+    unique.push(ImageName)
+    sharp(req.files[i].buffer).resize(200,200)
+   .jpeg({quality : 50}).toFile('public/admin/productImage/'+ ImageName);
+   }
+   
+ 
     let data=req.body;
     const cata = await category.findOne({category:req.body.category})
     let productData = new product({
       productName: data.ProductName,
       category: cata.id,
-      image: images,
+      image: unique,
       productPrice: data.productPrice,
       salePrice: data.salePrice,
     });
@@ -54,7 +64,7 @@ const productPost = async (req, res) => {
       }
     }
   ])
-  console.log(productq);
+ 
   res.render("admin/productPage.ejs", { productq });
 };
 
@@ -83,7 +93,7 @@ const productEdit = async (req, res) => {
     const productq = await product.findById({ _id: id });
     if (productq) {
       res.render("admin/edit", { products: productq ,cataName});
-      console.log("edit success");
+   
     } else {
       res.redirect("/admin/product_page");
     }
@@ -94,11 +104,21 @@ const productEdit = async (req, res) => {
 
 const productUpadte = async (req, res) => {
   try {
-    if(typeof req.file === "undefined"){
+    const cata = await category.findOne({category:req.body.category})
+    const unique  = []
+   for(i=0 ; i<4 ;i++){
+    const ImageName = req.body.ProductName + [i] + '-' + Date.now()+'.jpg';
+    unique.push(ImageName)
+    sharp(req.files[i].buffer).resize(200,200)
+   .jpeg({quality : 50}).toFile('public/admin/productImage/'+ ImageName);
+   }
+
+
+    if(typeof req.files === "undefined"){
       let data =req.body;
       const id = req.query.id;
       const productName = data.ProductName;
-      const category =data.category;
+      const category =cata.id;
       const productPrice = data.productPrice;
       const salePrice = data.salePrice;
       const productq = await product.findByIdAndUpdate(
@@ -106,18 +126,20 @@ const productUpadte = async (req, res) => {
         { $set: { productName, category,  productPrice, salePrice } }
       );
       res.redirect("/admin/product_page");
-      console.log("update success");
+      console.log("update no image");
     }else{
       let data =req.body;
       const id = req.query.id;
       const productName = data.ProductName;
-      const category =data.category;
-      const image = req.file.filename;
+      const category =cata.id;
+      const images = unique;
+      console.log(images);
       const productPrice = data.productPrice;
       const salePrice = data.salePrice;
       const productq = await product.findByIdAndUpdate(
         { _id: id },
-        { $set: { productName, category, image, productPrice, salePrice } }
+        { $set: { productName, category,image:images , productPrice, salePrice } },
+      
       );
       res.redirect("/admin/product_page");
       console.log("update success")

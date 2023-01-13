@@ -3,6 +3,7 @@ const router = express.Router();
 const sessions = require('express-session');
 const upload = require('../middleware/multer')
 
+const auth = require('../middleware/auth/admin/auth')
 const orderController = require('../controller/admin/order')
 const couponController = require('../controller/admin/coupon')
 const admincontroller = require('../controller/admin/adminController')
@@ -11,18 +12,17 @@ const categoryController = require('../controller/admin/categoryController')
 const custmoerController = require('../controller/admin/customer.Controller')
 const bannerController = require('../controller/admin/banner')
 //seesion middleware
-//admin&&product side
-
-router.get('/',admincontroller.dashboard)
+//admin&&product sid
+router.get('/',auth.sessionCheck,admincontroller.dashboard)
 router.get('/login',admincontroller.login)
 router.post('/login',admincontroller.adminveri)
-router.get('/product',productController.loProduct)
-router.post('/product',upload.array('image',4),productController.inserProduct)
-router.get('/product_page',productController.productPost)
-router.get('/product_edit',productController.productEdit)
-router.post('/product_edit',upload.single('image'),productController.productUpadte)
-router.get('/product_delete',productController.productDelete)
-router.get('/logout',admincontroller.adminlogout)
+router.get('/product',auth.sessionCheck,productController.loProduct)
+router.post('/product',auth.sessionCheck,upload.array('image',4),productController.inserProduct)
+router.get('/product_page',auth.sessionCheck,productController.productPost)
+router.get('/product_edit',auth.sessionCheck,productController.productEdit)
+router.post('/product_edit',auth.sessionCheck,upload.array('image',4),productController.productUpadte)
+router.get('/product_delete',auth.sessionCheck,productController.productDelete)
+router.get('/logout',auth.sessionCheck,auth.logout)
 /*----------------------------------category page---------------------------------*/
 router.get('/category',categoryController.categoryPage)
 router.get('/category_add',categoryController.addCategory)

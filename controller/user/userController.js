@@ -57,7 +57,7 @@ const userInsert = async (req, res) => {
           });
           console.log(OTP);
           otp_store.save();
-          // console.log(data+'-----------------------------------------');
+          
           
           res.render("user/otp.ejs", { data });
         }

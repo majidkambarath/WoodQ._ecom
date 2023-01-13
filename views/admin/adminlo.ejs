@@ -21,7 +21,7 @@
     <title>Login-woodQ</title>
   </head>
   <body>
-  
+
 
   <div class="d-lg-flex half container-fluid">
     <div class="bg order-1 order-md-2 img-fluid" style="background-image: url('/admin/image/logo\ key.webp');"></div>
@@ -31,7 +31,11 @@
         <div class="row align-items-center justify-content-center">
           <div class="col-md-7">
             <h3>Login to <strong>Admin LOG</strong></h3>
-            <p style="color:red ;"><%=locals.wrong%></p>
+            <%if(locals.wrong){%>
+              <div class="alert alert-danger" role="alert">
+                <%=locals.wrong%>
+              </div>
+            <%}%>
             <form action="/admin/login" method="post">
               <div class="form-group first">
                 <label for="username">Username</label>

@@ -23,6 +23,7 @@ exports.orderPlace = async (req, res) => {
       email,
       Phone,
       couponId,
+      Total,
       discountPrice,
     } = req.body;
     let finalPrice = parseInt(discountPrice);
@@ -156,7 +157,7 @@ exports.orderPlace = async (req, res) => {
                 {
                   name: "item",
                   sku: "item",
-                  price: discountPrice ||cartItems.TotalPrice ,
+                  price: discountPrice||Total,
                   currency: "USD",
                   quantity: 1,
                 },
@@ -164,7 +165,7 @@ exports.orderPlace = async (req, res) => {
             },
             amount: {
               currency: "USD",
-              total: discountPrice ||cartItems.TotalPrice ,
+              total: discountPrice||Total,
             },
             description: "This is the payment description.",
           },
