@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const sessions = require('express-session');
 const upload = require('../middleware/multer')
+const upldPic = require('../middleware/singleMulter')
 
 const auth = require('../middleware/auth/admin/auth')
 const orderController = require('../controller/admin/order')
@@ -36,7 +37,7 @@ router.get('/custmoer_block',custmoerController.userBlock)
 /*----------------------------------banner mangement---------------------------------*/
 router.get('/banner_page',bannerController.banner_page)
 router.get('/add_banner',bannerController.add_Banner)
-router.post('/add_banner',upload.array('image',3),bannerController.insert_banner)
+router.post('/add_banner',upldPic.single('image'),bannerController.insert_banner)
 /*----------------------------------coupon---------------------------------*/
 router.get('/coupon_page',couponController.coupon_page)
 router.get('/add_coupon',couponController.add_Coupon_page)

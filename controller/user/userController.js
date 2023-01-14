@@ -132,10 +132,10 @@ const userverificate = async (req, res) => {
 
 const homeLo = async (req, res) => {
   try {
-    let banner_view = await banner.find()
-    let image = banner_view[0].image
+    // let banner_view = await banner.find()
+    // let image = banner_view[0].image
     const userData = await User.findOne();
-  res.render("user/home.ejs",{userData,image});
+  res.render("user/home.ejs",{userData});
     
   } catch (error) {
     console.log(error.message);

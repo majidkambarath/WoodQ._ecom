@@ -1,5 +1,5 @@
 const banner = require('../../models/banner')
-
+var sharp = require('sharp')
 const banner_page = async(req,res)=>{
     try {
         let banner_view = await banner.find()
@@ -8,7 +8,7 @@ const banner_page = async(req,res)=>{
         res.render('admin/banner',{image})
 
     } catch (error) {
-       console.log(error.message); 
+       console.log(error); 
     }
 }
 const add_Banner = async(req,res)=>{
@@ -16,21 +16,22 @@ const add_Banner = async(req,res)=>{
         res.render('admin/addBanner')
     
     } catch (error) {
-       console.log(error.message); 
+       console.log(error); 
     }
 }
 
 const insert_banner = async(req,res)=>{
     try {
-        const files = [req.files[0].filename,req.files[1].filename,req.files[2].filename];
+    
         let bannerData = new banner({
-           image:files
+            name:req.body.Name,
+           image:req.filename
         })
         await bannerData.save();
         res.redirect('/admin/banner_page')
         
     } catch (error) {
-       console.log(error.message); 
+       console.log(error); 
     }
 }
 

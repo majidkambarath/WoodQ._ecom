@@ -10,7 +10,7 @@ const userController = require('../controller/user/userController')
 const cartController = require('../controller/user/cartController')
 const wishlistController = require('../controller/user/wishlist')
 const orderController = require('../controller/user/oderController')
-
+const actionController = require('../controller/user/actionController')
 
 router.get('/login',auth.userVerfiy,auth.userBlock,userController.userlogin)
 router.get('/userSign_up',userController.usersign)
@@ -56,4 +56,7 @@ router.get('/cancel',orderController.order_cancel)
 router.get('/order_invoice',orderController.order_invoice)
 router.get('/payment_success',orderController.payment_success)
 
+router.get('/about',actionController.about_page)
+router.get('/service',actionController.service_page)
+router.get('/contact',actionController.contact_page)
 module.exports=router
