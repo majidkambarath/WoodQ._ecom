@@ -38,6 +38,7 @@ router.get('/custmoer_block',custmoerController.userBlock)
 router.get('/banner_page',bannerController.banner_page)
 router.get('/add_banner',bannerController.add_Banner)
 router.post('/add_banner',upldPic.single('image'),bannerController.insert_banner)
+router.delete('/delete',bannerController.banner_delete)
 /*----------------------------------coupon---------------------------------*/
 router.get('/coupon_page',couponController.coupon_page)
 router.get('/add_coupon',couponController.add_Coupon_page)

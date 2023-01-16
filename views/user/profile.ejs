@@ -149,7 +149,7 @@
                                   <%}%>
                             </div>
                             <div class="tab-pane fade" id="tab-account" role="tabpanel" aria-labelledby="tab-address-link">
-                                <form action="#">
+                              
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <label>First Name *</label>
@@ -168,19 +168,19 @@
 
                                     <label>Email address *</label>
                                     <input type="email" class="form-control" required>
-
+                                    <form action="/confirmPassword" method="post">
                                     <label>Current password (leave blank to leave unchanged)</label>
-                                    <input type="password" class="form-control">
-
+                                    <input type="password" name="currentpassword" class="form-control" required="">
+                                    <p style="color: rgb(255, 35, 35);" ><%=locals.wrong%></p>
                                     <label>New password (leave blank to leave unchanged)</label>
-                                    <input type="password" class="form-control">
-
+                                    <input type="password" name="newPassword" id="passwordd" class="form-control" onkeyup="validatePassword()" required="">
+                                    <p id="passwordError" class="error" style="color: rgb(236, 111, 111);"></p>
                                     <label>Confirm new password</label>
-                                    <input type="password" class="form-control mb-2">
-
+                                    <input type="password" name="confirrmPassword" id="confrm" class="form-control mb-2" onkeyup="checkpassword()" required="">
+                                    <p id="conformError" class="error" style="color: rgb(236, 111, 111);"></p>
                                     <button type="submit" class="btn btn-outline-primary-2">
                                         <span>SAVE CHANGES</span>
-                                        <i class="icon-long-arrow-right"></i>
+                                      
                                     </button>
                                 </form>
                             </div>
@@ -282,6 +282,31 @@
 
 
 
+<script>
+    	const passwordError = document.getElementById('passwordError');
+       const conformError = document.getElementById('conformError');
+       
+          function validatePassword(){
+		  var password = document.getElementById('passwordd').value
+		  if(password.length < 8){
+			passwordError.innerHTML = 'password is required [above 8 character]'
+			password.focus()
+			return false;
+		  }
+		  passwordError.innerHTML = '';
+			return true;
+		  }
+          function checkpassword(){
+			var password = document.getElementById('passwordd').value;
+			var confrm = document.getElementById('confrm').value;
+			if( password == confrm){
+				conformError.innerHTML =''
+				return true;
+			}
+			conformError.innerHTML ='Not Required Password'
+			return false
 
+		  }
+</script>
 
 <%-include('./layouts/profilefooter.ejs')%>

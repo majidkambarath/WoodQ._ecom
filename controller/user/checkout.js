@@ -1,9 +1,8 @@
 const user = require("../../models/userModel");
-const cart = require("../../models/cartModel")
-const coupon = require('../../models/coupon')
-const order = require('../../models/order')
+const cart = require("../../models/cartModel");
+const coupon = require("../../models/coupon");
+const order = require("../../models/order");
 const mongoose = require("mongoose");
-
 
 const insertaddress = async (req, res) => {
   try {
@@ -68,7 +67,7 @@ const addAddress = async (req, res) => {
 const showAddress = async (req, res) => {
   try {
     const Id = req.session.userlo;
-    console.log(Id);
+
     const userId = mongoose.Types.ObjectId(Id);
     const show = await user.aggregate([
       {
@@ -91,47 +90,45 @@ const showAddress = async (req, res) => {
         },
       },
     ]);
-  
-let order_list = await order.find({userId:userId})
-    res.render("user/profile",{show,order_list});
-   
+
+    let order_list = await order.find({ userId: userId });
+    res.render("user/profile", { show, order_list });
   } catch (error) {
     console.log(error.message);
   }
 };
 
-const defaultSet = async(req,res)=>{
-    try {
-   const Id = req.session.userlo;
-  const iddd = req.query.id;
+const defaultSet = async (req, res) => {
+  try {
+    const Id = req.session.userlo;
+    const iddd = req.query.id;
 
-  const check  = await user.updateMany({ _id: Id,"address.primary":true},
+    const check = await user.updateMany(
+      { _id: Id, "address.primary": true },
 
-  {
-    $set:{
-      "address.$.primary":false,
-    },
+      {
+        $set: {
+          "address.$.primary": false,
+        },
+      }
+    );
+
+    const another = await user
+      .updateOne(
+        { _id: Id, "address._id": iddd },
+        {
+          $set: {
+            "address.$.primary": true,
+          },
+        }
+      )
+      .then(() => {
+        res.redirect("/profile");
+      });
+  } catch (error) {
+    console.log(error.message);
   }
-
-  );
-
-  const another = await user.updateOne({ _id:Id,"address._id":iddd},
-  {
-    $set:{
-      "address.$.primary":true
-    }
-  }
-
-  ).then(()=>{
-   
-    res.redirect('/profile')
-  })
-
-    } catch (error) {
-      console.log(error.message);
-    }
-
-     }
+};
 
 const addDelete = async (req, res) => {
   try {
@@ -148,7 +145,6 @@ const addDelete = async (req, res) => {
       .then(() => {
         res.redirect("/profile");
       });
-    console.log(deleteAdd);
   } catch (error) {
     console.log(error.message);
   }
@@ -158,7 +154,7 @@ const editAddress = async (req, res) => {
   try {
     const Id = req.session.userlo;
     const AddId = req.query.id;
-    console.log(AddId);
+
     const change = await user.find(
       { _id: mongoose.Types.ObjectId(Id) },
       { address: { $elemMatch: { _id: AddId } } }
@@ -168,50 +164,49 @@ const editAddress = async (req, res) => {
     console.log(error.message);
   }
 };
-const Addupdate = async (req,res)=>{
-   try {
-    let id = req.query.id
-    let data = req.body
+const Addupdate = async (req, res) => {
+  try {
+    let id = req.query.id;
+    let data = req.body;
     let userId = req.session.userlo;
-    const updateAddress = await user.updateOne({ _id:mongoose.Types.ObjectId(userId),"address._id":id},
-    {
-      $set:{
-        "address.$.FirstName":data.FirstName,
-        "address.$.LastName":data.LastName,
-        "address.$.Address":data.Address,
-        "address.$.State":data.State,
-        "address.$.Email":data.Email,
-        "address.$.phone":data.phone,
-        "address.$.postCode":data.postCode,
-        "address.$.FirstName":data.FirstName,
-      }
-    }
-    ).then(()=>{
-      res.redirect('/profile')
-    })
-    // console.log(updateAddress);
-   } catch (error) {
+    const updateAddress = await user
+      .updateOne(
+        { _id: mongoose.Types.ObjectId(userId), "address._id": id },
+        {
+          $set: {
+            "address.$.FirstName": data.FirstName,
+            "address.$.LastName": data.LastName,
+            "address.$.Address": data.Address,
+            "address.$.State": data.State,
+            "address.$.Email": data.Email,
+            "address.$.phone": data.phone,
+            "address.$.postCode": data.postCode,
+            "address.$.FirstName": data.FirstName,
+          },
+        }
+      )
+      .then(() => {
+        res.redirect("/profile");
+      });
+  } catch (error) {
     console.log(error.message);
-   }
-}
+  }
+};
 
-const payment = async(req,res)=>{
+const payment = async (req, res) => {
   try {
     let userId = req.session.userlo;
     const detailss = await cart.aggregate([
       {
-        $match:{userId:mongoose.Types.ObjectId(userId)}
+        $match: { userId: mongoose.Types.ObjectId(userId) },
       },
       {
-        $unwind: "$cartItems"
+        $unwind: "$cartItems",
       },
       {
         $project: {
-        
           productId: "$cartItems.productId",
           qtyItems: "$cartItems.qty",
-     
-
         },
       },
       {
@@ -224,7 +219,6 @@ const payment = async(req,res)=>{
       },
       {
         $project: {
-     
           productId: 1,
           qtyItems: 1,
           carts: { $arrayElemAt: ["$carts", 0] },
@@ -237,141 +231,131 @@ const payment = async(req,res)=>{
           },
         },
       },
-    ])
-    // console.log(detailss[0].productId);
+    ]);
+
     const subtotal = detailss.reduce((acc, cur) => {
       acc = acc + cur.TotalPrice;
       return acc;
     }, 0);
-  
-// console.log(detailss);
 
     const defaultset = await user.aggregate([
       {
-        $match:{_id: mongoose.Types.ObjectId(userId)}
+        $match: { _id: mongoose.Types.ObjectId(userId) },
       },
       {
-        $unwind:"$address"
+        $unwind: "$address",
       },
       {
-        $match:{'address.primary':true}
-      }
-    ])
-    // const sub = await subtotal(userId)
-    // const len = subtotal.length
-    // console.log(defaultset);
-    // const totalcount = sub[0].total
-    // const amonut = parseInt(totalcount)
-    // console.log(amonut);
-    const show = await user.findOne({_id:mongoose.Types.ObjectId(userId)})
-    const Address = show.address
-    const couponData = await coupon.find()
+        $match: { "address.primary": true },
+      },
+    ]);
+    const show = await user.findOne({ _id: mongoose.Types.ObjectId(userId) });
+    const Address = show.address;
+    const couponData = await coupon.find();
     console.log(couponData);
-    res.render('user/payment.ejs',{defaultset,detailss,Address,subtotal,couponData})
-
+    res.render("user/payment.ejs", {
+      defaultset,
+      detailss,
+      Address,
+      subtotal,
+      couponData,
+    });
   } catch (error) {
     console.log(error.message);
   }
-}
-const changeOption = async(req,res)=>{
+};
+const changeOption = async (req, res) => {
   try {
-      let id = req.body.address
-      const userId = req.session.userlo;
-      const check  = await user.updateMany({ _id: userId,"address.primary":true},
+    let id = req.body.address;
+    const userId = req.session.userlo;
+    const check = await user.updateMany(
+      { _id: userId, "address.primary": true },
 
       {
-        $set:{
-          "address.$.primary":false,
+        $set: {
+          "address.$.primary": false,
         },
       }
-    
-      );
-    
-      const another = await user.updateOne({ _id:userId,"address._id":id},
-      {
-        $set:{
-          "address.$.primary":true
+    );
+
+    const another = await user
+      .updateOne(
+        { _id: userId, "address._id": id },
+        {
+          $set: {
+            "address.$.primary": true,
+          },
         }
-      }
-    
-      ).then(()=>{
-       
-        res.redirect('/payment')
-      })
-    
+      )
+      .then(() => {
+        res.redirect("/payment");
+      });
   } catch (error) {
     console.log(error.message);
   }
+};
+const applycoupon = async (req, res) => {
+  try {
+    let data = req.body;
+    let coupon_cde = data.copuoncode;
+    let find = data.subTotal;
+    let Total = parseInt(find);
+    const Id = req.session.userlo;
+    const userId = mongoose.Types.ObjectId(Id);
 
-}
-const applycoupon = async(req,res)=>{
-try {
-  let data = req.body;
-  let coupon_cde = data.copuoncode;
-  let find = data.subTotal
-  let Total = parseInt(find)
-  const Id = req.session.userlo;
-  const userId = mongoose.Types.ObjectId(Id)
+    const coupon_check = await coupon.findOne({ couponName: coupon_cde });
+    console.log(coupon_check);
 
-const coupon_check = await coupon.findOne({couponName:coupon_cde});
-console.log(coupon_check);
+    if (coupon_check) {
+      let currentDate = new Date();
+      if (
+        currentDate >= coupon_check.startingDate &&
+        currentDate <= coupon_check.expiryDate
+      ) {
+        let userCheck = coupon_check.users.findIndex(
+          (users) => users.userId == Id
+        );
 
-if(coupon_check){
-
-let currentDate = new Date();
-if(currentDate>=coupon_check.startingDate && currentDate <= coupon_check.expiryDate){
-  let userCheck = coupon_check.users.findIndex((users)=> users.userId == Id)
-
-  userCheck=parseInt(userCheck)
-  if(userCheck === -1){
-
-   if(Total > coupon_check.minDiscount){
-
- let discount = coupon_check.discount
- let total = Total
- let discountParentage = (total*discount)/100
- let finnalDiscount = total - discountParentage
- var apply = ' Apply succeeed '
- let couponId = coupon_check._id
- console.log(couponId);
- res.json({finnalDiscount,apply,couponId})
-    }else{
-   var maximum = 'purchese Above 1000 '
-      res.json({maximum})
+        userCheck = parseInt(userCheck);
+        if (userCheck === -1) {
+          if (Total > coupon_check.minDiscount) {
+            let discount = coupon_check.discount;
+            let total = Total;
+            let discountParentage = (total * discount) / 100;
+            let finnalDiscount = total - discountParentage;
+            var apply = " Apply succeeed ";
+            let couponId = coupon_check._id;
+            console.log(couponId);
+            res.json({ finnalDiscount, apply, couponId });
+          } else {
+            var maximum = "purchese Above 1000 ";
+            res.json({ maximum });
+          }
+        } else {
+          var userEx = "Already Existed Coupon";
+          res.json({ userEx });
+        }
+      } else {
+        var exprire = "Your coupon is Exprired";
+        res.json({ exprire });
+      }
+    } else {
+      var invalid = "copuon is not valid";
+      res.json({ invalid });
     }
-  
-
-  }else{
-    var userEx = 'Already Existed Coupon';
-    res.json({userEx})
-  
+  } catch (error) {
+    console.log(error);
   }
-  
-}else{
- var exprire = 'Your coupon is Exprired';
-  res.json({exprire})
-}
-
-}else{
-  var invalid = 'copuon is not valid';
- res.json({invalid})
-}
-
-  
-} catch (error) {
-  console.log(error);
-}
-
-}
+};
 module.exports = {
   insertaddress,
   showAddress,
-   defaultSet,
+  defaultSet,
   addDelete,
   addAddress,
   editAddress,
   Addupdate,
   payment,
   changeOption,
-  applycoupon
+  applycoupon,
 };

@@ -1,5 +1,17 @@
+const order = require('../../models/order')
 const dashboard = async (req, res) => {
-  res.render("admin/admin.ejs");
+  try {
+    const find = await order.find()
+    const sum = find.reduce((acc ,cur)=>{
+      acc = acc + cur.totalPrice;
+      return acc;
+    },0)
+   
+    res.render("admin/admin.ejs",{sum});
+  } catch (error) {
+    console.log(error);
+  }
+  
 };
 
 const login = async (req, res) => {

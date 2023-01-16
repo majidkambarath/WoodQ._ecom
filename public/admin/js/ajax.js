@@ -17,3 +17,19 @@ function update(id){
     }
    })
 }
+
+function remove(id){
+   console.log(id);
+   $.ajax({
+      url:'/admin/delete',
+      method:'delete',
+      data:{
+         bannerId : id
+      },
+      success:(res)=>{
+         if(res.success){
+            $("#delet"+id).load(location.href + " #delet"+id)
+         }
+      }
+   })
+}

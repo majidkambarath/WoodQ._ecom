@@ -1,17 +1,17 @@
 const banner = require('../../models/banner')
 var sharp = require('sharp')
-const banner_page = async(req,res)=>{
+exports.banner_page = async(req,res)=>{
     try {
         let banner_view = await banner.find()
-        let image = banner_view
-        console.log(image);
-        res.render('admin/banner',{image})
+      
+       
+        res.render('admin/banner',{banner_view})
 
     } catch (error) {
        console.log(error); 
     }
 }
-const add_Banner = async(req,res)=>{
+exports.add_Banner = async(req,res)=>{
     try {
         res.render('admin/addBanner')
     
@@ -20,12 +20,12 @@ const add_Banner = async(req,res)=>{
     }
 }
 
-const insert_banner = async(req,res)=>{
+exports.insert_banner = async(req,res)=>{
     try {
     
         let bannerData = new banner({
             name:req.body.Name,
-           image:req.filename
+           image:req.file.filename
         })
         await bannerData.save();
         res.redirect('/admin/banner_page')
@@ -35,8 +35,15 @@ const insert_banner = async(req,res)=>{
     }
 }
 
-module.exports = {
-    banner_page,
-    insert_banner,
-    add_Banner
+exports.banner_delete =async(req,res)=>{
+    try {
+        let data = req.body;
+        let bannerId = data.bannerId;
+        const remove = await banner.deleteOne({_id:bannerId})
+        res.json({success:true})
+        
+ 
+    } catch (error) {
+      console.log(error);  
+    }
 }

@@ -24,6 +24,7 @@ router.get('/forgOTP',userController.forgOTP)
 router.post('/forgOTP',userController.resetOTPverification)
 router.get('/passchange',userController.passwordChange)
 router.post('/passcahnge',userController.passwordUpdate)
+router.post('/confirmPassword',actionController.confirmPaswd)
 router.get('/signout',auth.signOut)
 /*-------------------------productController---------------------------------*/
 router.get('/shop',productController.shoppage)

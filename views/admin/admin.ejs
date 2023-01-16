@@ -26,7 +26,7 @@
   <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.3.1/css/rowReorder.dataTables.min.css">
 
   <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.0/css/responsive.dataTables.min.css">
-
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <div class="container-scroller">
@@ -223,7 +223,9 @@
                 </div>
               </div>
             </div>
+            
           </div>
+          
           <div class="row">
             <div class="col-md-6 grid-margin stretch-card">
               <div class="card tale-bg">
@@ -248,9 +250,9 @@
                 <div class="col-md-6 mb-4 stretch-card transparent">
                   <div class="card card-tale">
                     <div class="card-body">
-                      <p class="mb-4">Today’s Bookings</p>
-                      <p class="fs-30 mb-2">4006</p>
-                      <p>10.00% (30 days)</p>
+                      <p class="mb-4">Today’s Sales</p>
+                      <p class="fs-30 mb-2"><%=sum%></p>
+                      <p>(30 days)</p>
                     </div>
                   </div>
                 </div>
@@ -283,13 +285,56 @@
                     </div>
                   </div>
                 </div>
+                
               </div>
             </div>
+            
           </div>
+          
+      </div>
+      <div >
+    
+
+          <canvas  id="myChart"></canvas>
+        
+      </div>
+    
+      
+
       </div>
     </div>
   </div>
+ 
+  
+  <script>
+    const ctx = document.getElementById('myChart');
 
+    var chartData = <%=sum%>;
+new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: ['This Month', 'january', 'february', 'march', 'april', 'June'],
+    datasets: [{
+      label: '#Sale Report',
+      data: [chartData,1200,487,34,3434,434],
+      borderWidth: 1,
+      
+    }]
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true,
+        
+      },
+      
+    }
+  }
+});
+
+
+  </script>
+  
   <!-- plugins:js -->
   <script src="/admin/js/vendor.bundle.base.js"></script>
 
