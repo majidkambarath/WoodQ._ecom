@@ -108,7 +108,7 @@ exports.orderPlace = async (req, res) => {
         });
         await orderdetails.save();
         await cart.deleteOne({ userId: userId });
-        res.redirect("/");
+        res.render("user/success");
       } else {
         await coupon.updateOne(
           { _id: coupId },
@@ -137,7 +137,7 @@ exports.orderPlace = async (req, res) => {
 
         await cart.deleteOne({ userId: userId });
 
-        res.render("user/success");
+        res.redirect('/payment_success')
       }
     } else {
       let orderData = await order.findOne({userId:userId})

@@ -222,11 +222,11 @@
                                     <div class="form-group row">
                                       <div class="col-md-6">
                                         <label for="c_fname" class="text-black">First Name <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="c_fname" name="fname">
+                                        <input type="text" class="form-control" id="c_fname" required=""  name="fname">
                                       </div>
                                       <div class="col-md-6">
                                         <label for="c_lname" class="text-black">Last Name <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="c_lname" name="lname">
+                                        <input type="text" class="form-control" id="c_lname" required=""  name="lname">
                                       </div>
                                     </div>
                 
@@ -234,7 +234,7 @@
                                     <div class="form-group row">
                                       <div class="col-md-12">
                                         <label for="c_address" class="text-black">Address <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="c_address" name="address" placeholder="Street address">
+                                        <input type="text" class="form-control" id="c_address" name="address" required=""  placeholder="Street address">
                                       </div>
                                     </div>
                 
@@ -243,22 +243,22 @@
                                     <div class="form-group row">
                                       <div class="col-md-6">
                                         <label for="c_state_country" class="text-black">State / Country <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="c_state_country" name="state">
+                                        <input type="text" class="form-control" id="c_state_country" required=""  name="state">
                                       </div>
                                       <div class="col-md-6">
                                         <label for="c_postal_zip" class="text-black">Posta / Zip <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="c_postal_zip" name="post">
+                                        <input type="text" class="form-control" id="c_postal_zip" required=""  name="post">
                                       </div>
                                     </div>
                 
                                     <div class="form-group row mb-5">
                                       <div class="col-md-6">
                                         <label for="c_email_address" class="text-black">Email Address <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="c_email_address" name="email">
+                                        <input type="text" class="form-control" id="c_email_address" required=""  pattern="^(([-\w\d]+)(\.[-\w\d]+)*@([-\w\d]+)(\.[-\w\d]+)*(\.([a-zA-Z]{2,5}|[\d]{1,3})){1,2})$" name="email">
                                       </div>
                                       <div class="col-md-6">
                                         <label for="c_phone" class="text-black">Phone <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="c_phone" name="phone" placeholder="Phone Number">
+                                        <input type="text" class="form-control"  required=""  id="c_phone" name="phone"pattern="^[0-9]{10}$"  placeholder="Phone Number">
                                       </div>
                                     </div>
                 
