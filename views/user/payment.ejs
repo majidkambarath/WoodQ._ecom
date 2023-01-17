@@ -74,10 +74,16 @@
                   <input type="text" class="form-control me-2" id="code"  placeholder="Coupon Code"
                     aria-label="Coupon Code" name="coupon" aria-describedby="button-addon2">
                    <input hidden id="couponId" value="" name="couponId">
-                   
-                  <div class="input-group-append">
-                    <button class="btn btn-primary btn-sm" type="button"  onclick="Addcoupon('<%=subtotal%>')">Apply</button>
-                  </div>
+                   <%if(defaultset!= ''){%>
+                    <div class="input-group-append">
+                      <button class="btn btn-primary btn-sm disabled"  type="button"  onclick="Addcoupon('<%=subtotal%>')">Apply</button>
+                    </div>
+                   <%}else{%>
+                    <div class="input-group-append">
+                      <button class="btn btn-primary btn-sm" type="button"  onclick="Addcoupon('<%=subtotal%>')">Apply</button>
+                    </div>
+                  <%}%>
+                 
                   
                 </div>
               </div>

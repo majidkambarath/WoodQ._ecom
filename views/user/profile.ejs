@@ -129,7 +129,7 @@
                                                 <span class="badge badge-pill badge-danger"><%=data.orderStatus%></span>
                                             <%}%>
                                             <%if(data.orderStatus == "Devliverd" ){%>
-                                                <span class="badge badge-pill badge-primary"><%=data.orderStatus%></span>
+                                                <span class="badge badge-pill badge-success"><%=data.orderStatus%></span>
                                             <%}%>
                                             <%if(data.orderStatus == "processing"||data.orderStatus == "shipped" ){%>
                                                 <span class="badge badge-pill badge-warning"><%=data.orderStatus%></span>
@@ -153,21 +153,21 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <label>First Name *</label>
-                                            <input type="text" class="form-control" required>
+                                            <input type="text" class="form-control" value="<%=show.FirstName%>"  required>
                                         </div><!-- End .col-sm-6 -->
 
                                         <div class="col-sm-6">
                                             <label>Last Name *</label>
-                                            <input type="text" class="form-control" required>
+                                            <input type="text" class="form-control" value="<%=show.LastName%>" required>
                                         </div><!-- End .col-sm-6 -->
                                     </div><!-- End .row -->
 
                                     <label>Display Name *</label>
-                                    <input type="text" class="form-control" required>
+                                    <input type="text" class="form-control" value="<%=show.FirstName%>" required>
                                     <small class="form-text">This will be how your name will be displayed in the account section and in reviews</small>
 
                                     <label>Email address *</label>
-                                    <input type="email" class="form-control" required>
+                                    <input type="email" class="form-control" value="<%=show.Email%>" required>
                                     <form action="/confirmPassword" method="post">
                                     <label>Current password (leave blank to leave unchanged)</label>
                                     <input type="password" name="currentpassword" class="form-control" required="">

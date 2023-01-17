@@ -251,7 +251,7 @@ const payment = async (req, res) => {
     ]);
     const show = await user.findOne({ _id: mongoose.Types.ObjectId(userId) });
     const Address = show.address;
-    const couponData = await coupon.find();
+    const couponData = await coupon.find(); 
     console.log(couponData);
     res.render("user/payment.ejs", {
       defaultset,
@@ -259,6 +259,7 @@ const payment = async (req, res) => {
       Address,
       subtotal,
       couponData,
+     
     });
   } catch (error) {
     console.log(error.message);
