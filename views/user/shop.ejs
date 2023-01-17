@@ -7,10 +7,11 @@
                 <div class="intro-excerpt">
                     <h1 >Modern Interior <span clsas="d-block">Design Studio</span></h1>
                     <p>
-                        <div class="dropdown">
+                        <div class="dropdown d-flex justify-content-between">
                             <button class="btn dropdown-toggle btn-white-outline "type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                           Categorys
                             </button>
+                            
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                 <li><a class="dropdown-item" href="/shop "> Show All</a></li>
                                 <%catadata.forEach(function(show){ %>
@@ -18,6 +19,10 @@
                               
                               <% }) %>
                             </ul>
+                            <!-- <form class="d-flex">
+                                <input class="form-control " type="search" placeholder="Search" aria-label="Search">
+                                <button class="btn btn-white-outline btn-sm" type="submit">Search</button>
+                              </form> -->
                           </div>
                        
                     </p>

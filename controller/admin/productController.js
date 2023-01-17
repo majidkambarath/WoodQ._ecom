@@ -20,7 +20,7 @@ const inserProduct = async (req, res) => {
     const ImageName = req.body.ProductName + [i] + '-' + Date.now()+'.jpg';
     unique.push(ImageName)
     sharp(req.files[i].buffer).resize(200,200)
-   .jpeg({quality : 50}).toFile('public/admin/productImage/'+ ImageName);
+   .jpeg({quality : 100}).toFile('public/admin/productImage/'+ ImageName);
    }
    
  

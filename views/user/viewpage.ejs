@@ -6,11 +6,11 @@
             <div class="container px-4 px-lg-5 my-5 ">
                 <div class="row gx-4 gx-lg-5 align-items-center ">
                     <div class="col-md-6 d-flex flex-column"  >
-                        <figure id="zoomer" class="zoom  " onmousemove="zoom(event)" style=" background-image: url(/admin/productImage/<%=show.image[0]%>); width: 400px; "  >
-                        <img class="card-img-top mb-5 mb-md-0  " src="/admin/productImage/<%=show.image[0]%>" id="main-image"   alt="..." />
+                        <figure id="zoomer" class="zoom  " onmousemove="zoom(event)" style=" background-image: url(/admin/productImage/<%=show.image[0]%>); width: 350px; "  >
+                        <img class="card-img-top mb-5 mb-md-0  " src="/admin/productImage/<%=show.image[0]%> " style="width: 400x;" id="main-image"   alt="..." />
                         </figure>
-                        <div class="img-zoom-container" style="width: 400px;" >
-                            <div class="col-md-6 d-flex" style="height: 100px; width: 400px; " >                    
+                        <div class="img-zoom-container" style="width: 300px;" >
+                            <div class="col-md-6 d-flex" style="height: 130px; width: 300px; " > 
                                
                                <img  onclick="change_image(this) " class="card-img-top mb-5 mb-md-0 d-flex img-thumbnail "  src="/admin/productImage/<%=show.image[0]%>" alt="..." />
                                <img  onclick="change_image(this)" class="card-img-top mb-5 mb-md-0 d-flex img-thumbnail"  src="/admin/productImage/<%=show.image[1]%>" alt="..." />

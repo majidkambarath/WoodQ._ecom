@@ -49,7 +49,7 @@
                     <div class="d-flex justify-content-between">
                       <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                         data-bs-target="#staticBackdrop">
-                        Add <i class="fa-solid fa-plus"></i>
+                        Set Default <i class="fa-solid fa-plus"></i>
                       </button>
                       <a href="/profile"><i class="fa-sharp fa-solid fa-user-plus"></i></a>
                     </div>
@@ -74,15 +74,11 @@
                   <input type="text" class="form-control me-2" id="code"  placeholder="Coupon Code"
                     aria-label="Coupon Code" name="coupon" aria-describedby="button-addon2">
                    <input hidden id="couponId" value="" name="couponId">
-                   <%if(defaultset!= ''){%>
-                    <div class="input-group-append">
-                      <button class="btn btn-primary btn-sm disabled"  type="button"  onclick="Addcoupon('<%=subtotal%>')">Apply</button>
-                    </div>
-                   <%}else{%>
+                
                     <div class="input-group-append">
                       <button class="btn btn-primary btn-sm" type="button"  onclick="Addcoupon('<%=subtotal%>')">Apply</button>
                     </div>
-                  <%}%>
+            
                  
                   
                 </div>
@@ -130,15 +126,21 @@
                 </table>
                 <div class="border p-3 mb-3">
                   <input type="radio" id="html" name="payment_method" value="COD">
-                <label for="html">COD</label><br>
+                <label for="html">Cash On Devliverd</label><br>
                 <input type="radio" id="html" name="payment_method" value="pay">
-                <label for="html">Online Method</label><br>
+                <label for="html">PayPal</label><br>
                 </div>
+                <%if(defaultset == ''){%>
                 <div class="form-group">
-                  <button class="btn btn-black btn-lg py-3 btn-block" value="submit" type="submit" >Place
+                  <button class="btn btn-black btn-lg py-3 btn-block disabled" value="submit" type="submit" >Place
                     Order</button>
                 </div>
-                
+                <%}else{%>
+                  <div class="form-group">
+                    <button class="btn btn-black btn-lg py-3 btn-block" value="submit" type="submit" >Place
+                      Order</button>
+                  </div>
+                  <%}%>
               </div>
               
             </div>
