@@ -138,12 +138,12 @@
                                         </td>
                                         <td>
                                             <a href="/order_details?id=<%=data._id%>" > <i class="fa-solid fa-circle-info"></i></a><br>
-                                            <%if(data.orderStatus =="cancelled"){%>
+                                            <%if(data.orderStatus == "cancelled" || data.orderStatus == "Devliverd"){%>
                                               <a href="/cancel?id=<%=data._id%> " hidden style="color: red;" >  Cancel</a>
                                             <%}else{%>
                                               <a href="/cancel?id=<%=data._id%>" style="color: red;" >  Cancel</a>
                                             <%}%>
-                                            
+                                        
                                         </td>
                                       </tr>
                                       
