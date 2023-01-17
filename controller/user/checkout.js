@@ -91,7 +91,7 @@ const showAddress = async (req, res) => {
       },
     ]);
 console.log(show);
-    let order_list = await order.find({ userId: userId });
+    let order_list = await order.find({ userId: userId }).sort(-1);
     res.render("user/profile", { show, order_list });
   } catch (error) {
     console.log(error.message);

@@ -147,8 +147,8 @@ exports.orderPlace = async (req, res) => {
           payment_method: "paypal",
         },
         redirect_urls: {
-          return_url: "http://localhost:4040/payment_success",
-          cancel_url: "http://localhost:4040/payment",
+          return_url: "http://woodq.co/payment_success",
+          cancel_url: "http://woodq.co/payment",
         },
         transactions: [
           {
