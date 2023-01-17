@@ -149,40 +149,50 @@
                                   <%}%>
                             </div>
                             <div class="tab-pane fade" id="tab-account" role="tabpanel" aria-labelledby="tab-address-link">
-                              
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <label>First Name *</label>
-                                            <input type="text" class="form-control" value="<%=show.FirstName%>"  required>
-                                        </div><!-- End .col-sm-6 -->
+                              <%if(show == ''){%>
+                                <div class="card-body">
+                                  <h3 class="card-title">Please completed your Profile <span><i class="fa-solid fa-circle-info"></i></span> </h3><br>
+                                  <div>
+                                    <a class="nav-link btn btn-outline-primary-2" id="tab-address-link" data-toggle="tab" href="#tab-address" role="tab" aria-controls="tab-address" aria-selected="false" > Add </a>
+                                  </div>
+                                 
+                                </div>
+                              <%}else{%>
+                                <div class="row">
+                                  <div class="col-sm-6">
+                                      <label>First Name *</label>
+                                      <input type="text" class="form-control" value="<%=show[0].FirstName%>"  required>
+                                  </div><!-- End .col-sm-6 -->
 
-                                        <div class="col-sm-6">
-                                            <label>Last Name *</label>
-                                            <input type="text" class="form-control" value="<%=show.LastName%>" required>
-                                        </div><!-- End .col-sm-6 -->
-                                    </div><!-- End .row -->
+                                  <div class="col-sm-6">
+                                      <label>Last Name *</label>
+                                      <input type="text" class="form-control" value="<%=show[0].LastName%>" required>
+                                  </div><!-- End .col-sm-6 -->
+                              </div><!-- End .row -->
 
-                                    <label>Display Name *</label>
-                                    <input type="text" class="form-control" value="<%=show.FirstName%>" required>
-                                    <small class="form-text">This will be how your name will be displayed in the account section and in reviews</small>
+                              <label>Display Name *</label>
+                              <input type="text" class="form-control" value="<%=show[0].FirstName%>" required>
+                              <small class="form-text">This will be how your name will be displayed in the account section and in reviews</small>
 
-                                    <label>Email address *</label>
-                                    <input type="email" class="form-control" value="<%=show.Email%>" required>
-                                    <form action="/confirmPassword" method="post">
-                                    <label>Current password (leave blank to leave unchanged)</label>
-                                    <input type="password" name="currentpassword" class="form-control" required="">
-                                    <p style="color: rgb(255, 35, 35);" ><%=locals.wrong%></p>
-                                    <label>New password (leave blank to leave unchanged)</label>
-                                    <input type="password" name="newPassword" id="passwordd" class="form-control" onkeyup="validatePassword()" required="">
-                                    <p id="passwordError" class="error" style="color: rgb(236, 111, 111);"></p>
-                                    <label>Confirm new password</label>
-                                    <input type="password" name="confirrmPassword" id="confrm" class="form-control mb-2" onkeyup="checkpassword()" required="">
-                                    <p id="conformError" class="error" style="color: rgb(236, 111, 111);"></p>
-                                    <button type="submit" class="btn btn-outline-primary-2">
-                                        <span>SAVE CHANGES</span>
-                                      
-                                    </button>
-                                </form>
+                              <label>Email address *</label>
+                              <input type="email" class="form-control" value="<%=show[0].Email%>" required>
+                              <form action="/confirmPassword" method="post">
+                              <label>Current password (leave blank to leave unchanged)</label>
+                              <input type="password" name="currentpassword" class="form-control" required="">
+                              <p style="color: rgb(255, 35, 35);" ><%=locals.wrong%></p>
+                              <label>New password (leave blank to leave unchanged)</label>
+                              <input type="password" name="newPassword" id="passwordd" class="form-control" onkeyup="validatePassword()" required="">
+                              <p id="passwordError" class="error" style="color: rgb(236, 111, 111);"></p>
+                              <label>Confirm new password</label>
+                              <input type="password" name="confirrmPassword" id="confrm" class="form-control mb-2" onkeyup="checkpassword()" required="">
+                              <p id="conformError" class="error" style="color: rgb(236, 111, 111);"></p>
+                              <button type="submit" class="btn btn-outline-primary-2">
+                                  <span>SAVE CHANGES</span>
+                                
+                              </button>
+                          </form>
+                              <%}%>
+                                    
                             </div>
                             <div class="tab-pane fade" id="tab-address" role="tabpanel" aria-labelledby="tab-address-link">
                                

@@ -90,7 +90,7 @@ const showAddress = async (req, res) => {
         },
       },
     ]);
-
+console.log(show);
     let order_list = await order.find({ userId: userId });
     res.render("user/profile", { show, order_list });
   } catch (error) {
