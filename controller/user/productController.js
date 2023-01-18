@@ -16,8 +16,8 @@ const shoppage = async (req, res) => {
       res.render("user/shop", { show, catadata });
     }
   } catch (error) {
-    console.log(error.message);
-    res.render('user/layouts/404.ejs')
+    console.log(error);
+    res.redirect('/500')
   }
 };
 
@@ -54,7 +54,7 @@ const viewpage = async (req, res) => {
   } catch (error) {
     console.log(error.message);
   
-    res.render('user/layouts/404.ejs')
+    res.redirect('/500')
   }
 };
 

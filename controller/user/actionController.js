@@ -1,4 +1,5 @@
 const User = require("../../models/userModel");
+const product = require('../../models/productModel')
 const bcryptjs = require("bcryptjs");
 const securePassword = async (password) => {
   try {
@@ -42,3 +43,39 @@ exports.confirmPaswd = async (req, res) => {
     console.log(error);
   }
 };
+exports.searchData = async (req,res)=>{
+  try {
+    console.log(req.body);
+   
+    let data = req.body;
+    let val = data.val
+   let find = await product.find({productName:{$regex:val}})
+   console.log(find)
+   
+   
+    res.json({ success: true });
+
+
+    
+  } catch (error) {
+    console.log(error);
+  }
+}
+exports.error_page = (req,res)=>{
+
+try {
+  res.render('user/layouts/404.ejs')
+} catch (error) {
+  console.log(error);
+}
+
+}
+exports.error500_page = (req,res)=>{
+
+  try {
+    res.render('user/layouts/500.ejs')
+  } catch (error) {
+    console.log(error);
+  }
+  
+  }

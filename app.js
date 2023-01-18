@@ -50,7 +50,7 @@ app.use('/',userRouter);
 app.use('/admin',adminRouter)
 
 app.all('*', (req, res) => {
-    res.render('user/layouts/404.ejs')
+    res.redirect('/error')
 })
 
 app.listen(port,()=>{

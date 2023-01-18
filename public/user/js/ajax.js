@@ -117,3 +117,19 @@ function Addcoupon(total){
     })
 
 }
+ function findData(){
+    let search = $('#search').val()
+    console.log(search);
+    $.ajax({
+        url:'/search',
+        method:'post',
+        data:{
+            val : search
+        },
+        success:(res)=>{
+            if(res.success){
+                $('#find').load(location.href + ' #find')
+            }
+        }
+    })
+ }

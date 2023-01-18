@@ -28,7 +28,7 @@ function remove(id){
       },
       success:(res)=>{
          if(res.success){
-            $("#delet"+id).load(location.href + " #delet"+id)
+           location.reload()
          }
       }
    })

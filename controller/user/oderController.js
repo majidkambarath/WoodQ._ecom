@@ -108,7 +108,13 @@ exports.orderPlace = async (req, res) => {
         });
         await orderdetails.save();
         await cart.deleteOne({ userId: userId });
+        if(cart.length == 0){
         res.render("user/success");
+        }else{
+          res.redirect('/cart')
+        }
+
+       
       } else {
         await coupon.updateOne(
           { _id: coupId },
@@ -137,10 +143,15 @@ exports.orderPlace = async (req, res) => {
 
         await cart.deleteOne({ userId: userId });
 
-        res.redirect('/payment_success')
+        if(cart.length == 0){
+          res.render("user/success");
+          }else{
+            res.redirect('/cart')
+          }
       }
     } else {
       let orderData = await order.findOne({userId:userId})
+      req.session.payment = true;
       const create_payment_json = {
         intent: "sale",
         payer: {
@@ -181,6 +192,7 @@ exports.orderPlace = async (req, res) => {
             for (let i = 0; i < payment.links.length; i++) {
               if (payment.links[i].rel === "approval_url") {
                 res.redirect(payment.links[i].href);
+              
               }
             }
           }
@@ -358,6 +370,7 @@ exports.order_cancel = async (req, res) => {
     res.redirect("/profile");
   } catch (error) {
     console.log(error);
+    res.redirect('/500')
   }
 };
 exports.order_invoice = async (req, res) => {
@@ -428,16 +441,23 @@ exports.order_invoice = async (req, res) => {
     res.render("user/invoice", { couponData, subtotal });
   } catch (error) {
     console.log(error);
+    res.redirect('/500')
   }
 };
 
 exports.payment_success = async (req, res) => {
   try {
-    let userId = req.session.userlo
-    const orderr = new order(orderdetails)
-    await orderr.save()
-    await cart.deleteOne({ userId: userId });
-    res.render("user/success");
+    if(req.session.payment){
+      let userId = req.session.userlo
+      const orderr = new order(orderdetails)
+      await orderr.save()
+      await cart.deleteOne({ userId: userId });
+      res.render("user/success");         
+    }else{
+res.redirect('/')
+    }
+      
+    
   } catch (error) {
     console.log(error);
   }

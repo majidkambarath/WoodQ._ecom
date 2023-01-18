@@ -101,7 +101,8 @@
 
                             </div>
                             <div class="tab-pane fade" id="tab-Order" role="tabpanel" aria-labelledby="tab-address-link">
-                                <%if(order_list != null){%>
+                                <%if(order_list != ''){%>
+                                 
                                 <table class="table">
                                     <thead>
                                       <tr>
@@ -151,7 +152,16 @@
                                     </tbody>
                                     <%})%>
                                   </table>
-                                  <%}%>
+                                 <%}else{%>
+                                  <div class="card-body">
+                                    <h3 class="card-title"> Your Order is Empty <span><i class="fa-solid fa-circle-info"></i></span> </h3><br>
+                                    <div>
+                                      <a class="nav-link btn btn-outline-primary-2"   href="/shop" > shop </a>
+                                    </div>
+                                   
+                                  </div>
+
+                                    <%}%>
                             </div>
                             <div class="tab-pane fade" id="tab-account" role="tabpanel" aria-labelledby="tab-address-link">
                               <%if(show == ''){%>

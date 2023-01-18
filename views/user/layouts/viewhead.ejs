@@ -5,7 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Shop Item - Start Bootstrap Template</title>
+		<link rel="shortcut icon" href="/user/images/logo-removebg-preview.png">
+        <title>woodq.co </title>
         <!-- Favicon-->
         
         
@@ -23,33 +24,36 @@
         <nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark" arial-label="Furni navigation bar">
 
 			<div class="container">
-				<a class="navbar-brand" href="index.html"><img  class="img-fluid" id="logo" src="/user/images/logo-removebg-preview.png"> WoodQ <span>.</span></a>
-
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
+				<div class="d-flex">
+					<div>
+						<a class="navbar-brand" style="font-size: 23px;" href="/"><img  class="img-fluid" id="logo" src="/user/images/logo-removebg-preview.png"> WoodQ <span>.</span></a>
+					</div>
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+				</div>
 
 				<div class="collapse navbar-collapse" id="navbarsFurni">
 					<ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
 					
 						<li class="nav-item ">
-							<a class="nav-link" href="index.html">Home</a>
+							<a class="nav-link" href="/">Home</a>
 						</li>
-						<li class="active"><a class="nav-link" href="shop.html">Shop</a></li>
-						<li><a class="nav-link" href="about.html">About</a></li>
+						<li class="active"><a class="nav-link" href="/shop">Shop</a></li>
+						<li><a class="nav-link" href="/about">About</a></li>
 						
 						 
-						<li><a class="nav-link" href="blog.html">category</a></li>
-						<li><a class="nav-link" href="contact.html">Contact</a></li>
+						<li><a class="nav-link" href="/service">Services</a></li>
+						<li><a class="nav-link" href="/contact">Contact</a></li>
 					</ul>
 
 					<ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
-						<li><a class="nav-link" href="#"><img src="/user/images/user.svg"></a></li>
+						<li><a class="nav-link" href="/profile"><img src="/user/images/user.svg"></a></li>
 						<li><a class="nav-link fs-5" style="color: aliceblue;" href="/wishlist"><i class="fa fa-heart"></i></a></li>
                         
 						<li>
 
-                         <a class="nav-link" href="cart.html"><img src="/user/images/cart.svg"><span class="badge badge-light">
+                         <a class="nav-link" href="/cart"><img src="/user/images/cart.svg"><span class="badge badge-light">
                             <%if(count>0){%>
                                 <%=locals.count%></span></a>
                             

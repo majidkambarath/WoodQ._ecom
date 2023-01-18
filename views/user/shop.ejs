@@ -11,7 +11,11 @@
                             <button class="btn dropdown-toggle btn-white-outline "type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                           Categorys
                             </button>
-                            
+                            <!-- <form class="d-flex ">
+                                
+                                <input class="form-control " type="search" placeholder="Search" aria-label="Search" style="border-radius: 27px 27px 27px 27px;" >
+                              
+                              </form> -->
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                 <li><a class="dropdown-item" href="/shop "> Show All</a></li>
                                 <%catadata.forEach(function(show){ %>
@@ -19,10 +23,7 @@
                               
                               <% }) %>
                             </ul>
-                            <!-- <form class="d-flex">
-                                <input class="form-control " type="search" placeholder="Search" aria-label="Search">
-                                <button class="btn btn-white-outline btn-sm" type="submit">Search</button>
-                              </form> -->
+                           
                           </div>
                        
                     </p>
@@ -30,6 +31,7 @@
             </div>
             <div class="col-lg-7">
                 <div class="hero-img-wrap">
+                   
                     <img src="/user/images/couch.png" class="img-fluid" style="max-width: -webkit-fill-available;">
                 </div>
             </div>
@@ -37,16 +39,34 @@
     </div>
 </div>
 <div class="untree_co-section product-section before-footer-section">
+    <div class="container">
+        <div class="row ">
+            <div class="d-flex">
+                <div >
+                    <input type="text" class="form-control "  style="width: 250px; margin-top: -87px; margin-left: 7px;" placeholder="Search" id="search" onkeyup="findData()" > 
+                </div>
+               
+                <span style="margin-top: -77px;
+                font-size: 27px;
+                margin-left: 5px;">
+                <i class="fa fa-magnifying-glass"></i>
+            </span>
+            </div>
+
+        </div>
+
+    </div>
     
 <div class="container">
+    
    
-      <div class="row">
+      <div class="row" id="find">
         
           <!-- Start Column 1 -->
           <%if(show!= null){ %>
             <%show.forEach(function(show){ %>
                
-        <div class="col-12 col-md-4 col-lg-3 mb-5">
+        <div class="col-12 col-md-4 col-lg-3 mb-5" >
             
             <a class="product-item" href="/view_product/<%=show._id%>">
               

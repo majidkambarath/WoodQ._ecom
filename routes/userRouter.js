@@ -60,4 +60,7 @@ router.get('/payment_success',orderController.payment_success)
 router.get('/about',actionController.about_page)
 router.get('/service',actionController.service_page)
 router.get('/contact',actionController.contact_page)
+router.post('/search',actionController.searchData)
+router.get('/error',actionController.error_page)
+router.get('/500',actionController.error500_page)
 module.exports=router
