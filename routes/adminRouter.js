@@ -12,6 +12,7 @@ const productController = require('../controller/admin/productController')
 const categoryController = require('../controller/admin/categoryController')
 const custmoerController = require('../controller/admin/customer.Controller')
 const bannerController = require('../controller/admin/banner')
+const exportPDF = require('../controller/admin/excellExport')
 //seesion middleware
 //admin&&product sid
 router.get('/',admincontroller.dashboard)
@@ -48,4 +49,5 @@ router.get('/coupon_block',couponController.coupon_blocking)
 router.get('/order_page',orderController.order_page)
 router.patch('/order_update',orderController.order_upte)
 router.get('/saleReport',orderController.saleReport)
+router.get('/export',exportPDF.exportorder)
 module.exports = router
