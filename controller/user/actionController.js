@@ -2,7 +2,8 @@ const User = require("../../models/userModel");
 const product = require('../../models/productModel')
 const order = require('../../models/order')
 const bcryptjs = require("bcryptjs");
-const { deleteOne } = require("../../models/cartModel");
+
+const { default: mongoose } = require("mongoose");
 const securePassword = async (password) => {
   try {
     console.log("chage hash");
@@ -80,14 +81,18 @@ exports.error500_page = (req,res)=>{
   }
   
   }
-  // exports.history_clean= async (req,res)=>{
-  //   try {
-  //     let data = req.body
-  //     let userId = data.userId
-  //    await order.deleteMany({userId:userId})
-  //    res.json({success:true})
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
+  exports.history_clean= async (req,res)=>{
+    try {
+      let data = req.body
+      let orderId = data.orderId
+      let userId = req.session.userlo
+      console.log(orderId);
+    let orderData = await order.deleteMany({userId:userId},{_id:orderId})
+    console.log(orderData);
+     
+     res.json({success:true})
+    } catch (error) {
+      console.log(error);
+    }
     
-  //   }
+    }

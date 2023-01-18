@@ -3,7 +3,7 @@
   <div class="container py-5">
     <div class="row justify-content-center mb-3">
       <div class="col-md-12 col-xl-10 ">
-        <%if(wishdata != null){%>
+        <%if(wishdata != ''){%>
           <%wishdata.forEach((data)=>{%>
           
         <div class="card shadow-0 border rounded-3  my-2">
@@ -65,8 +65,8 @@
                 <h6 class="text-success">Free shipping</h6>
                 <div class="d-flex flex-column mt-4">
                   <a href="/view_product/<%=data.wish._id%>" class="btn btn-primary btn-sm"  type="button">details</a> 
-                  <button class="btn btn-outline-primary btn-sm mt-2" type="button"  onclick="addToCart('<%=data.wish._id%>')">
-                    Add to wishlist
+                  <button class="btn btn-outline-primary btn-sm mt-2" type="button"  onclick="addToCart('<%=data.productId%>')">
+                    Add to Cart
                   </button>
                 </div>
               </div>
@@ -74,6 +74,10 @@
           </div>
         </div>
         <%})%>
+        <%}else{%>
+        <h1>New offers!! check Now</h1>  
+        
+        <a style="text-decoration: none;" href="/shop"> SHOP <i class="fa-solid fa-arrow-right"></i></a>
         <%}%>
       </div>
       

@@ -134,18 +134,20 @@ function Addcoupon(total){
     })
  }
 
-//  function clean(id){
-//     console.log(id);
-//     $.ajax({
-//         url:'/history_Clean',
-//         method:'delete',
-//         data:{
-//             userId:id
-//         },
-//         success:(res)=>{
-//             if(res.success){
-//                 location.reload()
-//             }
-//         }
-//     })
-//  }
+ function clean(id){
+    console.log(id);
+    $.ajax({
+        url:'/history_Clean',
+        method:'delete',
+        data:{
+            orderId:id
+        },
+        success:(res)=>{
+            if(res.success){
+                $('#tab-Order').load(location.href + ' #tab-Order')
+            }
+        }
+    })
+ }
+
+ 

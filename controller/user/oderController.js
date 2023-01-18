@@ -144,11 +144,9 @@ exports.orderPlace = async (req, res) => {
       
       }
     } else {
+     
       let orderData = await order.findOne({userId:userId})
       let findCart = await cart.findOne({userId:mongoose.Types.ObjectId(userId)})
-      if(findCart.length == 0){
-        res.redirect('/')
-      }else{}
       req.session.payment = true;
       const create_payment_json = {
         intent: "sale",
@@ -450,9 +448,10 @@ exports.payment_success = async (req, res) => {
       const orderr = new order(orderdetails)
       await orderr.save()
       await cart.deleteOne({ userId: userId });
+      req.session.payment = false;
       res.render("user/success");         
     }else{
-res.redirect('/')
+     res.redirect('/')
     }
       
     

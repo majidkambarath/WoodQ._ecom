@@ -104,17 +104,11 @@ const productEdit = async (req, res) => {
 
 const productUpadte = async (req, res) => {
   try {
-    const cata = await category.findOne({category:req.body.category})
-    const unique  = []
-   for(i=0 ; i<4 ;i++){
-    const ImageName = req.body.ProductName + [i] + '-' + Date.now()+'.jpg';
-    unique.push(ImageName)
-    sharp(req.files[i].buffer).resize(200,200)
-   .jpeg({quality : 50}).toFile('public/admin/productImage/'+ ImageName);
-   }
+    const cata = await category.findOne({category:req.body.category}) 
 
 
-    if(typeof req.files === "undefined"){
+    if(req.files.length == 0 ){
+      
       let data =req.body;
       const id = req.query.id;
       const productName = data.ProductName;
@@ -128,6 +122,14 @@ const productUpadte = async (req, res) => {
       res.redirect("/admin/product_page");
       console.log("update no image");
     }else{
+     
+    const unique  = []
+   for(i=0 ; i<4 ;i++){
+    const ImageName = req.body.ProductName + [i] + '-' + Date.now()+'.jpg';
+    unique.push(ImageName)
+    sharp(req.files[i].buffer).resize(200,200)
+   .jpeg({quality : 100}).toFile('public/admin/productImage/'+ ImageName);
+   }
       let data =req.body;
       const id = req.query.id;
       const productName = data.ProductName;

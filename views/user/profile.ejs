@@ -100,10 +100,16 @@
                                   </div>
 
                             </div>
-                            <div class="tab-pane fade " id="tab-Order" role="tabpanel" aria-labelledby="tab-address-link">
+                            <div class="tab-pane fade " id="tab-Order" role="tabpanel" aria-labelledby="tab-address-link" >
                            
                                 <%if(order_list != ''){%>
+                              
+                                    <button type="submit" class="btn btn-outline-primary-2" onclick="clean('<%=order_list[0]._id%>')">
+                                      <span>History Clean</span>
+                                    
+                                  </button>
                                  
+                                  
                                 <table class="table">
                                     <thead>
                                       <tr>
@@ -155,7 +161,7 @@
                                   </table>
                                  <%}else{%>
                                   <div class="card-body">
-                                    <h3 class="card-title"> Your Order is Empty <span><i class="fa-solid fa-circle-info"></i></span> </h3><br>
+                                    <h3 class="card-title"> Your Order Is Empty Please Order Now <span><i class="fa-solid fa-circle-info"></i></span> </h3><br>
                                     <div>
                                       <a class="nav-link btn btn-outline-primary-2"   href="/shop" > shop </a>
                                     </div>

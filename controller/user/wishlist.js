@@ -1,7 +1,9 @@
 const wishlist = require('../../models/wishlist')
-const mongoose = require('mongoose')
+const cart = require('../../models/cartModel')
+const mongoose = require('mongoose');
+const { request } = require('express');
 
-const Wishlistpage = async(req,res)=>{
+exports.Wishlistpage = async(req,res)=>{
    try {
     const userId = req.session.userlo;
     const Id = mongoose.Types.ObjectId(userId)
@@ -41,7 +43,7 @@ console.log(wishdata);
 
 }
 
-const addWishlist = async(req,res)=>{
+exports.addWishlist = async(req,res)=>{
     try {
         const data = req.body
         const id = data.prodId
@@ -85,7 +87,7 @@ const addWishlist = async(req,res)=>{
     }
 }
 
-const removewishlist = async(req,res)=>{
+exports.removewishlist = async(req,res)=>{
     try {
         const id = req.query.id
         const userId = req.session.userlo;
@@ -103,8 +105,3 @@ const removewishlist = async(req,res)=>{
     }
 }
 
-module.exports={
-    Wishlistpage,
-    addWishlist,
-    removewishlist
-}

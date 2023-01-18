@@ -20,10 +20,10 @@ const categoryInsert = async (req, res) => {
     const categoryDate = new category({
       category: req.body.category.toUpperCase(),
     });
-    console.log(req.file);
+
     categoryDate.save();
-    const categorySave = await category.find();
-    console.log(categorySave);
+    // const categorySave = await category.find();
+    // console.log(categorySave);
 
     res.redirect("/admin/category");
     console.log("inserting sucess");
@@ -31,6 +31,7 @@ const categoryInsert = async (req, res) => {
 
   } catch (error) {
     console.log(error.message);
+    res.redirect("/500");
   }
 };
 
@@ -43,13 +44,13 @@ const cateEdit = async (req, res) => {
 
     if (categoryStore) {
       res.render("admin/editCate.ejs", { cate: categoryStore });
-      console.log("category add category");
+   
     } else {
       res.redirect("/admin/category");
     }
   } catch (error) {
     console.log(error.message);
-    res.redirect("/admin/category");
+    res.redirect("/500");
   }
 };
 
@@ -57,8 +58,10 @@ const cateUpdate = async (req, res) => {
   try {
     const id = req.query.id;
     const inputCategory = req.body.category.toUpperCase();
+    console.log(inputCategory);
     //const inputImage = req.file.filename;
-    const chack = await category.findOne({ inputCategory: category });
+    let chack = await category.findOne({category:inputCategory})
+    console.log(chack);
     if (chack) {
       res.render("admin/editCate", {
         wrong: "Already exited catagory",
@@ -73,6 +76,7 @@ const cateUpdate = async (req, res) => {
     }
   } catch (error) {
     console.log(error.message);
+    res.redirect("/500");
   }
 };
 

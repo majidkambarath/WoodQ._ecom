@@ -49,6 +49,7 @@ router.post('/apply_coupon',checkoutController.applycoupon)
 router.get('/wishlist',wishlistController.Wishlistpage)
 router.post('/addTowishlist',wishlistController.addWishlist)
 router.get('/remove',auth.userVerfiy,auth.userBlock,wishlistController.removewishlist)
+
 /*------------------------------oderManagmnt----------------------------------*/
 
 router.post('/order_place',auth.userVerfiy,auth.userBlock,orderController.orderPlace)
@@ -63,5 +64,5 @@ router.get('/contact',actionController.contact_page)
 router.post('/search',actionController.searchData)
 router.get('/error',actionController.error_page)
 router.get('/500',actionController.error500_page)
-// router.delete('/history_Clean',actionController.history_clean)
+router.delete('/history_Clean',actionController.history_clean)
 module.exports=router

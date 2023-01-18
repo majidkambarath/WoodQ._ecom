@@ -61,7 +61,8 @@ const viewcart = async (req, res) => {
   }
 };
 const addToCart = async (req, res) => {
-  const data = req.body;
+  try {
+    const data = req.body;
   console.log(data);
   const id = data.proId;
   console.log(id);
@@ -109,6 +110,10 @@ const addToCart = async (req, res) => {
     });
     await cartOb.save();
   }
+  } catch (error) {
+    console.log(error);
+  }
+  
 };
 
 const changeQuantity = async (req, res) => {
