@@ -133,3 +133,19 @@ function Addcoupon(total){
         }
     })
  }
+
+//  function clean(id){
+//     console.log(id);
+//     $.ajax({
+//         url:'/history_Clean',
+//         method:'delete',
+//         data:{
+//             userId:id
+//         },
+//         success:(res)=>{
+//             if(res.success){
+//                 location.reload()
+//             }
+//         }
+//     })
+//  }

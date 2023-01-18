@@ -1,6 +1,8 @@
 const User = require("../../models/userModel");
 const product = require('../../models/productModel')
+const order = require('../../models/order')
 const bcryptjs = require("bcryptjs");
+const { deleteOne } = require("../../models/cartModel");
 const securePassword = async (password) => {
   try {
     console.log("chage hash");
@@ -71,7 +73,6 @@ try {
 
 }
 exports.error500_page = (req,res)=>{
-
   try {
     res.render('user/layouts/500.ejs')
   } catch (error) {
@@ -79,3 +80,14 @@ exports.error500_page = (req,res)=>{
   }
   
   }
+  // exports.history_clean= async (req,res)=>{
+  //   try {
+  //     let data = req.body
+  //     let userId = data.userId
+  //    await order.deleteMany({userId:userId})
+  //    res.json({success:true})
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+    
+  //   }
