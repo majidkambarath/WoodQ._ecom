@@ -10,8 +10,8 @@
 </head>
 <body>
     <div class="card "   >
-        <div class="card-body" id="Invoice">
-          <div class="container mb-5 mt-3">
+        <div class="card-body" >
+          <div class="container mb-5 mt-3 " id="Invoice">
             <div class="row d-flex align-items-baseline">
               <div class="col-xl-9">
                 <!-- <p style="color: #7e8d9f;font-size: 20px;">Invoice >> <strong>ID: #<%=couponData[0]._id%></strong></p> -->
@@ -62,7 +62,7 @@
                             <span class="badge bg-danger text-black fw-bold"><%=couponData[0].orderStatus%></span>
                         <%}%>
                         <%if(couponData[0].orderStatus == "Devliverd" ){%>
-                            <span class="badge bg-primary text-black fw-bold"><%=couponData[0].orderStatus%></span>
+                            <span class="badge bg-success text-black fw-bold"><%=couponData[0].orderStatus%></span>
                         <%}%>
                         <%if(couponData[0].orderStatus == "processing"||couponData[0].orderStatus == "shipped" ){%>
                             <span class="badge bg-warning text-black fw-bold"><%=couponData[0].orderStatus%></span>
