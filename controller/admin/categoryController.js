@@ -1,8 +1,12 @@
 const category = require("../../models/categoryModel");
 
 const categoryPage = async (req, res) => {
-  const categorySave = await category.find();
-  res.render("admin/category", { categorySave });
+  try {
+    const categorySave = await category.find();
+    res.render("admin/category", { categorySave });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const addCategory = async (req, res) => {
@@ -12,23 +16,20 @@ const addCategory = async (req, res) => {
 
 const categoryInsert = async (req, res) => {
   try {
-   const categoryy = req.body.category.toUpperCase()
-   const cata = await category.findOne({category:categoryy})
-   if(cata){
-    res.render("admin/addCategory",{wrong:"Already Exited Category"} );
-   }else{
-    const categoryDate = new category({
-      category: req.body.category.toUpperCase(),
-    });
+    const categoryy = req.body.category.toUpperCase();
+    const cata = await category.findOne({ category: categoryy });
+    if (cata) {
+      res.render("admin/addCategory", { wrong: "Already Exited Category" });
+    } else {
+      const categoryDate = new category({
+        category: req.body.category.toUpperCase(),
+      });
 
-    categoryDate.save();
-    // const categorySave = await category.find();
-    // console.log(categorySave);
+      categoryDate.save();
 
-    res.redirect("/admin/category");
-    console.log("inserting sucess");
-   }
-
+      res.redirect("/admin/category");
+      console.log("inserting sucess");
+    }
   } catch (error) {
     console.log(error.message);
     res.redirect("/500");
@@ -44,7 +45,6 @@ const cateEdit = async (req, res) => {
 
     if (categoryStore) {
       res.render("admin/editCate.ejs", { cate: categoryStore });
-   
     } else {
       res.redirect("/admin/category");
     }
@@ -58,10 +58,7 @@ const cateUpdate = async (req, res) => {
   try {
     const id = req.query.id;
     const inputCategory = req.body.category.toUpperCase();
-    console.log(inputCategory);
-    //const inputImage = req.file.filename;
-    let chack = await category.findOne({category:inputCategory})
-    console.log(chack);
+    let chack = await category.findOne({ category: inputCategory });
     if (chack) {
       res.render("admin/editCate", {
         wrong: "Already exited catagory",

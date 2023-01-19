@@ -104,12 +104,12 @@ exports.orderPlace = async (req, res) => {
           orderItems: orderItemss,
           paymentMethod: req.body.payment_method,
           totalPrice: subtotal,
-          // discountPrice:finalPrice
         });
+        
         await orderdetails.save();
         await cart.deleteOne({ userId: userId });
-          res.render("user/success");
-       
+        res.render("user/success");
+        
       } else {
         await coupon.updateOne(
           { _id: coupId },
@@ -138,15 +138,13 @@ exports.orderPlace = async (req, res) => {
 
         await cart.deleteOne({ userId: userId });
 
-       
-          res.render("user/success");
-        
-      
+        res.render("user/success");
       }
     } else {
-     
-      let orderData = await order.findOne({userId:userId})
-      let findCart = await cart.findOne({userId:mongoose.Types.ObjectId(userId)})
+      let orderData = await order.findOne({ userId: userId });
+      let findCart = await cart.findOne({
+        userId: mongoose.Types.ObjectId(userId),
+      });
       req.session.payment = true;
       const create_payment_json = {
         intent: "sale",
@@ -164,7 +162,7 @@ exports.orderPlace = async (req, res) => {
                 {
                   name: "item",
                   sku: "item",
-                  price: discountPrice||Total,
+                  price: discountPrice || Total,
                   currency: "USD",
                   quantity: 1,
                 },
@@ -172,7 +170,7 @@ exports.orderPlace = async (req, res) => {
             },
             amount: {
               currency: "USD",
-              total: discountPrice||Total,
+              total: discountPrice || Total,
             },
             description: "This is the payment description.",
           },
@@ -188,7 +186,6 @@ exports.orderPlace = async (req, res) => {
             for (let i = 0; i < payment.links.length; i++) {
               if (payment.links[i].rel === "approval_url") {
                 res.redirect(payment.links[i].href);
-              
               }
             }
           }
@@ -250,8 +247,7 @@ exports.orderPlace = async (req, res) => {
       return acc;
     }, 0);
     if (coupId === "") {
-
-       orderdetails = {
+      orderdetails = {
         userId: userId,
         name: firstName,
         phone: ph,
@@ -267,11 +263,10 @@ exports.orderPlace = async (req, res) => {
         orderItems: orderItemss,
         paymentMethod: req.body.payment_method,
         totalPrice: subtotal,
-        // discountPrice:finalPrice
       };
     } else {
       await coupon.updateOne({ _id: coupId }, { $push: { users: { userId } } });
-       orderdetails = {
+      orderdetails = {
         userId: userId,
         name: firstName,
         phone: ph,
@@ -366,7 +361,7 @@ exports.order_cancel = async (req, res) => {
     res.redirect("/profile");
   } catch (error) {
     console.log(error);
-    res.redirect('/500')
+    res.redirect("/500");
   }
 };
 exports.order_invoice = async (req, res) => {
@@ -437,24 +432,22 @@ exports.order_invoice = async (req, res) => {
     res.render("user/invoice", { couponData, subtotal });
   } catch (error) {
     console.log(error);
-    res.redirect('/500')
+    res.redirect("/500");
   }
 };
 
 exports.payment_success = async (req, res) => {
   try {
-    if(req.session.payment){
-      let userId = req.session.userlo
-      const orderr = new order(orderdetails)
-      await orderr.save()
+    if (req.session.payment) {
+      let userId = req.session.userlo;
+      const orderr = new order(orderdetails);
+      await orderr.save();
       await cart.deleteOne({ userId: userId });
       req.session.payment = false;
-      res.render("user/success");         
-    }else{
-     res.redirect('/')
+      res.render("user/success");
+    } else {
+      res.redirect("/");
     }
-      
-    
   } catch (error) {
     console.log(error);
   }

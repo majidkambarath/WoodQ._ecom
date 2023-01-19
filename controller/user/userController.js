@@ -67,25 +67,28 @@ const userInsert = async (req, res) => {
 };
 //otp page
 const user_otp = async (req, res) => {
-  let data = req.body;
-  console.log(data);
-  const otps = await otp.findOne({ otp: data.otp });
-  if (otps) {
-    await otp.deleteOne({ otp: data.otp });
+  try {
+    let data = req.body;
+    console.log(data);
+    const otps = await otp.findOne({ otp: data.otp });
+    if (otps) {
+      await otp.deleteOne({ otp: data.otp });
 
-    const spassword = await securePassword(req.body.password);
-    const user1 = new User({
-      username: req.body.username,
-      email: req.body.email,
-      phone: req.body.phone,
-      password: spassword,
-      //conformpassword:spassword
-    });
-    user1.save();
+      const spassword = await securePassword(req.body.password);
+      const user1 = new User({
+        username: req.body.username,
+        email: req.body.email,
+        phone: req.body.phone,
+        password: spassword,
+      });
+      user1.save();
 
-    res.render("user/login");
-  } else {
-    res.render("user/otp.ejs", { wrong: "Please Enter a Valid OTP", data });
+      res.render("user/login");
+    } else {
+      res.render("user/otp.ejs", { wrong: "Please Enter a Valid OTP", data });
+    }
+  } catch (error) {
+    console.log(error);
   }
 };
 
@@ -94,8 +97,6 @@ const user_otp = async (req, res) => {
 const userverificate = async (req, res) => {
   try {
     const email = req.body.email;
-    // const password = req.body.password;
-    // console.log(req.body.password);
     const userData = await User.findOne({ email: email });
 
     if (userData) {
@@ -127,23 +128,31 @@ const userverificate = async (req, res) => {
 
 const homeLo = async (req, res) => {
   try {
-    let banner_view = await banner.find()
-    let images = banner_view
+    let banner_view = await banner.find();
+    let images = banner_view;
     console.log(images);
     const userData = await User.findOne();
-    res.render("user/home.ejs", { userData,images });
+    res.render("user/home.ejs", { userData, images });
   } catch (error) {
     console.log(error.message);
   }
 };
 
 const profile = async (req, res) => {
-  res.render("user/profile");
+  try {
+    res.render("user/profile");
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 //forgot password
 const forgPass = async (req, res) => {
-  res.render("user/forgPass");
+  try {
+    res.render("user/forgPass");
+  } catch (error) {
+    console.log(error);
+  }
 };
 //rest OTP
 const forgOTP = async (req, res) => {
@@ -190,10 +199,14 @@ const passChange = async (req, res) => {
   }
 };
 const passwordChange = async (req, res) => {
-  if (req.session.resetOTP && req.session.restuser) {
-    res.render("user/changePass");
-  } else {
-    res.redirect("/userSign_up");
+  try {
+    if (req.session.resetOTP && req.session.restuser) {
+      res.render("user/changePass");
+    } else {
+      res.redirect("/userSign_up");
+    }
+  } catch (error) {
+    console.log(error);
   }
 };
 const resetOTPverification = async (req, res) => {

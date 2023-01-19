@@ -30,7 +30,7 @@ const insertaddress = async (req, res) => {
         res.redirect("/profile");
       });
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
   }
 };
 
@@ -60,7 +60,7 @@ const addAddress = async (req, res) => {
         res.redirect("/checkOut");
       });
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
   }
 };
 
@@ -90,11 +90,11 @@ const showAddress = async (req, res) => {
         },
       },
     ]);
-console.log(show);
-    let order_list = await order.find({ userId: userId }).sort({_id:-1})
+    console.log(show);
+    let order_list = await order.find({ userId: userId }).sort({ _id: -1 });
     res.render("user/profile", { show, order_list });
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
   }
 };
 
@@ -126,7 +126,7 @@ const defaultSet = async (req, res) => {
         res.redirect("/profile");
       });
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
   }
 };
 
@@ -146,7 +146,7 @@ const addDelete = async (req, res) => {
         res.redirect("/profile");
       });
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
   }
 };
 
@@ -161,7 +161,7 @@ const editAddress = async (req, res) => {
     );
     res.render("user/editAdd", { change });
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
   }
 };
 const Addupdate = async (req, res) => {
@@ -195,6 +195,7 @@ const Addupdate = async (req, res) => {
 
 const payment = async (req, res) => {
   try {
+  
     let userId = req.session.userlo;
     const detailss = await cart.aggregate([
       {
@@ -251,16 +252,20 @@ const payment = async (req, res) => {
     ]);
     const show = await user.findOne({ _id: mongoose.Types.ObjectId(userId) });
     const Address = show.address;
-    const couponData = await coupon.find(); 
+    const couponData = await coupon.find();
     console.log(couponData);
+    if(detailss.length > 0 ){
     res.render("user/payment.ejs", {
       defaultset,
       detailss,
       Address,
       subtotal,
       couponData,
-     
+    
     });
+  }else{
+    res.redirect('/')
+  }
   } catch (error) {
     console.log(error.message);
   }
@@ -292,7 +297,7 @@ const changeOption = async (req, res) => {
         res.redirect("/payment");
       });
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
   }
 };
 const applycoupon = async (req, res) => {

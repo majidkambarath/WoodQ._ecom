@@ -1,6 +1,6 @@
 const User = require("../../models/userModel");
-const product = require('../../models/productModel')
-const order = require('../../models/order')
+const product = require("../../models/productModel");
+const order = require("../../models/order");
 const bcryptjs = require("bcryptjs");
 
 const { default: mongoose } = require("mongoose");
@@ -46,53 +46,48 @@ exports.confirmPaswd = async (req, res) => {
     console.log(error);
   }
 };
-exports.searchData = async (req,res)=>{
+exports.searchData = async (req, res) => {
   try {
     console.log(req.body);
-   
+
     let data = req.body;
-    let val = data.val
-   let find = await product.find({productName:{$regex:val}})
-   console.log(find)
-   
-   
+    let val = data.val;
+    let find = await product.find({ productName: { $regex: val } });
+    console.log(find);
+
     res.json({ success: true });
-
-
-    
   } catch (error) {
     console.log(error);
   }
-}
-exports.error_page = (req,res)=>{
-
-try {
-  res.render('user/layouts/404.ejs')
-} catch (error) {
-  console.log(error);
-}
-
-}
-exports.error500_page = (req,res)=>{
+};
+exports.error_page = (req, res) => {
   try {
-    res.render('user/layouts/500.ejs')
+    res.render("user/layouts/404.ejs");
   } catch (error) {
     console.log(error);
   }
-  
+};
+exports.error500_page = (req, res) => {
+  try {
+    res.render("user/layouts/500.ejs");
+  } catch (error) {
+    console.log(error);
   }
-  exports.history_clean= async (req,res)=>{
-    try {
-      let data = req.body
-      let orderId = data.orderId
-      let userId = req.session.userlo
-      console.log(orderId);
-    let orderData = await order.deleteMany({userId:userId},{_id:orderId})
+};
+exports.history_clean = async (req, res) => {
+  try {
+    let data = req.body;
+    let orderId = data.orderId;
+    let userId = req.session.userlo;
+    console.log(orderId);
+    let orderData = await order.deleteMany(
+      { userId: userId },
+      { _id: orderId }
+    );
     console.log(orderData);
-     
-     res.json({success:true})
-    } catch (error) {
-      console.log(error);
-    }
-    
-    }
+
+    res.json({ success: true });
+  } catch (error) {
+    console.log(error);
+  }
+};

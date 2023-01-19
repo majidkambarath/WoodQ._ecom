@@ -3,7 +3,7 @@ const router = express.Router();
 const sessions = require('express-session');
 const upload = require('../middleware/multer')
 const upldPic = require('../middleware/singleMulter')
-
+//{{controller}}
 const auth = require('../middleware/auth/admin/auth')
 const orderController = require('../controller/admin/order')
 const couponController = require('../controller/admin/coupon')
@@ -13,8 +13,8 @@ const categoryController = require('../controller/admin/categoryController')
 const custmoerController = require('../controller/admin/customer.Controller')
 const bannerController = require('../controller/admin/banner')
 const exportPDF = require('../controller/admin/excellExport')
-//seesion middleware
-//admin&&product sid
+
+//{{Router}}
 router.get('/',auth.sessionCheck,admincontroller.dashboard)
 router.get('/login',admincontroller.login)
 router.post('/login',admincontroller.adminveri)
@@ -45,7 +45,7 @@ router.get('/coupon_page',auth.sessionCheck,couponController.coupon_page)
 router.get('/add_coupon',auth.sessionCheck,couponController.add_Coupon_page)
 router.post('/add_coupon',auth.sessionCheck,couponController.coupon_insert)
 router.get('/coupon_block',auth.sessionCheck,couponController.coupon_blocking)
-
+/*----------------------------------order-------------------------------------*/
 router.get('/order_page',auth.sessionCheck,orderController.order_page)
 router.patch('/order_update',auth.sessionCheck,orderController.order_upte)
 router.get('/saleReport',auth.sessionCheck,orderController.saleReport)

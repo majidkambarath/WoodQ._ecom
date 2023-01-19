@@ -53,67 +53,62 @@ const viewcart = async (req, res) => {
       return acc;
     }, 0);
     const len = cartlist.length;
-  res.render("user/cart.ejs", { cartlist, userId, len, subtotal });
- 
-   
+    res.render("user/cart.ejs", { cartlist, userId, len, subtotal });
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
   }
 };
 const addToCart = async (req, res) => {
   try {
     const data = req.body;
-  console.log(data);
-  const id = data.proId;
-  console.log(id);
-  const Id = req.session.userlo;
-  const userId = mongoose.Types.ObjectId(Id);
-  let productOb = {
-    productId: id,
-    qty: 1,
-  };
-  const cartdata = await cart.findOne({ userId: userId });
-  if (cartdata) {
-    let productEx = cartdata.cartItems.findIndex(
-      (cartItems) => cartItems.productId == id
-    );
-    console.log(productEx);
+    const id = data.proId;
+    const Id = req.session.userlo;
+    const userId = mongoose.Types.ObjectId(Id);
+    let productOb = {
+      productId: id,
+      qty: 1,
+    };
+    const cartdata = await cart.findOne({ userId: userId });
+    if (cartdata) {
+      let productEx = cartdata.cartItems.findIndex(
+        (cartItems) => cartItems.productId == id
+      );
+      console.log(productEx);
 
-    if (productEx != -1) {
-      const inc = await cart
-        .updateOne(
-          { userId: userId, "cartItems.productId": id },
-          {
-            $inc: { "cartItems.$.qty": 1 },
-          }
-        )
-        .then(() => {
-          res.redirect("/view_product");
-        });
+      if (productEx != -1) {
+        const inc = await cart
+          .updateOne(
+            { userId: userId, "cartItems.productId": id },
+            {
+              $inc: { "cartItems.$.qty": 1 },
+            }
+          )
+          .then(() => {
+            res.redirect("/view_product");
+          });
+      } else {
+        const cartUpdate = await cart
+          .updateOne(
+            { userId: userId },
+            {
+              $push: { cartItems: { productId: id, qty: 1 } },
+            }
+          )
+          .then(() => {
+            res.json({ success: true });
+          });
+      }
     } else {
-      const cartUpdate = await cart
-        .updateOne(
-          { userId: userId },
-          {
-            $push: { cartItems: { productId: id, qty: 1 } },
-          }
-        )
-        .then(() => {
-          res.json({ success: true });
-        });
+      console.log("failed");
+      const cartOb = new cart({
+        userId: userId,
+        cartItems: [productOb],
+      });
+      await cartOb.save();
     }
-  } else {
-    console.log("failed");
-    const cartOb = new cart({
-      userId: userId,
-      cartItems: [productOb],
-    });
-    await cartOb.save();
-  }
   } catch (error) {
     console.log(error);
   }
-  
 };
 
 const changeQuantity = async (req, res) => {
@@ -138,7 +133,7 @@ const changeQuantity = async (req, res) => {
         res.json({ success: true });
       });
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
   }
 };
 
@@ -158,9 +153,8 @@ const deleteCart = async (req, res) => {
       .then(() => {
         res.redirect("/cart");
       });
-
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
   }
 };
 
@@ -168,5 +162,5 @@ module.exports = {
   addToCart,
   viewcart,
   changeQuantity,
-  deleteCart
+  deleteCart,
 };

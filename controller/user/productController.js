@@ -17,7 +17,7 @@ const shoppage = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.redirect('/500')
+    res.redirect("/500");
   }
 };
 
@@ -53,8 +53,8 @@ const viewpage = async (req, res) => {
     res.render("user/viewpage", { show, shows, count, id, find });
   } catch (error) {
     console.log(error);
-  
-    res.redirect('/500')
+
+    res.redirect("/500");
   }
 };
 
