@@ -12,6 +12,7 @@
           {header:"Payment", key:"payment",width:20},
           {header:"Status", key:"status",width:20},
           {header:"total", key:"total",width:20},
+          
         ];
         let counter =1;
         
@@ -27,6 +28,7 @@
           sale.payment=sale.paymentMethod;
           sale.status=sale.orderStatus;
           sale.total=sale.totalPrice;
+         
          worksheet.addRow(sale);
         counter++;
         });

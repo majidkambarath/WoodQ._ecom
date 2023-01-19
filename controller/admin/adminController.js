@@ -1,4 +1,5 @@
 const order = require('../../models/order')
+const user = require('../../models/userModel.js')
 const dashboard = async (req, res) => {
   try {
     const find = await order.find()
@@ -6,8 +7,11 @@ const dashboard = async (req, res) => {
       acc = acc + cur.totalPrice;
       return acc;
     },0)
-   
-    res.render("admin/admin.ejs",{sum});
+
+   const findconut = await order.find().count()
+   const count = await user.find().count()
+   const stutas = await order.find({orderStatus:'Devliverd'}).count()
+    res.render("admin/admin.ejs",{sum,count,findconut,stutas});
   } catch (error) {
     console.log(error);
   }

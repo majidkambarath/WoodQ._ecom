@@ -1,28 +1,18 @@
-// const multer = require('multer');
- 
+const multer = require('multer');
 // const storage = multer.diskStorage({
-//     destination: (req,file,cb)=>{
-//          cb(null,'/public/productImage')
-//          console.log('multer');
-//     },
-//     filename:(req,file,cb)=>{
-//         const name = Date.now()+'-'+file.originalname;
-//         cb(null,name)
+//     destination: './public/admin/productImage',
+//     filename: (req, file, cb) => {
+//         cb(null, file.fieldname + '-' + Date.now()+'.jpg');
 //     }
-    
 // });
-// const upload = multer({storage:storage});
-
-// module.exports = upload;
- const multer = require('multer');
-
-const storage = multer.diskStorage({
-    destination: './public/admin/productImage',
-    filename: (req, file, cb) => {
-        cb(null, file.fieldname + '-' + Date.now()+'.jpg');
+const multerFilter = (req, file, cb) => {
+    if (file.mimetype.startsWith("image")) {
+      cb(null, true);
+    } else {
+      cb(console.log("Multer Filter: Must upload an Image"), false);
     }
-});
-
-const upload = multer({ storage: multer.memoryStorage()});
+  };
+  const upload = multer({ storage: multer.memoryStorage(), fileFilter: multerFilter })
+// const upload = multer({ storage: multer.memoryStorage()});
 
 module.exports = upload;

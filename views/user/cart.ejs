@@ -37,7 +37,7 @@
               <div class="input-group mb-3 d-flex align-items-center quantity-container" style="max-width: 120px;">
               <%if(cart.qtyItems == 1){%>
                 <div class="input-group-prepend">
-                  <button class="btn btn-outline-black disabled " type="button"   onclick="change('<%=cart.productId%>','<%=cart._id%>',-1)" >-</button>
+                  <button class="btn btn-outline-black " hidden type="button"   onclick="change('<%=cart.productId%>','<%=cart._id%>',-1)" >-</button>
                 </div>
               <%} else {%>
                 

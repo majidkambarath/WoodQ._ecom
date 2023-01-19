@@ -13,7 +13,7 @@ const loProduct = async (req, res) => {
 // product inserting
 const inserProduct = async (req, res) => {
   try {
-   const images = [req.files[0].filename,req.files[1].filename,req.files[2].filename,req.files[3].filename]
+  //  const images = [req.files[0].filename,req.files[1].filename,req.files[2].filename,req.files[3].filename]
 
    const unique  = []
    for(i=0 ; i<4 ;i++){

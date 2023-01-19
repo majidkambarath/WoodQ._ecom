@@ -52,7 +52,7 @@ const viewpage = async (req, res) => {
     const shows = await product.find().limit(4);
     res.render("user/viewpage", { show, shows, count, id, find });
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
   
     res.redirect('/500')
   }
