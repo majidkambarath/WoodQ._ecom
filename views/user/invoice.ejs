@@ -58,15 +58,16 @@
                     <li class="text-muted"></i>
                          <span
                         class="me-1 fw-bold">Status:
-                         <%if(couponData[0].orderStatus == "cancelled"||couponData[0].orderStatus == "refunded"){%>
+                         <%if(couponData[0].orderStatus == "cancelled"){%>
                             <span class="badge bg-danger text-black fw-bold"><%=couponData[0].orderStatus%></span>
                         <%}%>
-                        <%if(couponData[0].orderStatus == "Devliverd" ){%>
+                        <%if(couponData[0].orderStatus == "Devliverd"|| couponData[0].orderStatus == "refunded"){%>
                             <span class="badge bg-success text-black fw-bold"><%=couponData[0].orderStatus%></span>
                         <%}%>
-                        <%if(couponData[0].orderStatus == "processing"||couponData[0].orderStatus == "shipped" ){%>
+                        <%if(couponData[0].orderStatus == "processing"||couponData[0].orderStatus == "shipped"||couponData[0].orderStatus == "refunded Pending" ){%>
                             <span class="badge bg-warning text-black fw-bold"><%=couponData[0].orderStatus%></span>
                         <%}%>
+                       
                             
                     
                     

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="shortcut icon" href="/user/images/logo-removebg-preview.png">
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" href="/user/profile/bootstrap.min.css">
+    <link rel="stylesheet" href="/user/profile/owl.carousel.css">
+    <link rel="stylesheet" href="/user/profile/magnific-popup.css">
+    <!-- Main CSS File -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/user/profile/style.css">
+
+    <link rel="stylesheet" href="/user/profile/nouislider.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="/admin/js/ajax.js"></script>
+</head>
+<body>
+        <section class="h-100 gradient-custom">
+            <div class="container py-5 h-100" id="updte">
+              <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-lg-10 col-xl-8">
+                  <div class="card" style="border-radius: 10px;">
+                    <div class="card-header px-4 py-5">
+                      <h5 class="text-muted mb-0">Thanks for your Order, <span style="color: #7bab85;"><%=orderData[0].name%></span>!</h5>
+                    </div>
+                    <%if(orderData!=null){%>
+                    <div class="card-body p-4">
+                      <div class="d-flex justify-content-between align-items-center mb-4">
+                        <p class="lead fw-normal mb-0" style="color: #d18ad1;">Receipt</p>
+                     
+                        <p>
+                            <%if(orderData[0].orderStatus == "refunded Pending"){%>
+                             <a class="btn btn-outline-primary-2" onclick="confirm_Return('<%=orderData[0]._id%>')" ><span>Return Confirm</span></a>
+                            <%}%>
+                            </p>
+                         
+                      </div>
+                      <% let date = orderData[0].orderDate %>
+                        <% const formt = new Date(date ); %>
+                        <% const todate = formt.toLocaleDateString(); %>
+                      <%orderData.forEach((data)=>{%>
+                        
+                      <div class="card shadow-0 border mb-4">
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col-md-2">
+                              <img src="/admin/productImage/<%=data.product.image[0]%>"
+                                class="img-fluid" alt="Phone">
+                            </div>
+                            <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                              <p class="text-muted mb-0"><%=data.product.productName%></p>
+                            </div>
+                            <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                              <p class="text-muted mb-0 small"> Qty:  <%=data.quantity%></p>
+                            </div>
+                            <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                              <p class="text-muted mb-0 small">$ <%=data.product.salePrice%></p>
+                            </div>
+                            <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                              <%if(data.orderStatus == "cancelled"||data.orderStatus == "refunded"){%>
+                                <span class="badge badge-pill badge-danger"><%=data.orderStatus%></span>
+                            <%}%>
+                            <%if(data.orderStatus == "Devliverd" ){%>
+                                <span class="badge badge-pill badge-success"><%=data.orderStatus%></span>
+                            <%}%>
+                            <%if(data.orderStatus == "processing"||data.orderStatus == "shipped" ){%>
+                                <span class="badge badge-pill badge-warning"><%=data.orderStatus%></span>
+                            <%}%>
+    
+                            </div>
+                          </div>
+                          <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
+                          <div class="row d-flex align-items-center">
+                            <div class="col-md-2">
+                              <p class="text-muted mb-0 small">Track Order</p>
+                            </div>
+                            <div class="col-md-10">
+                              <div class="progress" style="height: 6px; border-radius: 16px;">
+                                <div class="progress-bar" role="progressbar"
+                                  style="width: 65%; border-radius: 16px; background-color: #a8729a;" aria-valuenow="65"
+                                  aria-valuemin="0" aria-valuemax="100"></div>
+                              </div>
+                              <div class="d-flex justify-content-around mb-1">
+                                <p class="text-muted mt-1 mb-0 small ms-xl-5">Out for delivary</p>
+                                <p class="text-muted mt-1 mb-0 small ms-xl-5">Delivered</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <%})%>
+                    
+                      <div class="d-flex justify-content-between pt-2">
+                        <p class="fw-bold mb-0">Order Details</p>
+                        <p class="text-muted mb-0"><span class="fw-bold me-4">Total</span> $<%=orderData[0].totalPrice%></p>
+                      </div>
+          
+                      <div class="d-flex justify-content-between pt-2">
+                        <p class="text-muted mb-0">Invoice Number :# <%=orderData[0]._id%></p>
+                        <%if(orderData[0].discountPrice == ''){%>
+                        <p class="text-muted mb-0"><span class="fw-bold me-4">Discount</span> $ <%=orderData[0].totalPrice%></p>
+                        <%}else{%>
+                          <p class="text-muted mb-0"><span class="fw-bold me-4">Discount</span> $ <%=orderData[0].discountPrice%></p>
+                        <%}%>
+                      </div>
+          
+                      <div class="d-flex justify-content-between">
+                        <p class="text-muted mb-0">Invoice Date : <%=todate%></p>
+                        <p class="text-muted mb-0"><span class="fw-bold me-4">GST 18%</span> 123</p>
+                      </div>
+          
+                      <div class="d-flex justify-content-between mb-5">
+                        <p class="text-muted mb-0">Recepits Voucher : 18KU-62IIK</p>
+                        <p class="text-muted mb-0"><span class="fw-bold me-4">Delivery Charges</span> Free</p>
+                      </div>
+                    </div>
+                    <%}%>
+                    <div class="card-footer border-0 px-4 py-5"
+                      style="background-color: #a8729a; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+                      <%if(orderData[0].discountPrice == null){%>
+                      <h5 class="d-flex align-items-center justify-content-end text-white text-uppercase mb-0">Total
+                        paid: <span class="h2 mb-0 ms-2">$ <%=orderData[0].totalPrice%></span></h5>
+                        <%}else{%>
+                          <h5 class="d-flex align-items-center justify-content-end text-white text-uppercase mb-0">Total
+                            paid: <span class="h2 mb-0 ms-2">$ <%=orderData[0].discountPrice%></span></h5>
+                        <%}%>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+</body>
+</html>

@@ -26,7 +26,9 @@
                                 <a class="nav-link" id="tab-account-link" data-toggle="tab" href="#tab-account" role="tab" aria-controls="tab-account" aria-selected="false">Account Details</a>
                             </li>
                             
-                            
+                            <li class="nav-item">
+                              <a class="nav-link"  href="/wallet" >Wallet</a>
+                          </li>
                           
                             <li class="nav-item">
                                 <a class="nav-link" id="tab-downloads-link" data-toggle="tab" href="#tab-Order" role="tab" aria-controls="tab-downloads" aria-selected="false">Order</a>
@@ -113,8 +115,8 @@
                                     
                                   </button>
                                  
-                                  
-                                <table class="table">
+                                  <div id="refunded">
+                                <table class="table" >
                                     <thead>
                                       <tr>
                                         <th scope="col">#Order Date</th>
@@ -137,25 +139,34 @@
                                         <td><%=data.deliveryDate%></td>
                                         <td><%=data.paymentMethod%></td>
                                         <td>
-                                            <%if(data.orderStatus == "cancelled"||data.orderStatus == "refunded"){%>
+                                            <%if(data.orderStatus == "cancelled"){%>
                                                 <span class="badge badge-pill badge-danger"><%=data.orderStatus%></span>
                                             <%}%>
-                                            <%if(data.orderStatus == "Devliverd" ){%>
+                                            <%if(data.orderStatus == "Devliverd"||data.orderStatus == "refunded"){%>
                                                 <span class="badge badge-pill badge-success"><%=data.orderStatus%></span>
                                             <%}%>
                                             <%if(data.orderStatus == "processing"||data.orderStatus == "shipped" ){%>
                                                 <span class="badge badge-pill badge-warning"><%=data.orderStatus%></span>
                                             <%}%>
+                                            <%if(data.orderStatus == "refunded Pending" ){%>
+                                              <span class="badge badge-pill badge-warning"><%=data.orderStatus%></span>
+                                          <%}%>
 
                                         </td>
-                                        <td>
+                                        <td> <div class="d-flex">
                                             <a href="/order_details?id=<%=data._id%>" > <i class="fa-solid fa-circle-info"></i></a><br>
-                                            <%if(data.orderStatus == "cancelled" || data.orderStatus == "Devliverd"){%>
+                                            <%if(data.orderStatus == "cancelled" || data.orderStatus == "Devliverd" ||data.orderStatus == "refunded"  ||data.orderStatus == "refunded Pending"  ){%>
                                               <a href="/cancel?id=<%=data._id%> " hidden style="color: red;" >  Cancel</a>
                                             <%}else{%>
                                               <a href="/cancel?id=<%=data._id%>" style="color: red;" >  Cancel</a>
                                             <%}%>
-                                        
+                                          
+                                           <%if(data.orderStatus == "Devliverd"){%>
+                                            
+                                           <a class="btn "onclick="returnData('<%=data._id%>')"><span class="badge badge-pill badge-danger">Return</span></a>
+                                           <%}%>
+                                            </div>
+                                           
                                         </td>
                                       </tr>
                                       
@@ -163,6 +174,7 @@
                                     </tbody>
                                     <%})%>
                                   </table>
+                                </div>
                                  <%}else{%>
                                   <div class="card-body">
                                     <h3 class="card-title"> Your Order Is Empty Please Order Now <span><i class="fa-solid fa-circle-info"></i></span> </h3><br>

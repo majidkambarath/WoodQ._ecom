@@ -117,7 +117,8 @@ function Addcoupon(total){
     })
 
 }
- function findData(){
+ function findData(id){
+    console.log(id);
     let search = $('#search').val()
     console.log(search);
     $.ajax({
@@ -150,4 +151,20 @@ function Addcoupon(total){
     })
  }
 
+ function returnData(id){
+    console.log(id);
+    $.ajax({
+        url:'/return',
+        method:'put',
+        data:{
+            orderId: id
+        },
+        success:(res)=>{
+            if(res.success){
+            $('#refunded').load(location.href + ' #refunded')
+            
+            }
+        }
+    })
+ }
  

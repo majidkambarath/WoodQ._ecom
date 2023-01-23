@@ -43,7 +43,7 @@
         <div class="row ">
             <div class="d-flex">
                 <div >
-                    <input type="text" class="form-control "  style="width: 250px; margin-top: -87px; margin-left: 7px;" placeholder="Search" id="search" onkeyup="findData()" > 
+                    <input type="text" class="form-control "  style="width: 250px; margin-top: -87px; margin-left: 7px;" placeholder="Search" id="search" onkeyup="findData('<%=show[0]._id%>')" > 
                 </div>
                
                 <span style="margin-top: -77px;
@@ -60,13 +60,13 @@
 <div class="container">
     
    
-      <div class="row" id="find">
+      <div class="row" >
         
           <!-- Start Column 1 -->
           <%if(show!= null){ %>
             <%show.forEach(function(show){ %>
                
-        <div class="col-12 col-md-4 col-lg-3 mb-5" >
+        <div class="col-12 col-md-4 col-lg-3 mb-5" id="find" >
             
             <a class="product-item" href="/view_product/<%=show._id%>">
               

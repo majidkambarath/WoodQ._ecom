@@ -50,4 +50,6 @@ router.get('/order_page',auth.sessionCheck,orderController.order_page)
 router.patch('/order_update',auth.sessionCheck,orderController.order_upte)
 router.get('/saleReport',auth.sessionCheck,orderController.saleReport)
 router.get('/export',auth.sessionCheck,exportPDF.exportorder)
+router.get('/orderDetails',orderController.orderDetails)
+router.patch('/refund',orderController.order_refund)
 module.exports = router

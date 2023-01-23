@@ -81,6 +81,7 @@
                                   <th>Payment Method</th>
                                   <th>Order Date</th>
                                   <th>Order Status</th>
+                                  <th>OrderDetails</th>
                   
                               </tr>
                           </thead>
@@ -97,39 +98,41 @@
                                 <td><%=data.totalPrice%></td>
                                 <td><%=data.paymentMethod%></td>
                                 <td><%= todate %></td>
-                                <td>
                                
-                                    <select name="order_status" id="data<%=data._id%>" >
-                                        <%if(data.orderStatus !== 'data.orderStatus'){%>
-                                        <option value="<%=data.orderStatus%>" ><%=data.orderStatus%></option>
-                                        <%}%>
-                                        <%if(data.orderStatus !== 'processing'){%>
-                                        <option value="processing" >processing</option>
-                                        <%}%>
-                                        <%if(data.orderStatus !== 'shipped'){%>
-                                        <option value="shipped" >shipped</option>
-                                        <%}%>
-                                        <%if(data.orderStatus !== 'Devliverd'){%>
-                                        <option value="Devliverd" >Devliverd</option>
-                                         <%}%>
-                                      <%if(data.orderStatus !== 'cancelled'){%>
-                                       <option value="cancelled" >cancelled</option>
-                                        <%}%>
-                                         <%if(data.orderStatus !== 'refunded'){%>
-                                         <option value="refunded" >refunded</option>
-                                           <%}%>
-                                    </select>
-                                    <input type="text" name="OrderId" value="<%=data._id%>" hidden>
-                                 
-                                    <div id="updte<%=data._id%>">
-                                      <button class="btn btn-primary" onclick="update('<%=data._id%>')">Update</button>
-                                    </div>
-                                  
-                              
-                                  
-                                </td>
-                           
-                                
+                           <td>
+                            <a href="/admin/OrderDetails?id=<%=data._id%>&userId=<%=data.userId%>" class="btn btn-secondary">OrderDetails</a>
+                           </td>
+                           <td>
+                               
+                            <select name="order_status" id="data<%=data._id%>" >
+                                <%if(data.orderStatus !== 'data.orderStatus'){%>
+                                <option value="<%=data.orderStatus%>" ><%=data.orderStatus%></option>
+                                <%}%>
+                                <%if(data.orderStatus !== 'processing'){%>
+                                <option value="processing" >processing</option>
+                                <%}%>
+                                <%if(data.orderStatus !== 'shipped'){%>
+                                <option value="shipped" >shipped</option>
+                                <%}%>
+                                <%if(data.orderStatus !== 'Devliverd'){%>
+                                <option value="Devliverd" >Devliverd</option>
+                                 <%}%>
+                              <%if(data.orderStatus !== 'cancelled'){%>
+                               <option value="cancelled" >cancelled</option>
+                                <%}%>
+                                   <%if(data.orderStatus !== 'refunded Pending'){%>
+                                    <option value="refunded Pending" >refunded Pending</option>
+                                      <%}%>
+                            </select>
+                            <input type="text" name="OrderId" value="<%=data._id%>" hidden>
+                  
+                            <div id="updte<%=data._id%>">
+                              <button class="btn btn-primary" onclick="update('<%=data._id%>')">Update</button>
+                            </div>
+                          
+                          
+                         
+                        </td>
                               </tr>
                      
                           </tbody>

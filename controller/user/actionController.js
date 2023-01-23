@@ -49,10 +49,9 @@ exports.confirmPaswd = async (req, res) => {
 exports.searchData = async (req, res) => {
   try {
     console.log(req.body);
-
     let data = req.body;
     let val = data.val;
-    let find = await product.find({ productName: { $regex: val } });
+    let find = await product.find({ productName: { $regex: val,$options:'i' } });
     console.log(find);
 
     res.json({ success: true });
@@ -91,3 +90,26 @@ exports.history_clean = async (req, res) => {
     console.log(error);
   }
 };
+
+exports.return_confirm = async(req,res)=>{
+  try {
+    let data = req.body;
+    let orderId = data.orderId
+     await order.updateOne({_id:orderId},{$set:{ orderStatus: "refunded Pending"} }).then((res.json({success:true})))
+    
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+exports.wallet_page =async (req,res)=>{
+  try {
+    let userId = req.session.userlo;
+     const userData = await User.findOne({_id:mongoose.Types.ObjectId(userId)})
+  
+    console.log(userData.wallet.Transitions);
+    res.render('user/wallet',{userData})
+  } catch (error) {
+    console.log(error);
+  }
+}

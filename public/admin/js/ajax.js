@@ -33,3 +33,20 @@ function remove(id){
       }
    })
 }
+
+function confirm_Return(id,userId){
+   console.log(id);
+   console.log(userId);
+   $.ajax({
+      url:'/admin/refund',
+      method:'patch',
+      data:{
+         orderId:id
+      },
+      success:(res)=>{
+         if(res.success){
+            $("#updte").load(location.href + " #updte");
+         }
+      }
+   })
+}

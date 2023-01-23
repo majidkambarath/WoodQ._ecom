@@ -1,0 +1,255 @@
+<%-include('./layouts/profilehead.ejs')%>
+<main class="main">
+    <div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
+        <div class="container">
+            <h1 class="page-title">My Account<span> Wallet</span></h1>
+        </div><!-- End .container -->
+    </div><!-- End .page-header -->
+    <nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/profile">Home</a></li>
+                <li class="breadcrumb-item"><a href="/shop">Shop</a></li>
+                <li class="breadcrumb-item active" aria-current="page">My Account</li>
+            </ol>
+        </div><!-- End .container -->
+    </nav><!-- End .breadcrumb-nav -->
+
+<section>
+    <div class="headerhny-title text-center mt-3 mb-3">
+      
+    
+    </div>
+</section>
+<div class="container ">
+<div class="row mb-5">
+    <div class="col-md-5 px-3 px-md-1  px-lg-5 ">
+        <div class="p-4 d-flex flex-column purple-bg-color round-corner">
+            <span class="text-uppercase font-10 weight-600 white-color-2">Balance Details</span>
+            <%if(userData.wallet.Transitions == ''){%>
+            <span class="font-28 weight-700 white-color mt-4">$ 0 Balance </span>
+            <%}else{%>
+                <span class="font-28 weight-700 white-color mt-4">$ <%=userData.wallet.totalAmount%> </span>
+            <%}%>
+            <span class="font-12 weight-300 white-color-2">Total Amount</span>
+            <div class="d-flex  justify-content-between mt-4">
+                <div class="d-flex flex-column">
+                    <%if(userData.wallet.Transitions == ''){%>
+                        <span class="font-16 weight-600 white-color"></span>
+                        <span class="font-12 weight-300 white-color-2"></span>
+                    <%}else{%>
+                        <span class="font-16 weight-600 white-color"> $ <%=userData.wallet.totalAmount%></span>
+                        <span class="font-12 weight-300 white-color-2">Received</span>
+                        <%}%>
+                </div>
+                <div class="d-flex flex-column">
+                    <%if(userData.wallet.Transitions == ''){%>
+                        <span class="font-16 weight-600 white-color"></span>
+                        <span class="font-12 weight-300 white-color-2"></span>
+                    <%}else{%>
+                        <span class="font-16 weight-600 white-color">$0</span>
+                        <span class="font-12 weight-300 white-color-2">Expense</span>
+                        <%}%>
+                </div>
+            </div>
+            <div class="d-none  mt-4">
+                <button
+                    class="flex-grow-1 me-1 py-2 text-uppercase font-12 weight-700 purple-color-2 grey-bg-color">Receive</button>
+                <button
+                    class="flex-grow-1 ms-1 py-2 text-uppercase font-12 weight-700 white-color orange-bg-color">Send</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-7 px-md-5 mt-5 mt-md-1">
+        <div>
+           
+            <table class="table table-borderless">
+          <%if(userData.wallet.Transitions != ''){%>
+                <thead>
+                    <tr>
+                        <th class="text-uppercase font-10 weight-600 grey-color-2">Transactions</th>
+                        
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%userData.wallet.Transitions.forEach((data)=>{%>
+                    <tr>
+                        <td>
+                            <div class="d-flex ">
+                               
+                                <div
+                                    class="d-flex  justify-content-center align-items-center blue-color square round-corner-small light-blue-bg-color font-14">
+                                    <i class="fas fa-long-arrow-alt-up"></i>
+                                </div>
+                                <div class="d-flex flex-column ps-2">
+                                    <span class="font-14 weight-700 purple-color-2"><%=data.status%></span>
+                                    <span class="font-10 weight-400 purple-color-2"><%=data.Date%></span>
+                                </div>
+                               
+                                <!-- <div
+                                    class="d-flex  justify-content-center align-items-center square round-corner-small light-white-bg-color green-color font-14 ">
+                                    <i class="fas fa-long-arrow-alt-down "></i>
+                                </div>
+                                <div class="d-flex flex-column ps-2 ">
+                                    <span class="font-14 weight-700 purple-color-2 "></span>
+                                    <span class="font-10 weight-400 purple-color-2 ">21/22/234</span>
+                                </div> -->
+                               
+                            </div>
+                        </td>
+                        <td>
+                         
+                            <!-- <div class="d-flex flex-column align-items-end">
+                                <span class=" font-16 weight-600 black-color ">-43654</span>
+                            </div> -->
+                           
+                            <div class="d-flex flex-column align-items-end ">
+                                <span class="font-16 weight-600 text-color-green ">+ <%=data.amonut%></span>
+                            </div>
+                          
+                        </td>
+                    </tr>
+                   
+                    
+                    <%})%>
+                </tbody>
+                 <%}else{%>
+                    <tr>
+                        <td>
+                            <p class="text-center">No Transactions</p>
+                        </td>
+                    </tr>
+                 <%}%>
+            </table>
+          
+            
+        </div>
+    </div>
+</div>
+</div>
+
+
+<style>
+button {
+    border: none;
+    border-radius: 5px;
+}
+.black-color{
+    color: #2f2f2f;
+}
+.green-color{
+    color: #4fc354;
+}
+.text-color-green{
+    color: #3ba53f;
+}
+.light-blue-bg-color{
+    background: #ecf4fa;
+}
+.light-white-bg-color{
+    background: #f3f3f3;
+}
+.blue-color{
+    color: #32a6fb;
+}
+.square {
+    width: 40px;
+    height: 40px;
+}
+
+.round-corner {
+    border-radius: 20px;
+}
+.round-corner-small {
+    border-radius: 6px;
+}
+.font-10 {
+    font-size: 10px;
+}
+.font-12 {
+    font-size: 12px;
+}
+.font-14 {
+    font-size: 14px;
+}
+.font-16 {
+    font-size: 16px;
+}
+.font-20 {
+    font-size: 20px;
+}
+.font-28 {
+    font-size: 28px;
+}
+.font-30 {
+    font-size: 30px;
+}
+.weight-300 {
+    font-weight: 300;
+}
+.weight-400 {
+    font-weight: 400;
+}
+.weight-600 {
+    font-weight: 600;
+}
+.weight-700 {
+    font-weight: 700;
+}
+.white-color {
+    color: #fff;
+}
+.white-color-2 {
+    color: #E7E5EC;
+}
+.orange-color {
+    color: #FF8872;
+}
+.purple-color {
+    color: #5D4E7B;
+}
+.purple-color-2 {
+    color: #776D8A;
+}
+.yellow-color {
+    color: #EAC52D;
+}
+.teal-color {
+    color: #43B8D5;
+}
+.grey-color {
+    color: #DBE3E5;
+}
+.grey-color-2 {
+    color: #BAC2C4;
+}
+.grey-bg-color {
+    background: #DBE3E5;
+}
+.purple-bg-color {
+           background-image: linear-gradient(172deg, #0c92e1, #0d3b6f);
+}
+.orange-bg-color {
+    background: #FF8872;
+}
+.light-purple-bg-color {
+    background: #F1F0F3;
+}
+.light-orange-bg-color {
+    background: #FFECE8;
+}
+.light-yellow-bg-color {
+    background: #FCF6DD;
+}
+.light-teal-bg-color {
+    background: #E0F4F8;
+}
+.light-green-bg-color {
+    background: #E0F8F2;
+}
+i.notification {
+    position: relative;
+}
+
+</style>
