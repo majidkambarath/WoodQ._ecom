@@ -120,6 +120,7 @@
 		}
 		  function validatePassword(){
 		  var password = document.getElementById('password').value
+		//   var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$%\^&\*])[a-zA-Z\d!@#\$%\^&\*]{8,}$/;
 		  if(password.length < 8){
 			passwordError.innerHTML = 'password is required [above 8 character]'
 			password.focus()
