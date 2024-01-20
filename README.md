@@ -1,5 +1,5 @@
-# WoodMart E-commerce App
-Welcome to WoodMart, a sophisticated wood eCommerce app that elevates user experiences through its user-friendly interface and advanced features. From interactive purchase tracking to wishlists and robust product filtering, WoodMart ensures a secure and enjoyable shopping journey.
+# WoodQ E-commerce App
+Welcome to WoodQ, a sophisticated wood eCommerce app that elevates user experiences through its user-friendly interface and advanced features. From interactive purchase tracking to wishlists and robust product filtering, WoodMart ensures a secure and enjoyable shopping journey.
 
 ## Features
 
